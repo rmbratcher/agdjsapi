@@ -1,0 +1,165 @@
+/* Any demo specific styling needed for this tutorial only */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.loadingOverlay {
+    
+    background: #FFFFFF url('../img/loading_big3.gif') no-repeat fixed center;
+    position: absolute;
+    z-index: 1001;
+    display: none;
+}
+ 
+.pageOverlay {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+ 
+.loadingMessage {
+    padding: 25px 40px;
+    color: #999;
+}
+
+/* this line hide layers when out of scale for the inline TOC */
+#scaleDiv .agsTOCOutOfScale {
+    display: none;
+}
+.collapsibleList li{
+  list-style-image:url('../img/button.png');
+  cursor:auto;
+}
+
+li.collapsibleListOpen{
+  list-style-image:url('../img/button-open.png');
+  cursor:pointer;
+}
+
+li.collapsibleListClosed{
+  list-style-image:url('../img/button-closed.png');
+  cursor:pointer;
+}
+
+#appLayout {
+    height: 100%;
+}
+#leftCol {
+    width: 25em;
+}
+#header {
+    height: 60px;
+    overflow: hidden;
+}
+#map {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+}
+#footer {
+    height: 30px;
+}
+#mousePosition {
+    background-color: #FCFFC7;
+    border: 1px solid #66666;
+    padding: 2px;
+    margin: 5px;
+    height: 20px;
+    float: right;
+    font-weight: bold;
+}
+#notification {
+    background-color: #FCFFC7;
+    color: red;
+    border: 1px solid #66666;
+    padding: 2px;
+    margin: 5px;
+    height: 20px;
+    float: left;
+    font-weight: bold;
+}
+
+#toggleButtonContainer {
+    position: relative;
+    float: right;
+    right: 25px;
+    top: 8px;
+    z-index: 999;
+}
+
+.nihilo .demoLayout .edgePanel {
+    background-color: #F5CE62;
+}
+
+#viewsChart {
+	width: 550px;
+	height: 550px;
+}
+
+.nihilo .dijitTabContainerTop-tabs .dijitTabInnerDiv,
+.nihilo .dijitTabContainerTop-tabs .dijitTabContent {
+}
+.toplinks {
+    position: relative;
+    float: right;
+    right: 10px;
+    top: -30px;
+    height: 25px;
+    width: 40%;
+    overflow: hidden;
+    text-align: right;
+}
+.toplinks ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+}
+
+.toplinks ul li {
+    display: inline;
+    padding-left: 5px;
+}
+
+.toplinks ul li a {
+    text-decoration: none;
+}
+
+.toplinks ul li a:hover {
+    font-weight: bold;
+}
+
+.headTitle {
+    position: relative;
+    float: left;
+}
+
+
+
+table.infotable {
+	border-collapse:collapse;
+	border: 1px solid #666666;
+}
+table.infotable th {
+	font-weight: bold;
+	padding: 4px;
+	background-color: #CCCCCC;
+	color: black;
+	border-bottom: 2px solid #666666;
+}
+table.infotable td {
+	border-left: 1px solid #666666;
+}
+tr.infotable_hl {
+	background-color: #99FFFF;
+}
+
+.nihilo .dojoxFloatingPaneTitle,
+.nihilo .dijitAccordionTitle { 
+	background-color: #F5CE62;
+}

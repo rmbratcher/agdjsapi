@@ -1,7 +1,7 @@
 {
     "mapConfig": {
         "Page": {
-            "style": "citrus",
+            "style": "citrus-flat",
             "title": "Marion County, MS",
             "links": [],
             "helpTab": "help.html",
