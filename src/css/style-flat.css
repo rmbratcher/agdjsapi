@@ -54,6 +54,7 @@ li.collapsibleListClosed{
 #header {
     height: 60px;
     overflow: hidden;
+    box-shadow: 10px 10px 5px #A5ABAD;
 }
 #map {
     position: absolute;

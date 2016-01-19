@@ -54,6 +54,7 @@ li.collapsibleListClosed{
 #header {
     height: 60px;
     overflow: hidden;
+    box-shadow: 10px 10px 5px #A5ABAD;
 }
 #map {
     position: absolute;
@@ -66,23 +67,23 @@ li.collapsibleListClosed{
     height: 30px;
 }
 #mousePosition {
-    background-color: #FCFFC7;
-    border: 1px solid #66666;
+    background-color: #FFF;
     padding: 2px;
     margin: 5px;
     height: 20px;
     float: right;
     font-weight: bold;
+    box-shadow: 10px 10px 5px #A5ABAD;
 }
 #notification {
-    background-color: #FCFFC7;
+    background-color: #FFF;
     color: red;
-    border: 1px solid #66666;
     padding: 2px;
     margin: 5px;
     height: 20px;
     float: left;
     font-weight: bold;
+    box-shadow: 10px 10px 5px #A5ABAD;
 }
 
 #toggleButtonContainer {
