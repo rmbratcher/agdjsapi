@@ -1,7 +1,7 @@
 {
     "mapConfig": {
         "Page": {
-            "style": "citrus",
+            "style": "citrus-flat",
             "title": "Lincoln County, MS  --  Blake Pickering, Tax Assessor/Collector",
             "links": [],
             "helpTab": "help.html",

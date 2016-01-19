@@ -1,7 +1,7 @@
 {
     "mapConfig": {
         "Page": {
-            "style": "sage",
+            "style": "sage-flat",
             "title": "Warren County, MS",
             "links": [],
             "helpTab": "help.html",

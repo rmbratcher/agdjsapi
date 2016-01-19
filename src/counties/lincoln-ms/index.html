@@ -14,108 +14,11 @@
             @import url("http://js.arcgis.com/3.14/dojox/grid/resources/Grid.css");
             @import url("http://js.arcgis.com/3.14/dojox/grid/resources/nihiloGrid.css");
             @import url("http://js.arcgis.com/3.14/esri/dijit/css/Popup.css");
-            @import url("./css/style.css");
-            @import url("./css/style-dijit.css");
-            @import url("./css/style-dijit2.css");
-        </style>
-        <script type="text/javascript">
-            function ajaxRequest(){
-             var activexmodes=["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"] //activeX versions to check for in IE
-             if (window.ActiveXObject){ //Test for support for ActiveXObject in IE first (as XMLHttpRequest in IE7 is broken)
-              for (var i=0; i<activexmodes.length; i++){
-               try{
-                return new ActiveXObject(activexmodes[i])
-               }
-               catch(e){
-                //suppress error
-               }
-              }
-             }
-             else if (window.XMLHttpRequest) // if Mozilla, Safari etc
-              return new XMLHttpRequest()
-             else
-              return false
-            }
-            var mygetrequest=new ajaxRequest();
-            mygetrequest.onreadystatechange=function(){
-                if (mygetrequest.readyState==4){
-                    if (mygetrequest.status==200 || window.location.href.indexOf("http")==-1){
-                        var obj = JSON.parse(mygetrequest.responseText);
-                        var stl = document.createElement("link");
-                        stl.setAttribute("rel", "stylesheet");
-                        stl.setAttribute("type","text/css");
-                        stl.setAttribute("href","css/" + obj.mapConfig.Page.style + ".css");
-                        document.getElementsByTagName("head")[0].appendChild(stl);
-                        document.title = obj.mapConfig.Page.title;
-                    } else {
-                    }
-                } else {
-                }
-            }
-            mygetrequest.open("GET",'conf.json',true);
-            mygetrequest.send(null);
-            
-        </script>
-        <script type="text/javascript">
-            var dojoConfig = {
-                parseOnLoad: true, 
-                paths: {
-                    agd: location.pathname.replace(/\/[^/]+$/, '') + 'agd'
-                }
-            };
-            </script>
-    <script src="//js.arcgis.com/3.14"></script>
-    <script src="./js/CollapsibleLists.js">
-    </script><script src="./js/agd.js"></script>    
+            @import url("./css/style-dijit2-flat.css");
+        </style>   
     </head>
     <body class="nihilo">
-    <script>
-        var GoToDeltaPPIN = function(ppin){           
-            var urlBase = "http://www.deltacomputersystems.com/cgi-apM5/APMCGI02?HTMCNTY=MS43&HTMBASE=C&HTMKEY=";
-            var str = ''+ppin;
-            var pad = "000000";
-            var padVal = pad.substring(0,pad.length - str.length) + str;
-            var url = urlBase + padVal;
-            
-            window.open(url);
-        };
-        var loadingOverlay = (function(){
-            // the overlay object with its methods are the return value 
-            // of this anonymous function
-            
-            var overlayNode;
-            return {
-                init: function(){
-                    // create the container element for the overlay
-                    // We store the reference in the overlayNode closure variable
-                    overlayNode = dojo.create('div', {
-                        id: 'loadingOverlay',
-                        'class': 'loadingOverlay pageOverlay',
-                        innerHTML: '<div class="loadingMessage"></div>'
-                    }, dojo.body());
-                    
-                    return this;
-                },
-                show: function(){
-                    // show the overlay
-                    dojo.style( overlayNode, {
-                        display: 'block'
-                    });
-                },
-                hide: function(){
-                    // hide the overlay
-                    dojo.style( overlayNode, {
-                        display: 'none'
-                    });
-                }
-            };
-        })();
-        loadingOverlay.init().show();
-        dojo.ready(function(){
-            // take down the loading overlay when the page is ready
-            loadingOverlay.hide();
-        });
-    </script>
+    <div id="loadingOverlay" class="loadingOverlay pageOverlay" style="display: block;"><div class="loadingMessage"></div></div>
     <div id="appLayout" class="demoLayout" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design: 'headline'">
         <div id="mainTabContainer" class="centerPanel" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="region: 'center', tabPosition: 'top'">
             <div id="mapContainer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Map'">
@@ -153,17 +56,79 @@
             <div id="mousePosition"></div>
         </div>
     </div>
-    
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script type="text/javascript">
+        function ajaxRequest() {
+            var activexmodes=["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"] //activeX versions to check for in IE
+            if (window.ActiveXObject) { //Test for support for ActiveXObject in IE first (as XMLHttpRequest in IE7 is broken)
+                for (var i=0; i<activexmodes.length; i++) {
+                    try{
+                        return new ActiveXObject(activexmodes[i]);
+                    } catch(e) {
+                        //suppress error
+                    }
+                }
+            } else if (window.XMLHttpRequest) { // if Mozilla, Safari etc
+                return new XMLHttpRequest();
+            } else {
+                return false;
+            }
+        }
+        var mygetrequest=new ajaxRequest();
+        mygetrequest.onreadystatechange=function(){
+            if (mygetrequest.readyState==4){
+                if (mygetrequest.status==200 || window.location.href.indexOf("http")==-1){
+                    var obj = JSON.parse(mygetrequest.responseText);
+                    var stl = document.createElement("link");
+                    stl.setAttribute("rel", "stylesheet");
+                    stl.setAttribute("type","text/css");
+                    stl.setAttribute("href","css/" + obj.mapConfig.Page.style + ".css");
+                    document.getElementsByTagName("head")[0].appendChild(stl);
+                    document.title = obj.mapConfig.Page.title;
+                } else {
+                }
+            } else {
+            }
+        }
+        mygetrequest.open("GET",'conf.json',true);
+        mygetrequest.send(null);
+            
+    </script>
+    <script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true, 
+            paths: {
+                agd: location.pathname.replace(/\/[^/]+$/, '') + 'agd'
+            }
+        };
+    </script>
+    <script src="//js.arcgis.com/3.14"></script>
+    <script src="./js/CollapsibleLists.js"></script>
+    <script src="./js/agd.min.js"></script>    
+    <script>
+        var GoToDeltaPPIN = function(ppin){           
+            var urlBase = "http://www.deltacomputersystems.com/cgi-apM5/APMCGI02?HTMCNTY=MS43&HTMBASE=C&HTMKEY=";
+            var str = ''+ppin;
+            var pad = "000000";
+            var padVal = pad.substring(0,pad.length - str.length) + str;
+            var url = urlBase + padVal;
+            
+            window.open(url);
+        };
+        dojo.ready(function(){
+            var overlay = document.getElementById("loadingOverlay");
+            overlay.remove();
+        });
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-43782007-26', 'auto');
-  ga('send', 'pageview');
+      ga('create', 'UA-43782007-26', 'auto');
+      ga('send', 'pageview');
 
-</script>
+    </script>
     
     </body>
 </html>

@@ -87,7 +87,24 @@ gulp.task('min-css3',function(){
 /*
 *   Minifi *.js
 */
-gulp.task('min-js',['min-js1','min-js2','min-js3','concat-js1','min-js4','js-copy']);
+//gulp.task('min-js',['min-js1','min-js2','min-js3','concat-js1','min-js4','js-copy']);
+gulp.task('min-js', function (callback) {
+    runSequence(
+        'min-js1',
+        'min-js2',
+        'min-js3',
+        'concat-js1',
+        'min-js4',
+        'js-copy',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('Build JS successful');
+          }
+          callback(error);
+    });
+});
 
 gulp.task('min-js1',function(){
     return gulp.src('./src/js/*.js')
