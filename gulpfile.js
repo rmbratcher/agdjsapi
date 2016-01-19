@@ -335,7 +335,7 @@ gulp.task('build-hampshire-wv', function (callback) {
         'hampshire-min-html',
         'min-js',
         'min-css',
-        'commit-changes',
+        //'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -465,7 +465,7 @@ gulp.task('deploy-marion-ms', function (callback) {
     outdir = '../sandbox/marion';
     runSequence(
         'build-marion-ms',
-        'hampshire-wv-ftp',
+        'marion-ms-ftp',
         function (error) {
           if (error) {
             console.log(error.message);
