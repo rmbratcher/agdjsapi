@@ -168,25 +168,6 @@ gulp.task('commit-changes', function () {
                                                                         
 */
 
-gulp.task('build-lib', function (callback) {
-    outdir = './dist/agdjsapi';
-    runSequence(
-        'img-crush',
-        'min-css',
-        'min-js',
-        'bump-version',
-        'commit-changes',
-        function (error) {
-          if (error) {
-            console.log(error.message);
-          } else {
-            console.log('RELEASE FINISHED SUCCESSFULLY');
-          }
-          callback(error);
-    });
-    
-
-});
 
 gulp.task('default', function () {
     console.log("*************************************************************");
@@ -219,6 +200,35 @@ gulp.task('default', function () {
     console.log("*************************************************************");
 
 });
+
+/*
+.______    __    __   __   __       _______         __       __  .______   
+|   _  \  |  |  |  | |  | |  |     |       \       |  |     |  | |   _  \  
+|  |_)  | |  |  |  | |  | |  |     |  .--.  |______|  |     |  | |  |_)  | 
+|   _  <  |  |  |  | |  | |  |     |  |  |  |______|  |     |  | |   _  <  
+|  |_)  | |  `--'  | |  | |  `----.|  '--'  |      |  `----.|  | |  |_)  | 
+|______/   \______/  |__| |_______||_______/       |_______||__| |______/  
+
+*/
+
+gulp.task('build-lib', function (callback) {
+    outdir = './dist/agdjsapi';
+    runSequence(
+        'img-crush',
+        'min-css',
+        'min-js',
+        'bump-version',
+        'commit-changes',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('RELEASE FINISHED SUCCESSFULLY');
+          }
+          callback(error);
+    });
+});
+
 
 /********************************************************************************************************
 *.___  ___.   ______   .__   __.      ____    __    ____ ____    ____ 
