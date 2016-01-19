@@ -54,7 +54,7 @@ li.collapsibleListClosed{
 #header {
     height: 60px;
     overflow: hidden;
-    box-shadow: 10px 10px 5px #A5ABAD;
+    box-shadow: 5px 5px 3px #A5ABAD;
 }
 #map {
     position: absolute;
@@ -73,7 +73,7 @@ li.collapsibleListClosed{
     height: 20px;
     float: right;
     font-weight: bold;
-    box-shadow: 10px 10px 5px #A5ABAD;
+    box-shadow: 5px 5px 3px #A5ABAD;
 }
 #notification {
     background-color: #FFF;
@@ -83,7 +83,7 @@ li.collapsibleListClosed{
     height: 20px;
     float: left;
     font-weight: bold;
-    box-shadow: 10px 10px 5px #A5ABAD;
+    box-shadow: 5px 5px 3px #A5ABAD;
 }
 
 #toggleButtonContainer {
