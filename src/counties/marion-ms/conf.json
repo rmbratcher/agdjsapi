@@ -61,7 +61,7 @@
             {
                 "name": "Marion Parcels",
                 "type": "ArcGISDynamicMapServiceLayer",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer",
                 "toggle": false,
                 "transbtn": false,
                 "visible": true
@@ -77,7 +77,7 @@
                 "task": [
                     {
                         "name": "MapIdentify",
-                        "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer",
+                        "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer",
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
@@ -130,13 +130,13 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://mariongis.com/ArcGIS/rest/services/Geometry/GeometryServer"
+                "geometryService": "http://warren.msmaps.org/ArcGIS/rest/services/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",
                 "label": "Select",
                 "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer",
                 "limit": 25,
                 "layerIds": [
                     44,
@@ -149,7 +149,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/44",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/44",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -182,7 +182,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/44",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/44",
                 "operator": "equals",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
@@ -215,7 +215,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/44",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/44",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -248,7 +248,7 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/44",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/44",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
@@ -285,7 +285,7 @@
             {
                 "label": "Search by Subdivision",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/49",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/49",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Subdivision",
@@ -303,7 +303,7 @@
             {
                 "label": "Search by Landmark",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMS/MapServer/37",
+                "url": "http://warren.msmaps.org/ArcGIS/rest/services/MarionMS/MapServer/37",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Name",
