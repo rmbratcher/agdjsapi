@@ -73,18 +73,19 @@ li.collapsibleListClosed{
     height: 20px;
     float: right;
     font-weight: bold;
-    box-shadow: 5px 5px 3px #A5ABAD;
+    box-shadow: 5px 5px 3px #898C8C;
     min-width: 40px;
 }
 #notification {
     background-color: #FFF;
     color: red;
     padding: 2px;
-    margin: 5px;
+    margin-left: 10px;
     height: 20px;
     float: left;
     font-weight: bold;
-    box-shadow: 5px 5px 3px #A5ABAD;
+    box-shadow: 5px 5px 3px #898C8C;
+    min-width: 40px;
 }
 
 #toggleButtonContainer {
