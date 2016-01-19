@@ -68,6 +68,15 @@
     </head>
     <body class="nihilo">
     <script>
+        var GoToDeltaPPIN = function(ppin){           
+            var urlBase = "http://www.deltacomputersystems.com/cgi-apM5/APMCGI02?HTMCNTY=MS46&HTMBASE=C&HTMKEY=";
+            var str = ''+ppin;
+            var pad = "000000";
+            var padVal = pad.substring(0,pad.length - str.length) + str;
+            var url = urlBase + padVal;
+            
+            window.open(url);
+        };
         var loadingOverlay = (function(){
             // the overlay object with its methods are the return value 
             // of this anonymous function

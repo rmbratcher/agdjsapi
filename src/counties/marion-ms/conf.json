@@ -92,7 +92,7 @@
                         "height": 300,
                         "templates": {
                             "37": "",
-                            "44": "<b>${NAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b>${PPIN}<br /><b>Parcel Number: </b>${Parcel_Number}<br /><b>Appraised Ac: </b>${Appraised_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><b>Assesed Value: </b>$${TOTAL_ASSESED_VAL}.00<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "44": "<b>${NAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${Parcel_Number}<br /><b>Appraised Ac: </b>${Appraised_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><b>Assesed Value: </b>$${TOTAL_ASSESED_VAL}.00<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
                             "49": ""
                         }
                     }

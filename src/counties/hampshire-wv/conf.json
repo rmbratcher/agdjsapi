@@ -70,6 +70,9 @@
         }, {
             "type": "Print",
             "url": "http://print.agd.cc/services/print/Default.ashx",
+            "title": "Hampshire County, WV     PROPERTY MAP",
+            "subtitle": "",
+            "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
             "printDefs": {
                 "61": [
                         "PARID",
