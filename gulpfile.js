@@ -248,7 +248,6 @@ gulp.task('build-mon-wv', function (callback) {
         'min-css',
         'mon-wv',
         'min-html',
-        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -335,7 +334,6 @@ gulp.task('build-hampshire-wv', function (callback) {
         'hampshire-min-html',
         'min-js',
         'min-css',
-        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -362,6 +360,7 @@ gulp.task('deploy-hampshire-wv', function (callback) {
     runSequence(
         'build-hampshire-wv',
         'hampshire-wv-ftp',
+        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -439,7 +438,6 @@ gulp.task('build-marion-ms', function (callback) {
         'marion-ms-min-html',
         'min-js',
         'min-css',
-        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -466,6 +464,7 @@ gulp.task('deploy-marion-ms', function (callback) {
     runSequence(
         'build-marion-ms',
         'marion-ms-ftp',
+        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -542,7 +541,6 @@ gulp.task('build-lincoln-ms', function (callback) {
         'lincoln-ms-min-html',
         'min-js',
         'min-css',
-        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -569,6 +567,7 @@ gulp.task('deploy-lincoln-ms', function (callback) {
     runSequence(
         'build-lincoln-ms',
         'lincoln-ms-ftp',
+        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -645,8 +644,6 @@ gulp.task('build-warren-ms', function (callback) {
         'warren-ms-min-html',
         'min-js',
         'min-css',
-        'commit-changes',
-        'warren-ms-ftp',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -673,6 +670,7 @@ gulp.task('deploy-warren-ms', function (callback) {
     runSequence(
         'build-warren-ms',
         'warren-ms-ftp',
+        'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);
