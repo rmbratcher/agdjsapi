@@ -446,7 +446,7 @@ gulp.task('build-marion-ms', function (callback) {
           } else {
             console.log('RELEASE FINISHED SUCCESSFULLY');
 
-            /*var requestData = {
+            var requestData = {
                 text: "Build finished for Marion, MS Arcgis Server Site."
             };
 
@@ -454,7 +454,7 @@ gulp.task('build-marion-ms', function (callback) {
                     { json: true, body: requestData },
                     function(err, res, body) {
               // `body` is a js object if request was successful
-            });*/
+            });
           }
           callback(error);
     });
@@ -501,7 +501,7 @@ gulp.task('marion-ms-min-html',function(){
 
 gulp.task('marion-ms-ftp', function(){
     var conn = ftp.create( {
-        host:     '192.168.1.73',
+        host:     '192.168.2.171',
         user:     'ftpuser',
         password: 'goftp',
         port:     21,
