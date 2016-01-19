@@ -446,7 +446,7 @@ gulp.task('build-marion-ms', function (callback) {
           } else {
             console.log('RELEASE FINISHED SUCCESSFULLY');
 
-            var requestData = {
+            /*var requestData = {
                 text: "Build finished for Marion, MS Arcgis Server Site."
             };
 
@@ -454,7 +454,7 @@ gulp.task('build-marion-ms', function (callback) {
                     { json: true, body: requestData },
                     function(err, res, body) {
               // `body` is a js object if request was successful
-            });
+            });*/
           }
           callback(error);
     });
