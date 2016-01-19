@@ -1,0 +1,391 @@
+{
+    "mapConfig": {
+        "Page": {
+            "style": "sage",
+            "title": "Warren County, MS",
+            "links": [],
+            "helpTab": "help.html",
+            "scalebar": true,
+            "scaleview": true
+        },
+        "Extent": {
+            "xmin" : 1962479.11439825, 
+            "ymin" : 920405.571177461, 
+            "xmax" : 2308109.70022263, 
+            "ymax" : 1172114.80215823, 
+            "spatialReference" : {
+              "wkid" : 2255
+            }
+        },
+        "layers": [
+            {
+                "name": "Aerial County Wide",
+                "type": "ArcGISImageServiceLayer",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS400/ImageServer",
+                "extent": {
+                    "xmin" : 2031532.57262978, 
+                    "ymin" : 932857.81542307, 
+                    "xmax" : 2234423.22305078, 
+                    "ymax" : 1145758.57743767, 
+                    "spatialReference" : {
+                      "wkid" : 2255
+                    }
+                },
+                "layers": [
+                    "WarrenMS-Imagery400"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Aerial City",
+                "type": "ArcGISImageServiceLayer",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS100/ImageServer",
+                "extent": {
+                    "xmin": 2068827.75,
+                    "ymin": 963904.25,
+                    "xmax": 2202053.75,
+                    "ymax": 1120962.25,
+                    "spatialReference": {
+                        "wkid": 2255
+                    }
+                },
+                "layers": [
+                    "WarrenMS-Imagery100"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Aerial Downtown",
+                "type": "ArcGISImageServiceLayer",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS50/ImageServer",
+                "extent": {
+                    "xmin": 2121099.26921888,
+                    "ymin": 1028065.83391261,
+                    "xmax": 2133407.82612956,
+                    "ymax": 1041208.75910581,
+                    "spatialReference": {
+                        "wkid": 2255
+                    }
+                },
+                "layers": [
+                    "WarrenMS-Imagery50"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Warren Parcels",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                "toggle": false,
+                "transbtn": false,
+                "visible": true
+            }
+        ],
+        "Tools": [
+            {
+                "type": "NavTools"
+            },
+            {
+                "type": "Identify",
+                "label": "Identify",
+                "task": [
+                    {
+                        "name": "MapIdentify",
+                        "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [
+                            168,
+                            162,
+                            160
+                        ],
+                        "layerOptions": "ALL",
+                        "show": true,
+                        "title": "${OWNERNAME}",
+                        "width": 350,
+                        "height": 300,
+                        "templates": {
+                            "162": "",
+                            "168": "<b>${OWNERNAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN:</b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL_NUMBER}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "160": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Print",
+                "url": "http://print.agd.cc/services/print/Default.ashx",
+                "title": "WARREN COUNTY, MS        PROPERTY MAP",
+                "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
+                "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
+                "printDefs": {
+                    "168": [
+                        "PPIN",
+                        "PARCEL_NUMBER",
+                        "OWNERNAME",
+                        "APPRAISED_AC",
+                        "ADDRESS1",
+                        "ADDRESS2",
+                        "CITY",
+                        "STATE",
+                        "ZIP",
+                        "TOTALVALUE",
+                        "SECTION",
+                        "TOWNSHIP",
+                        "RANGE",
+                        "TAX_DIST",
+                        "SUB_NAME",
+                        "LEGAL1",
+                        "LEGAL2"
+                    ]
+                }
+            },
+            {
+                "type": "Measure",
+                "geometryService": "http://mariongis.com/arcgis/rest/services/Geometry/GeometryServer"
+            },
+            {
+                "type": "MultiSelect",
+                "label": "Select",
+                "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                "limit": 25,
+                "layerIds": [
+                    168,
+                    160,
+                    162
+                ]
+            }
+        ],
+        "Queries": [
+            {
+                "label": "Search by Owner Name",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Owner Name",
+                "searchFields": [
+                    "OWNERNAME"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION",
+                    "TAX_DIST",
+                    "SUB_NAME",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by PPIN",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "operator": "equals",
+                "isNumber": true,
+                "searchBoxLable": "PPIN",
+                "searchFields": [
+                    "PPIN"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION",
+                    "TAX_DIST",
+                    "SUB_NAME",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Parcel Number",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Parcel No.",
+                "searchFields": [
+                    "PARCEL_NUMBER"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION",
+                    "TAX_DIST",
+                    "SUB_NAME",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Address",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Address",
+                "searchFields": [
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "ADDRESS3"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION",
+                    "TAX_DIST",
+                    "SUB_NAME",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Subdivision",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/169",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Subdivision",
+                "searchFields": [
+                    "SUBDIVISION_NAME"
+                ],
+                "outFields": [
+                    "SUBDIVISION_NAME",
+                    "PB_PG",
+                    "DB_PG"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Landmark",
+                "type": "QueryTask",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/172",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Name",
+                "searchFields": [
+                    "NAME"
+                ],
+                "outFields": [
+                    "NAME"
+                ],
+                "symbol": "DefaultPointSymbol"
+            }
+        ],
+        "Symbols": [
+            {
+                "name": "DefaultLineSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        115,
+                        76,
+                        0,
+                        255
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPointSymbol",
+                "style": {
+                    "type": "esriSMS",
+                    "style": "esriSMSSquare",
+                    "color": [
+                        76,
+                        115,
+                        0,
+                        255
+                    ],
+                    "size": 8,
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "outline": {
+                        "color": [
+                            152,
+                            230,
+                            0,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPolygonSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        247,
+                        230,
+                        97,
+                        80
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            }
+        ]
+    }
+}

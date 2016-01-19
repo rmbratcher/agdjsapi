@@ -1,0 +1,373 @@
+{
+    "mapConfig": {
+        "Page": {
+            "style": "citrus",
+            "title": "Lincoln County, MS  --  Blake Pickering, Tax Assessor/Collector",
+            "links": [],
+            "helpTab": "help.html",
+            "scalebar": true,
+            "scaleview": true
+        },
+        "Extent": {
+            "xmin" : 2160055.1299, 
+            "ymin" : 641403.8156,
+            "xmax" : 2365344.2392, 
+            "ymax" : 828565.8512,
+            "spatialReference" : {
+              "wkid" : 102695
+            }
+        },
+        "layers": [
+            {
+                "name": "Aerial County Wide",
+                "type": "ArcGISImageServiceLayer",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS400/ImageServer",
+                "extent": {
+                    "xmin" : 2160055.1299, 
+            		"ymin" : 641403.8156,
+            		"xmax" : 2365344.2392, 
+            		"ymax" : 828565.8512,
+            		"spatialReference" : {
+              			"wkid" : 102695
+            		}
+                },
+                "layers": [
+                    "LincolnMS-Imagery400"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Aerial City",
+                "type": "ArcGISImageServiceLayer",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS100/ImageServer",
+                "extent": {
+                    "xmin" : 2160055.1299, 
+            		"ymin" : 641403.8156,
+            		"xmax" : 2365344.2392, 
+            		"ymax" : 828565.8512,
+            		"spatialReference" : {
+              			"wkid" : 102695
+            		}
+                },
+                "layers": [
+                    "LincolnMS-Imagery100"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Lincoln Parcels",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                "toggle": false,
+                "transbtn": false,
+                "visible": true
+            }
+        ],
+        "Tools": [
+            {
+                "type": "NavTools"
+            },
+            {
+                "type": "Identify",
+                "label": "Identify",
+                "task": [
+                    {
+                        "name": "MapIdentify",
+                        "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [
+                            135,//Parcels
+                            136,//Subdivision
+                            146//Roads
+                        ],
+                        "layerOptions": "ALL",
+                        "show": true,
+                        "title": "${NAME}",
+                        "width": 350,
+                        "height": 300,
+                        "templates": {
+                            "128": "",
+                            "135": "<b>${NAME}</b><hr /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "136": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Print",
+                "url": "http://print.agd.cc/services/print/Default.ashx",
+                "title": "LINCOLN COUNTY, MS        PROPERTY MAP",
+                "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
+                "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
+                "printDefs": {
+                    "135": [
+                        "PPIN",
+                        "PARCEL",
+                        "NAME",
+                        "APPRAISED_AC",
+                        "ADDRESS1",
+                        "ADDRESS2",
+                        "CITY",
+                        "STATE",
+                        "ZIP",
+                        "TOTAL_ASSESSED_VALUE",
+                        "SECTION",
+                        "TOWNSHIP",
+                        "RANGE",
+                        "TAX_DISTRICT",
+                        "SUBDIV_PLAT",
+                        "STREET_NUMBER",
+                        "STREET_NAME",
+                        "LEGAL_DESC_1",
+                        "LEGAL_DESC_2"
+                    ]
+                }
+            },
+            {
+                "type": "Measure",
+                "geometryService": "http://lincoln.msmaps.org/arcgis/rest/services/Utilities/Geometry/GeometryServer"
+            },
+            {
+                "type": "MultiSelect",
+                "label": "Select",
+                "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                "limit": 25,
+                "layerIds": [
+                    135,//Parcels
+                    136,//Subdivision
+                    146//Roads
+                ]
+            }
+        ],
+        "Queries": [
+            {
+                "label": "Search by PPIN",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "operator": "NEAR",
+                "isNumber": true,
+                "searchBoxLable": "PPIN",
+                "searchFields": [
+                    "PPIN"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL",
+                    "APPRAISED_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "TOTAL_ASSESSED_VALUE",
+                    "RANGE",
+                    "SECTION",
+                    "LEGAL_DESC_1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Owner Name",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Owner Name",
+                "searchFields": [
+                    "NAME"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL",
+                    "APPRAISED_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "TOTAL_ASSESSED_VALUE",
+                    "RANGE",
+                    "SECTION",
+                    "LEGAL_DESC_1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Parcel Number",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Parcel No.",
+                "searchFields": [
+                    "PARCEL"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL",
+                    "APPRAISED_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "TOTAL_ASSESSED_VALUE",
+                    "RANGE",
+                    "SECTION",
+                    "LEGAL_DESC_1",
+                    "LEGAL_DESC_2"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Address",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Address",
+                "searchFields": [
+                    "SITUS_ADDRESS"
+                ],
+                "outFields": [
+                	"SITUS_ADDRESS",
+                    "PPIN",
+                    "PARCEL",
+                    "APPRAISED_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "TOTAL_ASSESSED_VALUE",
+                    "RANGE",
+                    "SECTION",
+                    "LEGAL_DESC_1",
+                    "LEGAL_DESC_2"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Subdivision",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/136",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Subdivision",
+                "searchFields": [
+                    "SUBDIVISION_NAME"
+                ],
+                "outFields": [
+                    "SUBDIVISION_NAME",
+                    "PB",
+                    "PB_PG",
+                    "DB",
+                    "DB_PG",
+                    "SLIDE"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Landmark",
+                "type": "QueryTask",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/136",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Name",
+                "searchFields": [
+                    "FEATURE_NAME"
+                ],
+                "outFields": [
+                    "FEATURE_NAME"
+                ],
+                "symbol": "DefaultPointSymbol"
+            }
+        ],
+        "Symbols": [
+            {
+                "name": "DefaultLineSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        115,
+                        76,
+                        0,
+                        255
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPointSymbol",
+                "style": {
+                    "type": "esriSMS",
+                    "style": "esriSMSSquare",
+                    "color": [
+                        76,
+                        115,
+                        0,
+                        255
+                    ],
+                    "size": 8,
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "outline": {
+                        "color": [
+                            152,
+                            230,
+                            0,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPolygonSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        247,
+                        230,
+                        97,
+                        80
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            }
+        ]
+    }
+}

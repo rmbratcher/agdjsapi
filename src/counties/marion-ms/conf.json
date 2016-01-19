@@ -1,0 +1,389 @@
+{
+    "mapConfig": {
+        "Page": {
+            "style": "citrus",
+            "title": "Marion County, MS",
+            "links": [],
+            "helpTab": "help.html",
+            "scalebar": true,
+            "scaleview": true
+        },
+        "Extent": {
+            "xmin": 2359619.6771539,
+            "ymin": 530663.863434327,
+            "xmax": 2556222.99496103,
+            "ymax": 725530.402815593,
+            "spatialReference": {
+                "wkid": 2255
+            }
+        },
+        "layers": [
+            {
+                "name": "Aerial County Wide",
+                "type": "WMS",
+                "url": "http://wms.agd.cc/geoserver/MarionCountyMS/wms?",
+                "extent": {
+                    "xmin": 2359619.6771539,
+                    "ymin": 530663.863434327,
+                    "xmax": 2556222.99496103,
+                    "ymax": 725530.402815593,
+                    "spatialReference": {
+                        "wkid": 2255
+                    }
+                },
+                "layers": [
+                    "MarionMS-Imagery400"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Aerial City",
+                "type": "WMS",
+                "url": "http://wms.agd.cc/geoserver/MarionCountyMS/wms?",
+                "extent": {
+                    "xmin": 2359619.6771539,
+                    "ymin": 530663.863434327,
+                    "xmax": 2556222.99496103,
+                    "ymax": 725530.402815593,
+                    "spatialReference": {
+                        "wkid": 2255
+                    }
+                },
+                "layers": [
+                    "MarionMS-Imagery100"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Marion Parcels",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer",
+                "toggle": false,
+                "transbtn": false,
+                "visible": true
+            }
+        ],
+        "Tools": [
+            {
+                "type": "NavTools"
+            },
+            {
+                "type": "Identify",
+                "label": "Identify",
+                "task": [
+                    {
+                        "name": "MapIdentify",
+                        "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [
+                            44,
+                            37,
+                            49
+                        ],
+                        "layerOptions": "ALL",
+                        "show": true,
+                        "title": "${NAME}",
+                        "width": 350,
+                        "height": 300,
+                        "templates": {
+                            "37": "",
+                            "44": "<b>${NAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b>${PPIN}<br /><b>Parcel Number: </b>${Parcel_Number}<br /><b>Appraised Ac: </b>${Appraised_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><b>Assesed Value: </b>$${TOTAL_ASSESED_VAL}.00<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "49": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Print",
+                "url": "http://print.agd.cc/services/print/Default.ashx",
+                "title": "MARION COUNTY, MS        PROPERTY MAP",
+                "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
+                "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
+                "printDefs": {
+                    "44": [
+                        "PPIN",
+                        "Parcel_Number",
+                        "NAME",
+                        "Appraised_AC",
+                        "TOTAL_ASSESED_VAL",
+                        "ADDRESS1",
+                        "ADDRESS2",
+                        "CITY",
+                        "STATE",
+                        "ZIPCODE",
+                        "TR_SECTION",
+                        "TOWNSHIP",
+                        "RANGE",
+                        "TAX_DIST",
+                        "SUBDIV_CODE",
+                        "PROP_ADD_NUM",
+                        "PROP_STREET",
+						"DEED_BOOK",
+						"DEED_PAGE",
+                        "LEGAL_DESC"
+                    ]
+                }
+            },
+            {
+                "type": "Measure",
+                "geometryService": "http://mariongis.com/ArcGIS/rest/services/Geometry/GeometryServer"
+            },
+            {
+                "type": "MultiSelect",
+                "label": "Select",
+                "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer",
+                "limit": 25,
+                "layerIds": [
+                    44,
+                    49,
+                    37
+                ]
+            }
+        ],
+        "Queries": [
+            {
+                "label": "Search by Owner Name",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/44",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Owner Name",
+                "searchFields": [
+                    "NAME"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "Parcel_Number",
+                    "Appraised_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIPCODE",
+                    "RANGE",
+                    "TR_SECTION",
+                    "TAX_DIST",
+                    "SUBDIV_CODE",
+                    "PROP_ADD_NUM",
+                    "PROP_STREET",
+                    "LEGAL_DESC",
+                    "TOTAL_ASSESED_VAL"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by PPIN",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/44",
+                "operator": "equals",
+                "isNumber": true,
+                "searchBoxLable": "PPIN",
+                "searchFields": [
+                    "PPIN"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "Parcel_Number",
+                    "Appraised_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIPCODE",
+                    "RANGE",
+                    "TR_SECTION",
+                    "TAX_DIST",
+                    "SUBDIV_CODE",
+                    "PROP_ADD_NUM",
+                    "PROP_STREET",
+                    "LEGAL_DESC",
+                    "TOTAL_ASSESED_VAL"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Parcel Number",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/44",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Parcel No.",
+                "searchFields": [
+                    "Parcel_Number"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "Parcel_Number",
+                    "Appraised_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIPCODE",
+                    "RANGE",
+                    "TR_SECTION",
+                    "TAX_DIST",
+                    "SUBDIV_CODE",
+                    "PROP_ADD_NUM",
+                    "PROP_STREET",
+                    "LEGAL_DESC",
+                    "TOTAL_ASSESED_VAL"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Address",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/44",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Address",
+                "searchFields": [
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "ADDRESS3",
+                    "ADDRESS4",
+                    "ADDRESS5"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "Parcel_Number",
+                    "Appraised_AC",
+                    "NAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIPCODE",
+                    "RANGE",
+                    "TR_SECTION",
+                    "TAX_DIST",
+                    "SUBDIV_CODE",
+                    "PROP_ADD_NUM",
+                    "PROP_STREET",
+                    "LEGAL_DESC",
+                    "TOTAL_ASSESED_VAL"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Subdivision",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/49",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Subdivision",
+                "searchFields": [
+                    "SubName"
+                ],
+                "outFields": [
+                    "SubName",
+                    "Division",
+                    "Book",
+                    "Page"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Landmark",
+                "type": "QueryTask",
+                "url": "http://mariongis.com/ArcGIS/rest/services/MarionMap/MapServer/37",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Name",
+                "searchFields": [
+                    "Feature_Name"
+                ],
+                "outFields": [
+                    "Feature_Name"
+                ],
+                "symbol": "DefaultPointSymbol"
+            }
+        ],
+        "Symbols": [
+            {
+                "name": "DefaultLineSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        115,
+                        76,
+                        0,
+                        255
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPointSymbol",
+                "style": {
+                    "type": "esriSMS",
+                    "style": "esriSMSSquare",
+                    "color": [
+                        76,
+                        115,
+                        0,
+                        255
+                    ],
+                    "size": 8,
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "outline": {
+                        "color": [
+                            152,
+                            230,
+                            0,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPolygonSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        247,
+                        230,
+                        97,
+                        80
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            }
+        ]
+    }
+}

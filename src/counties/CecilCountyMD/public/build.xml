@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--*************************************************************************
+Filename        :   build.xml
+Project         :   FusionSiteBuild
+Document Type   :   XML
+Purpose         :   build file for ant tool
+
+Author     Date            Description
+mbratcher  2013-07-01   AGD jsapi build config
+
+***************************************************************************-->
+<!-- A "project" describes a set of targets that may be requested
+     when Ant is executed.  The "default" attribute defines the
+     target which is executed if no specific target is requested,
+     and the "basedir" attribute defines the current working directory
+     from which Ant executes the requested task.  This is normally
+     set to the current working directory.
+-->
+  <project basedir="C:\Dev\agdjsapi" default="test" name="AGD JSAPI Build">
+
+<!-- ===================== Property Definitions =========================== -->
+<!--
+  Each of the following properties are used in the build script.
+  Values for these properties are set by the first place they are
+  defined, from the following list:
+
+  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+
+  * Definitions from a "build.properties" file in the top level
+    source directory of this application.
+
+  * Definitions from a "build.properties" file in the developer's
+    home directory.
+
+  * Default definitions in this build.xml file.
+
+  You will note below that property values can be composed based on the
+  contents of previously defined properties.  This is a powerful technique
+  that helps you minimize the number of changes required when your development
+  environment is modified.  Note that property composition is allowed within
+  "build.properties" files as well as in the "build.xml" script.
+-->
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+  <property file="default.properties"/>
+
+<!-- ==================== File and Directory Names ======================== -->
+<!--
+
+  These properties generally define file and directory names (or paths) that
+  affect where the build process stores its outputs.
+
+  app.name             Base name of this application, used to
+                       construct filenames and directories.
+                       Defaults to "myapp".
+
+  app.path             Context path to which this application should be
+                       deployed (defaults to "/" plus the value of the
+                       "app.name" property).
+
+  app.version          Version number of this iteration of the application.
+
+  build.home           The directory into which the "prepare" and
+                       "compile" targets will generate their output.
+                       Defaults to "build".
+
+  dist.home            The name of the base directory in which
+                       distribution files are created.
+                       Defaults to "dist".
+  <property name="deploy.home" value="C:\ms4w\apps/${app.name}"/>
+-->
+
+  <property environment="env"/>
+  <property name="county.name" value="CecilCountyMD"/>
+  <property name="app.name" value="public"/>
+  <property name="config.home" value="C:/Work/AgdJSAPI_Config/config/${county.name}"/>
+  <property name="build.home" value="C:/Work/AgdJSAPI_Config/build/${county.name}"/>
+  <property name="test.home" value="C:/Applications/nginx-1.2.6/html"/>
+  
+  <!-- Dont Change the rest of the properties -->
+  <property name="app.version" value="0.1.x"/>
+  <property name="build.app" value="${build.home}/${app.name}"/>
+  <property name="config.app" value="${config.home}/${app.name}"/>
+  <property name="css.home" value="${basedir}/css"/>
+  <property name="img.home" value="${basedir}/img"/>
+  <property name="lib.home" value="${basedir}/lib"/>
+  <property name="js.home" value="${basedir}/js"/>
+  <property name="agsjs.home" value="${basedir}/agsjs"/>
+
+
+<!-- ==================== External Dependencies =========================== -->
+
+<!--
+  Use property values to define the locations of external libraries on which
+  your application will depend.
+  -->
+
+  <property name="YUIcompressor"  value="${basedir}/bin/yuicompressor.jar"/>
+  <property name="compiler" value="${basedir}/bin/compiler.jar"/>
+  <property name="htmlcompressor" value="${basedir}/bin/htmlcompressor-1.5.3.jar"/>
+  <property name="jsmin" value="${basedir}/bin/jsmin.exe"/>
+  <property name="makeDistpy" value="${basedir}/bin/makeDist.py"/>
+  <property name="jsonmin" value="${basedir}/bin/jsonMin.py"/>
+  <!-- Set this to point at your python executable ( you may have to use a full path ) -->
+  <property name="Python" value="python.exe"/>
+
+
+<!-- ==================== Clean Target ==================================== -->
+<!--
+
+  The "clean" target deletes any previous "build" and "dist" directory,
+  so that you can be ensured the application can be built from scratch.
+
+-->
+
+  <target description="Delete old build and dist directories" name="clean">
+    <echo message="Removing build directories"/>
+    <delete dir="${build.app}"/>
+    <delete file="${js.home}/agd.js"/>
+    <delete file="${js.hoome}/agd.min.js"/>
+  </target>
+  
+  
+<!-- ==================== Prepare Target ================================== -->
+
+<!--
+
+  The "prepare" target is used to create the "build" destination directory,
+  and copy the static contents of your web application to it.  If you need
+  to copy static files from external dependencies, you can customize the
+  contents of this task.
+
+  Normally, this task is executed indirectly when needed.
+
+-->
+
+  <target name="prepare" description="preparing core files" depends="clean">
+    <echo message="os name=${os.name}"/>
+    <echo message="Preparing uncompressed build"/>
+    
+    
+    <!-- Create build directories as needed -->
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.app}"/>
+    
+    <copy tofile="${build.app}/help.html" file="${config.app}/help.html"/>
+    <copy tofile="${build.app}/conf.json" file="${config.app}/conf.json"/>
+
+    <!-- Copy static content -->
+    <copy todir="${build.app}">
+      <fileset dir="${basedir}"
+            includes="agsjs/**
+                      img/**
+                      css/**
+                      "
+       />
+    </copy>
+  </target>
+  
+  
+<!-- ==================== Render Template Deploy ====================================== -->
+  <target description="Make html and php files from templates" name="render" depends="prepare, concat">
+    <echo message="Rendering templates"/>
+    <!-- Use python and the jinja2 module to render the template into valid html -->
+    <exec executable="${Python}">
+        <arg value="${makeDistpy}"/>
+        <arg value="${config.app}/config.ini"/>
+        <arg value="${config.app}/template.html"/>
+        <arg value="${build.app}/index_uc.html"/>
+        <arg value="deploy"/>
+    </exec>
+  </target>
+  
+ <!-- ==================== Render Template Test ====================================== -->
+  <target description="Make html and php files from templates" name="render_test" depends="prepare, concat">
+    <echo message="Rendering templates from ${config.app}"/>
+    <!-- Use python and the jinja2 module to render the template into valid html -->
+    <exec executable="${Python}">
+        <arg value="${makeDistpy}"/>
+        <arg value="${config.app}/config.ini"/>
+        <arg value="${config.app}/template.html"/>
+        <arg value="${build.app}/index_uc.html"/>
+        <arg value="test"/>
+    </exec>
+  </target>
+  
+  
+  <!-- ======================= Concat JS from lib ================================ -->
+  <target description="Concat all js file in the lib foler into a single file" name="concat">
+    <echo message="Concatenate lib/* into agd.js" />
+    <concat destfile="${js.home}/agd.js" encoding="UTF-8" outputencoding="UTF-8" append="true">
+        <filelist dir="${lib.home}"
+                  files=" agd.arc.js
+                          agd.arc.MapFunctions.js
+                          agd.arc.Utils.js
+                          agd.arc.Widgets.GoToXY.js
+                          agd.arc.Widgets.Identify.js
+                          agd.arc.Widgets.Measure.js
+                          agd.arc.Widgets.MultiSelect.js
+                          agd.arc.Widgets.Print.js
+                          "
+        />
+    </concat>
+  </target>
+  
+
+<!-- ======================= Build Test ================================== -->
+<target description="Build the site without compression and concatenation" name="test" depends="render_test">
+    <echo message="Creating Test html and javascript" />
+    <move tofile="${build.app}/index.html" file="${build.app}/index_uc.html" />
+    <copy todir="${build.app}/js">
+        <filelist dir="${lib.home}"
+                 files=" agd.arc.js
+                          agd.arc.MapFunctions.js
+                          agd.arc.Utils.js
+                          agd.arc.Widgets.GoToXY.js
+                          agd.arc.Widgets.Identify.js
+                          agd.arc.Widgets.Measure.js
+                          agd.arc.Widgets.MultiSelect.js
+                          agd.arc.Widgets.Print.js
+                          "
+        />        
+    </copy>
+    
+    <copy todir="${build.app}">
+      <fileset dir="${basedir}"
+            includes="js/**
+                      "
+       />
+    </copy>
+    
+    <copy todir="${test.home}/${app.name}">
+        <fileset dir="${build.app}"/>
+    </copy>
+    
+    <copy todir="${test.home}/${app.name}">
+        <fileset dir="${build.app}"/>
+    </copy>
+    
+</target>
+
+
+<!-- ======================= Build Release ============================= -->
+<target description="Build the site with compression and optimization" name="release" depends="compress">
+    <echo message="Creating site for deployment"/>
+    
+    <copy todir="${build.app}">
+      <fileset dir="${basedir}"
+            includes="js/**
+                      "
+       />
+    </copy>
+</target>
+
+
+<!-- ======================= Deploy release ============================= -->
+<target description="Build the site with compression and optimization" name="deploy" depends="release">
+    <echo message="Moving files to server"/>
+    
+    <ftp server="cecilmaps.ccdps.org"
+         port="21"
+         remotedir="${app.name}"
+         depends="yes"
+         userid="update"
+         password = "update$123"
+         binary = "yes">
+         
+        <fileset dir="${build.app}"/>
+    </ftp>
+    
+</target>
+  
+
+  
+<!-- ====================== Compress ====================================== -->
+<target description="compress html and javascript" name="compress" depends="render">
+    <echo message="Compressing html"/>
+    <java jar="${htmlcompressor}" fork="true">
+        <arg value="-o"/>
+        <arg value="${build.app}/index.html"/>
+        <arg value="--compress-css"/>
+        <arg value="--compress-js"/>
+        <arg value="--js-compressor"/>
+        <arg value="yui"/>
+        <arg value="${build.app}/index_uc.html"/>
+    </java>
+    
+    <move tofile="${build.app}/help_uc.html" file="${build.app}/help.html" />
+    <move tofile="${build.app}/conf_uc.json" file="${build.app}/conf.json" />
+    
+    <java jar="${htmlcompressor}" fork="true">
+        <arg value="-o"/>
+        <arg value="${build.app}/help.html"/>
+        <arg value="--compress-css"/>
+        <arg value="--compress-js"/>
+        <arg value="--js-compressor"/>
+        <arg value="yui"/>
+        <arg value="${build.app}/help_uc.html"/>
+    </java>
+    
+    <java jar="${compiler}" fork="true">
+        <arg value="${js.home}/agd.js"/>
+        <arg value="--compilation_level"/>
+        <arg value="SIMPLE_OPTIMIZATIONS"/>
+        <arg value="--js_output_file"/>
+        <arg value="${js.home}/agd.min.js"/>
+    </java>
+    
+    <exec executable="${Python}">
+        <arg value="${jsonmin}"/>
+        <arg value="${build.app}/conf_uc.json"/>
+        <arg value="${build.app}/conf.json"/>
+    </exec>
+    
+    <delete file="${build.app}/index_uc.html"/>
+    <delete file="${build.app}/help_uc.html"/>
+    <delete file="${build.app}/conf_uc.json"/>
+    
+</target>
+  
+<!-- ====================== Compress Test ====================================== -->
+<target description="compress html and javascript" name="compress_test" depends="render_test">
+    <echo message="Compressing html"/>
+    <java jar="${htmlcompressor}" fork="true">
+        <arg value="-o"/>
+        <arg value="${build.app}/index.html"/>
+        <arg value="--compress-css"/>
+        <arg value="--compress-js"/>
+        <arg value="--js-compressor"/>
+        <arg value="yui"/>
+        <arg value="${build.app}/index_uc.html"/>
+    </java>
+    
+    <java jar="${compiler}" fork="true">
+        <arg value="${js.home}/agd.js"/>
+        <arg value="--compilation_level"/>
+        <arg value="SIMPLE_OPTIMIZATIONS"/>
+        <arg value="--js_output_file"/>
+        <arg value="${js.home}/agd.min.js"/>
+    </java>
+    
+    <delete file="${build.app}/index_uc.html"/> 
+</target>
+
+
+
+
+
+
+</project>

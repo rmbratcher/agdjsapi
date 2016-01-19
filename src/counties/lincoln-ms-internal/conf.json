@@ -1,0 +1,361 @@
+{
+    "mapConfig": {
+        "Page": {
+            "style": "tuxedo",
+            "title": "Lincoln County, MS",
+            "links": [],
+            "helpTab": "help.html",
+            "scalebar": true,
+            "scaleview": true
+        },
+        "Extent": {
+            "xmin" : 2160055.1299, 
+            "ymin" : 641403.8156,
+            "xmax" : 2365344.2392, 
+            "ymax" : 828565.8512,
+            "spatialReference" : {
+              "wkid" : 2255
+            }
+        },
+        "layers": [
+            {
+                "name": "Aerial County Wide",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://gisserver/arcgis/rest/services/Lincoln400/MapServer",
+                "extent": {
+                    "xmin" : 2160055.1299, 
+            		"ymin" : 641403.8156,
+            		"xmax" : 2365344.2392, 
+            		"ymax" : 828565.8512,
+            		"spatialReference" : {
+              			"wkid" : 2255
+            		}
+                },
+                "layers": [
+                    "LincolnMS-Imagery400"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Aerial City",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://gisserver/arcgis/rest/services/Lincoln100/MapServer",
+                "extent": {
+                    "xmin" : 2160055.1299, 
+            		"ymin" : 641403.8156,
+            		"xmax" : 2365344.2392, 
+            		"ymax" : 828565.8512,
+            		"spatialReference" : {
+              			"wkid" : 2255
+            		}
+                },
+                "layers": [
+                    "LincolnMS-Imagery100"
+                ],
+                "toggle": true,
+                "transbtn": true,
+                "visible": false
+            },
+            {
+                "name": "Lincoln Parcels",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer",
+                "toggle": false,
+                "transbtn": false,
+                "visible": true
+            }
+        ],
+        "Tools": [
+            {
+                "type": "NavTools"
+            },
+            {
+                "type": "Identify",
+                "label": "Identify",
+                "task": [
+                    {
+                        "name": "MapIdentify",
+                        "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [
+                            129,
+                            130,
+                            140
+                        ],
+                        "layerOptions": "ALL",
+                        "show": true,
+                        "title": "${OWNERNAME}",
+                        "width": 350,
+                        "height": 300,
+                        "templates": {
+                            "128": "",
+                            "129": "<b>${OWNERNAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b>${PPIN}<br /><b>Parcel Number: </b>${PARCEL_NUMBER}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "130": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Print",
+                "url": "http://gisserver/agsext/services/print/",
+                "title": "LINCOLN COUNTY, MS        PROPERTY MAP",
+                "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
+                "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
+                "printDefs": {
+                    "129": [
+                        "PPIN",
+                        "PARCEL_NUMBER",
+                        "OWNERNAME",
+                        "APPRAISED_AC",
+                        "ADDRESS1",
+                        "ADDRESS2",
+                        "CITY",
+                        "STATE",
+                        "ZIP",
+                        "SECTION_",
+                        "TOWNSHIP",
+                        "RANGE",
+                        "LEGAL1"
+                    ]
+                }
+            },
+            {
+                "type": "Measure",
+                "geometryService": "http://gisserver/arcgis/rest/services/Utilities/Geometry/GeometryServer"
+            },
+            {
+                "type": "MultiSelect",
+                "label": "Select",
+                "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer",
+                "limit": 25,
+                "layerIds": [
+                    129,
+                    130,
+                    140
+                ]
+            }
+        ],
+        "Queries": [
+            {
+                "label": "Search by Owner Name",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/129",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Owner Name",
+                "searchFields": [
+                    "OWNERNAME"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION_",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by PPIN",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/129",
+                "operator": "equals",
+                "isNumber": true,
+                "searchBoxLable": "PPIN",
+                "searchFields": [
+                    "PPIN"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION_",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Parcel Number",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/129",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Parcel No.",
+                "searchFields": [
+                    "PARCEL_NUMBER"
+                ],
+                "outFields": [
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION_",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Address",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/129",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Address",
+                "searchFields": [
+                    "SITUS_ADDRESS"
+                ],
+                "outFields": [
+                	"SITUS_ADDRESS",
+                    "PPIN",
+                    "PARCEL_NUMBER",
+                    "APPRAISED_AC",
+                    "OWNERNAME",
+                    "ADDRESS1",
+                    "ADDRESS2",
+                    "CITY",
+                    "STATE",
+                    "ZIP",
+                    "RANGE",
+                    "SECTION_",
+                    "LEGAL1"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Subdivision",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/130",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Subdivision",
+                "searchFields": [
+                    "SUBDIVISION_NAME"
+                ],
+                "outFields": [
+                    "SUBDIVISION_NAME",
+                    "PB",
+                    "PB_PG",
+                    "DB",
+                    "DB_PG",
+                    "SLIDE"
+                ],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Landmark",
+                "type": "QueryTask",
+                "url": "http://gisserver/arcgis/rest/services/LincolnMS/MapServer/136",
+                "operator": "LIKE",
+                "isNumber": false,
+                "searchBoxLable": "Name",
+                "searchFields": [
+                    "FEATURE_NAME"
+                ],
+                "outFields": [
+                    "FEATURE_NAME"
+                ],
+                "symbol": "DefaultPointSymbol"
+            }
+        ],
+        "Symbols": [
+            {
+                "name": "DefaultLineSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        115,
+                        76,
+                        0,
+                        255
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPointSymbol",
+                "style": {
+                    "type": "esriSMS",
+                    "style": "esriSMSSquare",
+                    "color": [
+                        76,
+                        115,
+                        0,
+                        255
+                    ],
+                    "size": 8,
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "outline": {
+                        "color": [
+                            152,
+                            230,
+                            0,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            },
+            {
+                "name": "DefaultPolygonSymbol",
+                "style": {
+                    "type": "esriSFS",
+                    "style": "esriSFSSolid",
+                    "color": [
+                        247,
+                        230,
+                        97,
+                        80
+                    ],
+                    "outline": {
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid",
+                        "color": [
+                            110,
+                            110,
+                            110,
+                            255
+                        ],
+                        "width": 1
+                    }
+                }
+            }
+        ]
+    }
+}

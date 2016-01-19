@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Config</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* Solarized (Dark) */
+/* Authors: Ethan Schoonover: http://ethanschoonover.com/solarized, CodeCatalyst: http://codecatalyst.com/ */
+/* Version: d9a83f4e7a47432baff86e1e7946d9e066cf3d1b (modified) */
+/* https://github.com/CodeCatalyst/mou-theme-solarized */
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+ol,
+ul,
+li,
+img {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+html * {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 16px;
+  line-height: 19.2px;
+  color-profile: sRGB;
+}
+body {
+  min-width: 32em;
+  max-width: 52em;
+  margin: 10px;
+}
+p {
+  font-weight: lighter;
+  margin-bottom: 20px;
+}
+strong {
+  font-weight: bold;
+}
+ol,
+ul {
+  margin-left: 2em;
+  margin-bottom: 20px;
+}
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  margin-top: 10px;
+}
+li {
+  margin-bottom: 10px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: lighter;
+  text-transform: capitalize;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 24.624px;
+  line-height: 29.548799999999996px;
+}
+h2 {
+  font-size: 24.624px;
+  line-height: 29.548799999999996px;
+}
+h3 {
+  font-size: 23.44px;
+  line-height: 28.128px;
+}
+h4 {
+  font-size: 22.16px;
+  line-height: 26.592px;
+}
+h5 {
+  font-size: 22.16px;
+  line-height: 26.592px;
+}
+h6 {
+  font-size: 22.16px;
+  line-height: 26.592px;
+}
+img {
+  margin-bottom: 20px;
+}
+h1 img,
+h2 img,
+h3 img,
+h4 img,
+h5 img,
+h6 img,
+p img {
+  margin-bottom: 0;
+}
+pre {
+  margin-bottom: 20px;
+}
+pre,
+code {
+  font-family: monospace;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 15px;
+}
+h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 1px solid;
+}
+h2 {
+  border-bottom: 1px solid;
+}
+h3,
+h4,
+h5,
+h6 {
+  border-bottom: none;
+}
+html * {
+  color: #839496;
+}
+html body {
+  background-color: #002b36;
+}
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  color: #93a1a1;
+  border-color: #839496;
+}
+html a,
+html a:active,
+html a:visited {
+  color: #93a1a1;
+}
+html a:hover {
+  background-color: #073642;
+}
+html pre {
+  color: #93a1a1;
+  background-color: #073642;
+}
+html a,
+html a:active,
+html a:visited,
+html code.url {
+  color: #b58900;
+}
+html h1 {
+  color: #b58900;
+}
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  color: #b58900;
+}
+
+/*
+LICENSE
+
+Solarized Theme for Mou
+
+Copyright (c) 2012 CodeCatalyst, LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Solarized
+
+Copyright (c) 2011 Ethan Schoonover
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+</style>
+</head>
+<body>
+<h1>Conf.json - the site configuration</h1>
+<p>Last update - 7/3/2013 4:30:44 PM </p>
+<p>The conf.json file holds all the information to display your web
+application.</p>
+<p>Be very careful when making edits as the file must contain valid
+json syntax <a href="http://jsonlint.com/">JSON Lint</a> is a good resource for checking JSON validity.  Also don't forget that javascript and JSON (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation) are case sensitive so section/object/type names listed below must be used exactly as shown.</p>
+<h2>Sections of the configuration file:</h2>
+<ul>
+<li>
+<p><strong>mapConfig {Object}</strong> </p>
+<ul>
+<li>
+<p>the container for all of the configuration all of the following sections are contained within this object.</p>
+<pre><code>{
+    &quot;mapConfig&quot;:{
+    }
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Page {Object}</strong></p>
+<pre><code>&quot;Page&quot;: {
+    &quot;style&quot;: &quot;steal-gray&quot;,
+    &quot;title&quot;: &quot;Some Name&quot;,
+    &quot;links&quot;: [{
+    &quot;label&quot;: &quot;Google&quot;,
+    &quot;url&quot;: &quot;http://www.google.com/&quot;
+    }, {
+    &quot;label&quot;: &quot;Yahoo&quot;,
+    &quot;url&quot;: &quot;http://www.yahoo.com/&quot;
+    }],
+    &quot;helpTab&quot;: &quot;help.html&quot;,
+    &quot;scalebar&quot;: true,
+    &quot;scaleview&quot;: true
+}
+</code></pre>
+
+<ul>
+<li>style - {String} name of the css style sheet in the ./css folder without extension</li>
+<li>title - {String} text displayed at the top left of the page</li>
+<li>
+<p>links - {Array} list of links displayed at top right of the page</p>
+<ul>
+<li>label - text of link</li>
+<li>
+<p>url - url of link</p>
+<pre><code>[
+    {
+        &quot;label&quot;: &quot;Google&quot;,
+        &quot;url&quot;: &quot;http://www.google.com/&quot;
+    },
+    {
+        &quot;label&quot;: &quot;Plats&quot;,
+        &quot;url&quot;: &quot;http://www.mysite.com/plats/&quot;
+    }
+]
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>helpTab - {String} relative path to help html file</li>
+<li>scalebar - {Boolean} whether or not to show a scalebar on the map</li>
+<li>scaleview - {Boolean} whether or not to show scale text</li>
+</ul>
+</li>
+<li>
+<p><strong>Extent {Object}</strong></p>
+<pre><code>&quot;Extent&quot;: {
+    &quot;xmin&quot;: 436961.12172705395,
+    &quot;ymin&quot;: 175832.12411863936,
+    &quot;xmax&quot;: 546848.1439280566,
+    &quot;ymax&quot;: 239782.768186436,
+    &quot;spatialReference&quot;: {
+    &quot;wkid&quot;: 26985
+    }
+}
+</code></pre>
+
+<ul>
+<li>xmin - {Double} lowest x value for the bounds of the map</li>
+<li>ymin - {Double} lowest y value for the bounds of the map</li>
+<li>xmax - {Double} highest x value for the bounds of the map</li>
+<li>ymax - {Double} highest y value for the bounds of the map</li>
+<li>
+<p>spatialReference - {Object} the spatial reference system used</p>
+<ul>
+<li>wkid - esri coordinate system id</li>
+<li>
+<p>epsg - epsg coordianate system id</p>
+<pre><code>&quot;spatialReference&quot;:{
+        &quot;wkid&quot;: 26985
+        }
+or
+
+&quot;spatialReference&quot;:{
+        &quot;epsg&quot;: 2264
+        }
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Layers {Array}</strong></p>
+<pre><code>&quot;layers&quot; : [
+]
+</code></pre>
+
+<ul>
+<li>
+<p>Layer Object</p>
+<ul>
+<li>name - {String} name of the layer in the map</li>
+<li>
+type - {String} options are 
+<ul>
+<li>ArcGISTiledMapServiceLayer</li>
+<li>ArcGISDynamicMapServiceLayer</li>
+<li>WMS</li>
+<li>Bing</li>
+</ul>
+</li>
+<li>url - {String} url of the resource</li>
+<li>toggle - {Boolean} show a button in the top right of the map to toggle layer on/off</li>
+<li>transbtn - {Boolean} add a transparency slider to the toggle button only valid if toggle = true</li>
+<li>visible - {Boolean} whether or not the layer is visible by default</li>
+<li>
+<p>bingKey - {String} only used with Bing layer type is the bing api key received from microsoft.</p>
+<pre><code>{
+    &quot;name&quot;: &quot;Layer1&quot;,
+    &quot;type&quot;: &quot;ArcGISDynamicMapServiceLayer&quot;,
+    &quot;url&quot;: &quot;http://myserver.com/arcgis/rest/services/map1/MapServer&quot;,
+    &quot;toggle&quot;: false,
+    &quot;transbtn&quot;: false,
+    &quot;visible&quot;:true
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Tools {Array}</strong></p>
+<ul>
+<li>
+<p>Optional tool Objects</p>
+<ul>
+<li>
+NavTools
+<ul>
+<li>type - {String} always set to &quot;NavTools&quot;</li>
+</ul>
+</li>
+<li>
+<p>Identify</p>
+<ul>
+<li>type - {String} always set to &quot;Identify&quot;</li>
+<li>label - {String} tool tip for button</li>
+<li>
+<p>task - {Array}</p>
+<ul>
+<li>
+<p>Identify Task Object</p>
+<ul>
+<li>tolerance - {Integer} radius around click point to search</li>
+<li>returnGeometry - {Boolean} always set to true</li>
+<li>layerIds - {Array} an array of layer ids {Integer} to query when the map is clicked</li>
+<li>layerOptions - {String} always set to &quot;ALL&quot;</li>
+<li>show - {Boolean}</li>
+<li>title - {String} text for the popup window use ${PROPERTY_NAME} syntax to use the value of a property from the attributes ie ${PID} to get the PID value from the layer attributes</li>
+<li>width - {Integer} width of the popup</li>
+<li>height - {Integer} height of the popup</li>
+<li>
+<p>templates - {Object} for each layer id in layerIds you must have a template, it can be empty but it must exist in the templates array. You may use html markup in the template as well as the ${PROPERTY_NAME} syntax to use attribute values.</p>
+<pre><code>{
+    &quot;21&quot;:&quot;&lt;b&gt;${PID}&lt;/b&gt;,
+    &quot;65&quot;:&quot;&lt;h1&gt;${NAME}-${AGE}&lt;h1&gt;&quot;
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Print</p>
+<ul>
+<li>type - {String} always set to &quot;Print&quot;</li>
+<li>url - {String} url to a running instance of agd ArcServer Extensions services print service</li>
+<li>title - {String} text to be displayed at the top of the output pdf.</li>
+<li>disclaimer - {String} (limit 255 characters) text to be displayed at the bottom of the pdf.</li>
+<li>
+<p>printDefs - {Object} an object with properties of layerIds that hold an array of attribute values to put on the printed map.</p>
+<pre><code>&quot;printDefs&quot;: {
+    &quot;28&quot;: [
+        &quot;PPIN&quot;,
+        &quot;TaxParcel.Parcel_Number&quot;,
+        &quot;Appraised_AC&quot;,
+        &quot;NAME&quot;,
+        &quot;ADDRESS1&quot;,
+        &quot;ADDRESS2&quot;,
+        &quot;CITY&quot;,
+        &quot;STATE&quot;,
+        &quot;ZIPCODE&quot;,
+        &quot;RANGE&quot;,
+        &quot;TR_SECTION&quot;,
+        &quot;TAX_DIST&quot;,
+        &quot;SUBDIV_CODE&quot;,
+        &quot;PROP_ADD_NUM&quot;,
+        &quot;PROP_STREET&quot;,
+        &quot;LEGAL_DESC&quot;,
+        &quot;TOTAL_ASSESED_VAL&quot;
+    ],
+    &quot;31&quot;: [
+        &quot;NAME&quot;,
+        &quot;AGE&quot;,
+        &quot;SIZE&quot;
+    ]
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>
+<p>Hyperlink</p>
+<ul>
+<li>type - {String} always set to &quot;Hyperlink&quot;</li>
+<li>label - {String} tooltip to display for the button</li>
+<li>target - {String} where on the page to display the retrieved url</li>
+<li>
+<p>task - {Object}</p>
+<ul>
+<li>name - {String} name of the task</li>
+<li>url - {String} url of the layer</li>
+<li>tolerance - {Integer}</li>
+<li>returnGeometry - {Boolean} always set to true</li>
+<li>layerIds - {Array} only put one item {Integer} in the array it is the layerId of the feature class that you wish to hyperlink from</li>
+<li>layerOptions - {String} always set to &quot;ALL&quot;</li>
+<li>show - {Boolean} whether or not to display a popup (normally false)</li>
+<li>iconClass - {String} a class name for the button to use a custom button default is &quot;hyperlinkIcon&quot;</li>
+<li>
+<p>template - {String} the url template to use to retrieve data.  <p>Use <strong>{PROPERTY_NAME}</strong> syntax to get a value from an attribute and <strong>#functionName#</strong> syntax to use a user defined function to format data. The user defined function must be added into the agd.Utils.userFunctions object via the addUserFunction method this can be added into the html template for the page. The example below creates a user defined function of MyFormater (#MyFormater#) and the propertyValue variable will be whatever follows the #MyFormater# tag in the template, for example <code>http://norealurl.com/getStuff/#MyFormater#{ACCOUNTID}</code> <br />If {ACCOUNTID} was billbagens the formatted url would be <br /> <code>http://norealurl.com/getStuff/bobbagens</code>.</p></p>
+<pre><code>agd.Utils.addUserFunction(
+    &quot;MyFormater&quot;,
+    function(propertyValue){
+        return propertyValue.replace(&quot;bill&quot;,&quot;bob&quot;);
+    });
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Measure</p>
+<ul>
+<li>type - {String} always set to &quot;Measure&quot;</li>
+<li>geometryService - {String} url to the ArcGIS server geometry service</li>
+</ul>
+</li>
+<li>
+GoToXY
+<ul>
+<li>type - {String} always set to &quot;GoToXY&quot;</li>
+<li>geometryService - {String} url to the ArcGIS server geometry service</li>
+</ul>
+</li>
+<li>
+MultiSelect
+<ul>
+<li>type - {String} always set to &quot;MultiSelect&quot;</li>
+<li>label - {String} tool tip text</li>
+<li>serviceUrl - {String} url for the Agd ArcServer Extensions services csv service</li>
+<li>limit - {Integer} number of CSV records to return (may also be limited by the server max records returned value)</li>
+<li>url - {String} ArcGIS Server map service url</li>
+<li>layerIds - {Array} list of layer ids {Integer} from the ArcGIS service to allow mulitselct on</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Queries {Array}</strong></p>
+<pre><code>&quot;Queries&quot; : [
+]
+</code></pre>
+
+<ul>
+<li>
+<p>QueryTask</p>
+<ul>
+<li>label - {String} text displayed above input box for search</li>
+<li>type - {String} always set to &quot;QueryTask&quot;</li>
+<li>url - {String} url of the ArcGIS server layer to be queried</li>
+<li>
+operator - {String} compare operator
+<ul>
+<li>
+Options
+<ul>
+<li>LIKE</li>
+<li>&gt;</li>
+<li>&lt;</li>
+<li>=</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>isNumber - {Boolean} true if the property to be searched is a number field</li>
+<li>searchBoxLable - {String} text displayed beside the search box to help the user understand what type of text to input</li>
+<li>searchFields - {Array} an array of field names {String} to search for the search term</li>
+<li>outFields - {Array} an array of field names to return with query results</li>
+<li>
+<p>symbol - {String} name of a symbol from the Symbols section of the configuration</p>
+<pre><code>{
+&quot;label&quot;: &quot;Search by Owner&quot;,
+&quot;type&quot;: &quot;QueryTask&quot;,
+&quot;url&quot;: &quot;http://noname.org/arcgis/rest/services/map1/MapServer/22&quot;,
+&quot;operator&quot;: &quot;LIKE&quot;,
+&quot;isNumber&quot;: false,
+&quot;searchBoxLable&quot;: &quot;Owner Name&quot;,
+&quot;searchFields&quot;: [&quot;OWNNAME1&quot;, &quot;OWNNAME2&quot;],
+&quot;outFields&quot;: [&quot;OWNNAME1&quot;, &quot;OWNADD1&quot;, &quot;OWNCITY&quot;, &quot;OWNSTATE&quot;, &quot;ACCTID&quot;],
+&quot;symbol&quot;: &quot;DefaultPolygonSymbol&quot;
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>
+<p>GeocodeTask</p>
+<ul>
+<li>label - {String} text displayed above input box for search</li>
+<li>type - {String} always set to &quot;GeocodeTask&quot;</li>
+<li>searchLable - {String} text displayed beside the search box to help the user understand what type of text to input</li>
+<li>
+<p>url - {String} url of the ArcGIS geocode service</p>
+<pre><code>{
+    &quot;label&quot;: &quot;Find Address&quot;,
+    &quot;type&quot;: &quot;GeocodeTask&quot;,
+    &quot;searchBoxLable&quot;: &quot;Address&quot;,
+    &quot;url&quot;: &quot;http://noname.org/arcgis/rest/services/AddressLocator/GeocodeServer&quot;,
+    &quot;layerIds&quot;: [],
+    &quot;searchFields&quot;: []
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+<li>
+<p>FindTask</p>
+<ul>
+<li>label - {String} text displayed above input box for search</li>
+<li>type - {String} always set to &quot;FindTask&quot;</li>
+<li>searchLable - {String} text displayed beside the search box to help the user understand what type of text to input</li>
+<li>url - {String} url of the ArcGIS map service</li>
+<li>layerIds - {Array} an array of {Integer} layer id's from the map service to search in</li>
+<li>searchFields - {Array} an array of field names to search</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Symbols {Array}</strong></p>
+<pre><code>&quot;Symbols&quot;: [
+    ]
+</code></pre>
+
+<ul>
+<li>name - {String} unique identifier to use when assigning symbol to result</li>
+<li>
+<p>style - {Object} Symbol Object <a href="https://developers.arcgis.com/en/javascript/jsapi/symbol.html">(see esri symbol json representation)</a></p>
+<pre><code>&quot;name&quot;: &quot;DefaultLineSymbol&quot;,
+    &quot;style&quot;: {
+    &quot;type&quot;: &quot;esriSFS&quot;,
+    &quot;style&quot;: &quot;esriSFSSolid&quot;,
+    &quot;color&quot;: [115, 76, 0, 255],
+    &quot;outline&quot;: {
+        &quot;type&quot;: &quot;esriSLS&quot;,
+        &quot;style&quot;: &quot;esriSLSSolid&quot;,
+        &quot;color&quot;: [110, 110, 110, 255],
+        &quot;width&quot;: 1
+    }
+}
+</code></pre>
+
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

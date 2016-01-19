@@ -1,0 +1,214 @@
+{
+    "mapConfig" : {
+        "Page": {
+            "style": "citrus",
+            "title": "Marion County, MS",
+			"links":[
+			],
+			"scalebar": true,
+            "scaleview": true
+			
+        },
+        "Extent": {
+                "xmin":2359619.6771539,
+                "ymin":530663.863434327,
+                "xmax":2556222.99496103,
+                "ymax":725530.402815593,
+                "spatialReference":{
+                    "wkid":2255
+                    }
+        },
+        "layers": [
+            {
+                "name": "Aerial",
+                "type": "WMS",
+                "url": "http://wms.agd.cc/cgi-bin/marionms.exe",
+                "toggle": true,
+                "extent": {
+                    "xmin": 2359619.6771539,
+                    "ymin":530663.863434327,
+                    "xmax":2556222.99496103,
+                    "ymax":725530.402815593,
+                    "spatialReference":{
+                        "wkid":2255
+                    }
+                },
+                "layers": ["MarionImagery"],
+				"toggle": true,
+				"transbtn":true,
+				"visible":false
+            },
+            {
+                "name": "Marion Parcels",
+                "type": "ArcGISDynamicMapServiceLayer",
+                "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer",
+                "toggle": false,
+				"transbtn":false,
+				"visible":true
+            }
+            
+        ],
+        "Tools": [
+            {
+                "type":"NavTools"
+            },
+            {
+                "type": "Identify",
+                "icon": "identifyIcon",
+                "id": "identify",
+                "label":"Identify",
+                "task": [
+                    {
+                        "name": "MapIdentify",
+                        "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [23],
+                        "layerOptions": "ALL",
+                        "show": true,
+                        "title" : "${LRCLN.NAME}",
+                        "width": 250,
+                        "height": 300,
+                        "templates" : {
+							"23" : "<b>${NAME}</b><hr /><b>PPIN: </b>${PPIN}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Assesed Value: </b>${TOTAL_ASSESED_VAL}<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>"
+						}
+                    }
+                ]
+            },
+			{
+				"type": "Print",
+				"icon": "printIcon",
+				"id": "Print",
+				"label": "Print",
+				"url": "http://ext.agd.cc/agsext/services/print/"
+			},
+			{
+				"type": "MultiSelect",
+				"icon": "multiSelectIcon",
+				"id": "MultiSelect",
+				"label": "Select",
+				"serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+				"url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer",
+				"layerIds": [23,30,23]
+			}
+        ],
+        "Queries": [
+            {
+                "label": "Search by Owner Name",
+                "type": "QueryTask",
+                "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer/23",
+                "operator": "LIKE",
+                "isNumber": false,
+				"searchBoxLable": "Owner Name",
+                "searchFields": [
+					"LRCLN.NAME"
+				],
+                "inputId": "ownerSearchBox",
+                "buttonId":"ownerSearchButton",
+                "resultId": "ownerSearchResults",
+                "outFields": ["LRCLN.NAME","LRCLN.ADDRESS1","LRCLN.ADDRESS2","LRCLN.PPIN"],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Parcel Number",
+                "type": "QueryTask",
+                "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer/23",
+                "operator": "equals",
+                "isNumber": true,
+				"searchBoxLable": "PPIN",
+                "searchFields": [
+					"LRCLN.PPIN"
+				],
+                "inputId": "ppinSearchBox",
+                "buttonId":"ppinSearchButton",
+                "resultId": "ppinSearchResults",
+                "outFields": ["LRCLN.NAME","LRCLN.ADDRESS1","LRCLN.ADDRESS2","LRCLN.PPIN"],
+                "symbol": "DefaultPolygonSymbol"
+            },
+            {
+                "label": "Search by Address",
+                "type": "QueryTask",
+                "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer/23",
+                "operator": "LIKE",
+                "isNumber": false,
+				"searchBoxLable": "Address",
+                "searchFields": [
+					"LRCLN.ADDRESS1",
+					"LRCLN.ADDRESS2",
+					"LRCLN.ADDRESS3",
+					"LRCLN.ADDRESS4",
+					"LRCLN.ADDRESS5"
+				],
+                "inputId": "addrSearchBox",
+                "buttonId":"addrSearchButton",
+                "resultId": "addrSearchResults",
+                "outFields": ["LRCLN.NAME","LRCLN.ADDRESS1","LRCLN.ADDRESS2","LRCLN.PPIN"],
+                "symbol": "DefaultPolygonSymbol"
+            },
+			{
+                "label": "Search by Subdivision",
+                "type": "QueryTask",
+                "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/MarionMap/MapServer/28",
+                "operator": "LIKE",
+                "isNumber": false,
+				"searchBoxLable": "Subdivision",
+                "searchFields": [
+					"SubName"
+				],
+                "inputId": "SubSearchBox",
+                "buttonId":"SubSearchButton",
+                "resultId": "SubSearchResults",
+                "outFields": ["SubName","Division","Book","Page"],
+                "symbol": "DefaultPolygonSymbol"
+            }
+			
+        ],
+        "Symbols": [
+            {
+                "name": "DefaultLineSymbol",
+                "style": {
+                  "type": "esriSFS",
+                  "style": "esriSFSSolid",
+                  "color": [115,76,0,255],
+                    "outline": {
+                     "type": "esriSLS",
+                     "style": "esriSLSSolid",
+                     "color": [110,110,110,255],
+                     "width": 1
+                     }
+                }
+            },
+            {
+                "name": "DefaultPointSymbol",
+                "style": {
+                     "type": "esriSMS",
+                     "style": "esriSMSSquare",
+                     "color": [76,115,0,255],
+                     "size": 8,
+                     "angle": 0,
+                     "xoffset": 0,
+                     "yoffset": 0,
+                     "outline": 
+                      {
+                      "color": [152,230,0,255],
+                       "width": 1
+                      }
+                }
+            },
+            {
+                "name": "DefaultPolygonSymbol",
+                "style": {
+                      "type": "esriSFS",
+                      "style": "esriSFSSolid",
+                      "color": [247,230,97,80],
+                        "outline": {
+                         "type": "esriSLS",
+                         "style": "esriSLSSolid",
+                         "color": [110,110,110,255],
+                         "width": 1
+                         }
+                }
+            }
+        ]
+    }
+}

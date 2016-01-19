@@ -1,0 +1,1 @@
+removed build.bat and replaced it with deploy-all.bat.  Added test-all.bat

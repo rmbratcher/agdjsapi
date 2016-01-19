@@ -1,0 +1,91 @@
+* {
+outline: none !important;
+}
+
+.zoominIcon { background-image:url(../img/nav_zoomin.png); width:16px; height:16px; }
+.zoomoutIcon { background-image:url(../img/nav_zoomout.png); width:16px; height:16px; }
+.zoomfullextIcon { background-image:url(../img/nav_fullextent.png); width:16px; height:16px; }
+.zoomprevIcon { background-image:url(../img/nav_previous.png); width:16px; height:16px; }
+.zoomnextIcon { background-image:url(../img/nav_next.png); width:16px; height:16px; }
+.panIcon { background-image:url(../img/nav_pan.png); width:16px; height:16px; }
+.deactivateIcon { background-image:url(../img/nav_decline.png); width:16px; height:16px; }
+.identifyIcon {background-image:url(../img/identify-map-icon.png); width:16px; height:16px;}
+.hyperlinkIcon {background-image:url(../img/hyperlink-icon.png); width:16px; height: 16px;}
+.printIcon {background-image:url(../img/print-icon.png);width:16px; height: 16px;}
+.clearSelectionIcon {background-image:url(../img/Clear-selected.png);width:16px; height: 16px;}
+.multiSelectIcon {background-image:url(../img/select_rectangle.png);width:16px; height: 16px;}
+.measurePointIcon {background-image:url(../img/Measure_point_icon.png);width:16px; height: 16px;}
+.measureLineIcon {background-image:url(../img/measure-line.png);width:16px; height: 16px;}
+.measureAreaIcon {background-image:url(../img/map_measure_area.png);width:16px; height: 16px;}
+.selectIcon {background-image:url(../img/rg-select.png);width:16px; height: 16px;}
+.measureIcon {background-image:url(../img/rulers.png);width:16px; height: 16px;}
+.gotoxyIcon {background-image:url(../img/esriGoToLocation.png);width:16px; height: 16px;}
+.photoIcon {background-image:url(../img/photo_icon.jpg);width:16px; height:16px;}
+
+body {
+    margin: 0;
+    padding: 2em;
+    font-family: Lucida Sans,Lucida Grande,Arial !important;
+    font-size: 13px !important;
+    background: white;
+    color: #333;
+}
+
+button {
+	-webkit-transition: background-color 0.2s linear;
+	border-radius:4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	background-color: #E4F2FF;
+	background-image: url("//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dijit/themes/claro/form/images/button.png");
+	background-position: center top;
+	background-repeat: repeat-x;
+	border: 1px solid #769DC0;
+	padding: 2px 8px 4px;
+	font-size:1em;
+}
+
+button:hover {
+	background-color: #AFD9FF;
+	color: #000000;
+}
+
+h1 {
+	font-size:1.5em;
+}
+
+.break
+{
+float:none;
+clear:both;
+}
+
+.downloadButton {
+	display: inline-block;
+	padding-left: 5px;
+	text-decoration: none;
+	margin: 3px;
+	padding: 3px;
+	background-color: #FFFFCC;
+	border: 1px solid #0066CC;
+	border-radius: 5px;
+}
+
+.downloadButton:hover {
+	display: inline-block;
+	padding-left: 5px;
+	text-decoration: none;
+	margin: 3px;
+	padding: 3px;
+	background-color: #FFFF99;
+	border: 1px solid #0066CC;
+	border-radius: 5px;
+}
+
+.dijitButtonDownagd {
+	padding: 1px;
+	width:16px; 
+	height: 16px;
+	background-color: #FFE284;
+    border: 1px solid #F7C95C;
+}

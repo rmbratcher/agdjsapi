@@ -1,0 +1,196 @@
+{
+    "mapConfig": {
+        "Page": {
+            "style": "light-green",
+            "title": "Hampshire County, WV",
+            "links": [
+                {
+                    "label": "IAS Search",
+                    "url": "http://ias.hampshirewv.com/"
+                },
+                {
+                    "label": "Hampshire County",
+                    "url": "http://hampshirewv.com"
+                }
+            ],
+            "helpTab": "help.html",
+            "scalebar": true,
+            "scaleview": true
+        },
+        "Extent": {
+            "xmin": 1929618.6996657,
+            "ymin": 206626.563903181,
+            "xmax": 2469925.64811217,
+            "ymax": 396556.078834436,
+            "spatialReference": {
+                "wkid": 26853
+            }
+        },
+        "layers": [{
+            "name": "Aerials 2010",
+            "type": "ArcGISDynamicMapServiceLayer",
+            "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/WVHAMP10_SID_1METER/MapServer",
+            "toggle": true,
+            "transbtn": true,
+            "visible": false
+        }, {
+            "name": "Layers",
+            "type": "ArcGISDynamicMapServiceLayer",
+            "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer",
+            "toggle": false,
+            "transbtn": false,
+            "visible": true
+        }
+
+        ],
+        "Tools": [{
+            "type": "NavTools"
+        }, {
+            "type": "Identify",
+            "label": "Identify",
+            "task": [{
+                "name": "MapIdentify",
+                "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer",
+                "tolerance": 3,
+                "returnGeometry": true,
+                "layerIds": [61, 57, 67, 63, 67],
+                "layerOptions": "ALL",
+                "show": true,
+                "title": "${PARID}",
+                "width": 250,
+                "height": 360,
+                "templates": {
+                    "61": "<b>${OWN1}</b><hr /><b>ACCOUNT: </b>${ACCOUNT}<br /><b>Address1: </b>${ADDR1}<br/><b>City: </b>${CITYNAME}<br /><b>State: </b>${STATECODE}<br /><b>Map: </b>${MAPNAME}<br /><b>Parcel.: </b>${PARCEL}<br /><b>Suffix: </b>${SUFFIX}<br /><hr /><b>Property Record Card:</b><a href='http://hampshire.wvassessor.com/prc.aspx?PARID=${PARID}' target='_blank'>PRC</a><br /><b>Plat:</b><a href='http://docs.hampshirewv.com/plat/ref/${PLAT_REF}' target='_blank'>${PLAT_REF}</a><br /><b>Deed:</b><a href='http://docs.hampshirewv.com/deed/${BOOK}/${PAGE}' target='_blank'>${BOOK}-${PAGE}</a><br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                    "57": "",
+                    "67": "",
+                    "63": "",
+                    "67": ""
+                }
+            }]
+        }, {
+            "type": "Print",
+            "url": "http://print.agd.cc/services/print/Default.ashx",
+            "printDefs": {
+                "61": [
+                        "PARID",
+                        "DISTRICT",
+                        "MAP",
+                        "PARCEL",
+                        "SUBPARCEL",
+                        "OWN1",
+                        "OWN2",
+                        "ADDR1",
+                        "ADDR2",
+                        "CITYNAME",
+                        "STATECODE",
+                        "ZIP1",
+                        "TOTASM"
+                    ]
+            }
+        }, {
+            "type": "Measure",
+            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Geometry/GeometryServer"
+        }, {
+            "type": "GoToXY",
+            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Geometry/GeometryServer"
+        }, {
+            "type": "MultiSelect",
+            "label": "Select",
+            "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
+            "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer",
+            "limit": 100,
+            "layerIds": [61]
+        },
+        {
+            "type":"Hyperlink",
+            "label": "PRC Link",
+            "target": "Dialog",
+            "task": [
+                {
+                    "name": "LinkIdentify",
+                    "url": "http://ags.agd.cc/ArcGIS/rest/services/HampshireWV/MapServer",
+                    "tolerance": 3,
+                    "returnGeometry": true,
+                    "layerIds": [61],
+                    "layerOptions": "ALL",
+                    "show": false,
+                    "iconClass":"hyperlinkIcon",
+                    "height": "450",
+                    "width": "700",
+                    "template":"http://hampshire.wvassessor.com/prc.aspx?PARID={PARID}"
+                }
+            ]
+        }
+        ],
+        "Queries": [{
+            "label": "Search by Owner",
+            "type": "QueryTask",
+            "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/61",
+            "operator": "LIKE",
+            "isNumber": false,
+            "searchBoxLable": "Owner Name",
+            "searchFields": ["OWN1", "OWN2"],
+            "outFields": ["OWN1", "OWN2", "CAREOF", "PARID","ADDR1","ADDR2"],
+            "symbol": "DefaultPolygonSymbol"
+        }, {
+            "label": "Search by PARID",
+            "type": "QueryTask",
+            "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/61",
+            "operator": "LIKE",
+            "isNumber": true,
+            "searchBoxLable": "PARID",
+            "searchFields": ["PARID"],
+            "outFields": ["OWN1", "OWN2", "CAREOF", "PARID","ADDR1","ADDR2"],
+            "symbol": "DefaultPolygonSymbol"
+        }, {
+            "label": "Find Address",
+            "type": "FindTask",
+            "searchBoxLable": "Address",
+            "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/",
+            "layerIds": [67, 70],
+            "searchFields": ["ADDR1","ADDR2","FULL_ADDRESS"]
+        }],
+        "Symbols": [{
+            "name": "DefaultLineSymbol",
+            "style": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [115, 76, 0, 255],
+                "outline": {
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid",
+                    "color": [110, 110, 110, 255],
+                    "width": 1
+                }
+            }
+        }, {
+            "name": "DefaultPointSymbol",
+            "style": {
+                "type": "esriSMS",
+                "style": "esriSMSSquare",
+                "color": [76, 115, 0, 255],
+                "size": 8,
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "outline": {
+                    "color": [152, 230, 0, 255],
+                    "width": 1
+                }
+            }
+        }, {
+            "name": "DefaultPolygonSymbol",
+            "style": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": [247, 230, 97, 80],
+                "outline": {
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid",
+                    "color": [110, 110, 110, 255],
+                    "width": 1
+                }
+            }
+        }]
+    }
+}

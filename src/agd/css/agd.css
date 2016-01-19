@@ -1,0 +1,56 @@
+/** combined CSS file */ 
+.agdTOCNode {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.agdTOCContent {
+    white-space: nowrap;
+}
+
+.agdTOCOutOfScale {
+    color: grey;
+    opacity: 0.5;
+}
+
+.agdTOCIcon {
+  vertical-align:bottom
+}
+
+.agdTOCRootLayer {
+}
+
+.agdTOCRootLayerLabel {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.agdTOCGroupLayer {
+    font-weight: bold;
+}
+
+.agdTOCGroupLayerLabel {
+    font-size: 10pt;
+}
+
+.agdTOCServiceLayer {
+    font-weight: bold;
+}
+
+.agdTOCServiceLayerLabel {
+    font-size: 10pt;
+    padding-left: 2px;
+}
+
+.agdTOCLegendIcon {
+    /* width: 50px;*/
+}
+
+.agdTOCLegendLabel {
+    font-size: 8pt;
+    padding-left: 2px;
+}
+
+.agdTOCSlider {
+    padding: 5px 20px 5px 30px;
+}

@@ -1,0 +1,18 @@
+            {
+                "type":"Hyperlink",
+                "label": "Hydrant Photos",
+                "target": "PropertyInfo",
+                "task": [
+                    {
+                        "name": "HydrantPhoto",
+                        "url": "http://cecilmaps.ccdps.org/arcserver/rest/services/Planning_10_1/MapServer",
+                        "tolerance": 3,
+                        "returnGeometry": true,
+                        "layerIds": [4],
+                        "layerOptions": "ALL",
+                        "show": false,
+                        "iconClass":"photoIcon",
+                        "template":"http://cecilmaps.ccdps.org/utils/viewimage.html?DIR=FireHydrants&IMG={PHOTO_NUMB}"
+                    }
+                ]
+            },
