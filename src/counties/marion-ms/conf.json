@@ -60,7 +60,7 @@
             },
             {
                 "name": "Marion Parcels",
-                "type": "arcgisDynamicMapServiceLayer",
+                "type": "ArcGISDynamicMapServiceLayer",
                 "url": "http://warren.msmaps.org/arcgis/rest/services/MarionMS/MapServer",
                 "toggle": false,
                 "transbtn": false,
