@@ -86,6 +86,6 @@ clear:both;
     border: 1px solid #F7C95C;
 }
 
-.dijit .dijitReset .dijitInline .dijitLeft .dijitComboButton {
+.dijit, .dijitReset, .dijitInline, .dijitLeft, .dijitComboButton {
 	box-shadow: 5px 5px 5px #898C8C;
 }
