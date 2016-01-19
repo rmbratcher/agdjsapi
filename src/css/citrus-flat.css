@@ -69,7 +69,7 @@ li.collapsibleListClosed{
 #mousePosition {
     background-color: #FFF;
     padding: 2px;
-    margin: 5px;
+    margin-left: 10px;
     height: 20px;
     float: right;
     font-weight: bold;
