@@ -168,7 +168,7 @@ gulp.task('commit-changes', function () {
                                                                         
 */
 
-gulp.task('default', function (callback) {
+gulp.task('build-lib', function (callback) {
     outdir = './dist/agdjsapi';
     runSequence(
         'img-crush',
@@ -185,6 +185,38 @@ gulp.task('default', function (callback) {
           callback(error);
     });
     
+
+});
+
+gulp.task('default', function () {
+    console.log("*************************************************************");
+    console.log("*      Command List                                         *");
+    console.log("*  [empty] = show this                                      *");
+    console.log("*  build-lib = compile js library (included in all others)  *");
+    console.log("*                                                           *");
+    console.log("*                   ## COUNTIES ##                          *");
+    console.log("*                                                           *");
+    console.log("*        Monongalia, WV                                     *");
+    console.log("*  build-mon-wv                                             *");
+    console.log("*  depoly-mon-wv                                            *");
+    console.log("*                                                           *");
+    console.log("*        Hampshire, WV                                      *");
+    console.log("*  build-hampshire-wv                                       *");
+    console.log("*  deploy-hampshire-wv                                      *");
+    console.log("*                                                           *");
+    console.log("*        Lincoln, MS                                        *");
+    console.log("*  build-lincoln-ms                                         *");
+    console.log("*  deploy-lincoln-ms                                        *");
+    console.log("*                                                           *");
+    console.log("*        Marion, MS                                         *");
+    console.log("*  build-marion-ms                                          *");
+    console.log("*  deploy-marion-ms                                         *");
+    console.log("*                                                           *");
+    console.log("*        Warren, MS                                         *");
+    console.log("*  build-warren-ms                                          *");
+    console.log("*  deploy-warren-ms                                         *");
+    console.log("*                                                           *");
+    console.log("*************************************************************");
 
 });
 
@@ -226,6 +258,10 @@ gulp.task('build-mon-wv', function (callback) {
           callback(error);
     });
 });
+
+/*gulp.task('deploy-mon-wv',function(){
+
+});*/
 
 
 gulp.task('mon-wv',['mon-wv-copy','min-js','mon-wv-make-css']);
@@ -285,9 +321,11 @@ gulp.task('build-hampshire-wv', function (callback) {
     outdir = '../sandbox/hampshire';
     runSequence(
         'img-crush',
-        'hampshire-wv',
+        'hampshire-wv-config',
+        'hampshire-min-html',
+        'min-js',
+        'min-css',
         'commit-changes',
-        'hampshire-wv-ftp',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -309,7 +347,31 @@ gulp.task('build-hampshire-wv', function (callback) {
 
 });
 
-gulp.task('hampshire-wv',['hampshire-wv-config','hampshire-min-html','min-js','min-css']);
+gulp.task('deploy-hampshire-wv', function (callback) {
+    outdir = '../sandbox/hampshire';
+    runSequence(
+        'build-hampshire-wv',
+        'hampshire-wv-ftp',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('** RELEASE DEPLOYED SUCCESSFULLY **');
+
+            var requestData = {
+                text: "Hampshire, WV Arcgis Server Site Deployed to server."
+            };
+
+            request('https://hooks.slack.com/services/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',
+                    { json: true, body: requestData },
+                    function(err, res, body) {
+              // `body` is a js object if request was successful
+            });
+          }
+          callback(error);
+    });
+
+});
 
 gulp.task('hampshire-wv-config', function(){
     return gulp.src('./src/counties/hampshire-wv/*.json')
@@ -363,7 +425,10 @@ gulp.task('build-marion-ms', function (callback) {
     outdir = '../sandbox/marion';
     runSequence(
         'img-crush',
-        'marion-ms',
+        'marion-ms-config',
+        'marion-ms-min-html',
+        'min-js',
+        'min-css',
         'commit-changes',
         function (error) {
           if (error) {
@@ -371,7 +436,7 @@ gulp.task('build-marion-ms', function (callback) {
           } else {
             console.log('RELEASE FINISHED SUCCESSFULLY');
 
-            /*var requestData = {
+            var requestData = {
                 text: "Build finished for Marion, MS Arcgis Server Site."
             };
 
@@ -379,14 +444,38 @@ gulp.task('build-marion-ms', function (callback) {
                     { json: true, body: requestData },
                     function(err, res, body) {
               // `body` is a js object if request was successful
-            });*/
+            });
           }
           callback(error);
     });
 
 });
 
-gulp.task('marion-ms',['marion-ms-config','marion-ms-min-html','min-js','min-css']);
+gulp.task('deploy-marion-ms', function (callback) {
+    outdir = '../sandbox/marion';
+    runSequence(
+        'build-marion-ms',
+        'hampshire-wv-ftp',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('** RELEASE DEPLOYED SUCCESSFULLY **');
+
+            var requestData = {
+                text: "Marion, MS Arcgis Server Site Deployed to server."
+            };
+
+            request('https://hooks.slack.com/services/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',
+                    { json: true, body: requestData },
+                    function(err, res, body) {
+              // `body` is a js object if request was successful
+            });
+          }
+          callback(error);
+    });
+
+});
 
 gulp.task('marion-ms-config', function(){
     return gulp.src('./src/counties/marion-ms/*.json')
@@ -398,6 +487,32 @@ gulp.task('marion-ms-min-html',function(){
     return gulp.src('./src/counties/marion-ms/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(outdir));
+});
+
+gulp.task('marion-ms-ftp', function(){
+    var conn = ftp.create( {
+        host:     '192.168.2.171',
+        user:     'ftpuser',
+        password: 'goftp',
+        port:     21,
+        parallel: 5,
+        log:      gutil.log,
+        reload:   true,
+        debug:    true
+    } );
+
+    var globs = [
+        outdir + '/**'
+    ];
+
+    console.log(globs);
+
+    // using base = '.' will transfer everything to /public_html correctly
+    // turn off buffering in gulp.src for best performance
+
+    gulp.src( globs, { base: outdir, buffer: false } )
+        .pipe( conn.newer( '/marion' ) ) // only upload newer files
+        .pipe( conn.dest( '/marion' ) );
 });
 
 /***************************************************************************************************************
@@ -418,7 +533,6 @@ gulp.task('build-lincoln-ms', function (callback) {
         'min-js',
         'min-css',
         'commit-changes',
-        'lincoln-ms-ftp',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -427,6 +541,32 @@ gulp.task('build-lincoln-ms', function (callback) {
 
             var requestData = {
                 text: "Build finished for Lincoln, MS Arcgis Server Site."
+            };
+
+            request('https://hooks.slack.com/services/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',
+                    { json: true, body: requestData },
+                    function(err, res, body) {
+              // `body` is a js object if request was successful
+            });
+          }
+          callback(error);
+    });
+
+});
+
+gulp.task('deploy-lincoln-ms', function (callback) {
+    outdir = '../sandbox/lincoln';
+    runSequence(
+        'build-lincoln-ms',
+        'lincoln-ms-ftp',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('** RELEASE DEPLOYED SUCCESSFULLY **');
+
+            var requestData = {
+                text: "Lincoln, MS Arcgis Server Site Deployed to server."
             };
 
             request('https://hooks.slack.com/services/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',
@@ -518,6 +658,31 @@ gulp.task('build-warren-ms', function (callback) {
 
 });
 
+gulp.task('deploy-warren-ms', function (callback) {
+    outdir = '../sandbox/warren';
+    runSequence(
+        'build-warren-ms',
+        'warren-ms-ftp',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('** RELEASE DEPLOYED SUCCESSFULLY **');
+
+            var requestData = {
+                text: "Warren, MS Arcgis Server Site Deployed to server."
+            };
+            request('https://hooks.slack.com/services/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',
+                    { json: true, body: requestData },
+                    function(err, res, body) {
+              // `body` is a js object if request was successful
+            });
+          }
+          callback(error);
+    });
+
+});
+
 gulp.task('warren-ms-config', function(){
     return gulp.src('./src/counties/warren-ms/*.json')
             .pipe(strip())
@@ -554,45 +719,4 @@ gulp.task('warren-ms-ftp', function(){
     gulp.src( globs, { base: outdir, buffer: false } )
         .pipe( conn.newer( '/warren' ) ) // only upload newer files
         .pipe( conn.dest( '/warren' ) );
-});
-
-
-/************************************************************************************************************
-.___________. _______     _______.___________.
-|           ||   ____|   /       |           |
-`---|  |----`|  |__     |   (----`---|  |----`
-    |  |     |   __|     \   \       |  |     
-    |  |     |  |____.----)   |      |  |     
-    |__|     |_______|_______/       |__|     
-*/
-
-gulp.task('test-config', function(callback){
-    outdir = '../sandbox/lincoln';
-    runSequence(
-        //'make-css',
-        //'img-crush',
-        //'min-css',
-        //'hampshire-wv',
-        //'min-html',
-        //'commit-changes',
-        'lincoln-ms-ftp',
-        function (error) {
-          if (error) {
-            console.log(error.message);
-          } else {
-            console.log('RELEASE FINISHED SUCCESSFULLY');
-
-            /*var requestData = {
-                text: "Build finished for Hampshire, WV Arcgis Server Site."
-            };
-
-            request('https://hooks.slack.com/services/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',
-                    { json: true, body: requestData },
-                    function(err, res, body) {
-              // `body` is a js object if request was successful
-            });*/
-          }
-          callback(error);
-    });
-
 });
