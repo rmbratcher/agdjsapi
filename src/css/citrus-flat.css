@@ -146,17 +146,17 @@ li.collapsibleListClosed{
 
 table.infotable {
 	border-collapse:collapse;
-	border: 1px solid #666666;
+	border: 1px solid #6289f5;
 }
 table.infotable th {
 	font-weight: bold;
 	padding: 4px;
 	background-color: #CCCCCC;
 	color: black;
-	border-bottom: 2px solid #666666;
+	border-bottom: 2px solid #6289f5;
 }
 table.infotable td {
-	border-left: 1px solid #666666;
+	border-left: 1px solid #6289f5;
 }
 tr.infotable_hl {
 	background-color: #99FFFF;
