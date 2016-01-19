@@ -64,6 +64,7 @@ li.collapsibleListClosed{
 }
 #footer {
     height: 30px;
+    overflow: hidden;
 }
 #mousePosition {
     background-color: #FFF;
