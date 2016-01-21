@@ -1043,6 +1043,10 @@ agd.Utilities = agd.Class({
 						for (var j = 0; j < result.features.length; j += 1) {
 							var itm = result.features[j];
 							var parts1 = [];
+                            var addclass = ""
+                            if(j%2 == 0){
+                                addclass = 'class="colorRow"';
+                            }
 							if(itm.attributes[queryDef.searchFields[0]] == null || itm.attributes[queryDef.searchFields[0]] == undefined){
 								//do nothing statement to avoid error
 								var x = 0;
@@ -1058,9 +1062,9 @@ agd.Utilities = agd.Class({
 									if(thtml.length < 1) {
 										thtml = 'NO VALUE';
 									}
-									html += '<li id="feature' + j + '">' + thtml;
+									html += '<li id="feature' + j + '"' + addclass + '>' + thtml;
 								} else {
-									html += '<li id="feature' + j + '">' + itm.attributes[queryDef.searchFields[0]];
+									html += '<li id="feature' + j + '"' + addclass + '>' + itm.attributes[queryDef.searchFields[0]];
 								}
 								html += "<ul>";
 								html += '<li><a href="#" id="'+ cacheName + '-' + j + '"class="zoomto">Zoom To</a></li>';

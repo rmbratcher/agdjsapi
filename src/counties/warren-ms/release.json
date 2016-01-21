@@ -1,0 +1,22 @@
+{
+	"name" : "Warren County, MS",
+	"minify" : true,
+	"srcdir" : "./src/counties/warren-ms",
+	"outdir": "../sandbox/warren",
+	"template": "template.tmpl",
+	"title": "Warren County, MS",
+	"header": "Warren County, MS",
+	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
+	"google": "UA-42186511-7",
+	"delta": "MS75",
+	"ftp" : {
+        "host":     "192.168.2.171",
+        "user":     "ftpuser",
+        "password": "goftp",
+        "port":     21,
+        "parallel": 5,
+        "reload":   true,
+        "debug":    true
+    },
+    "remotedir": "/warren"
+}

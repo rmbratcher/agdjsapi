@@ -89,3 +89,7 @@ clear:both;
 .dijit.dijitReset.dijitInline.dijitLeft.dijitComboButton {
 	box-shadow: 0px 8px 20px #525252;
 }
+
+.colorRow {
+	background-color: #e5eeff;
+}
