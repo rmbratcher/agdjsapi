@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="IE=10">
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Expires" CONTENT="-1">
+        <title>{{title}}</title>
+        <style type="text/css" media="screen">
+            @import url("http://js.arcgis.com/3.14/esri/css/esri.css");
+            @import url("http://js.arcgis.com/3.14/dijit/themes/nihilo/nihilo.css");
+            @import url("http://js.arcgis.com/3.14/dojox/layout/resources/FloatingPane.css");
+            @import url("http://js.arcgis.com/3.14/dojox/layout/resources/ResizeHandle.css");
+            @import url("http://js.arcgis.com/3.14/dojox/grid/resources/Grid.css");
+            @import url("http://js.arcgis.com/3.14/dojox/grid/resources/nihiloGrid.css");
+            @import url("http://js.arcgis.com/3.14/esri/dijit/css/Popup.css");
+            @import url("./css/style-dijit2-flat.css");
+        </style>
+    </head>
+    <body class="nihilo">
+    <div id="loadingOverlay" class="loadingOverlay pageOverlay" style="display: block;"><div class="loadingMessage"></div></div>
+    <div id="appLayout" class="demoLayout" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design: 'headline'">
+        <div id="mainTabContainer" class="centerPanel" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="region: 'center', tabPosition: 'top'">
+            <div id="mapContainer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Map'">
+                <div id="navToolbar" data-dojo-type="dijit.Toolbar">
+                </div>
+                <div id="toggleButtonContainer"></div>
+                <div id="map"></div>
+            </div>
+            <div id="helpTab" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Help'">
+                <iframe id="helpFrame" style="width:100%; height:100%; overflow:scroll;"></iframe>
+            </div>
+            <div id="propInfoTab" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Property Info'">
+                <iframe id="propInfoFrame" style="width:100%; height:100%; overflow:scroll;"></iframe>
+            </div>
+        </div>
+        <div id="header" class="edgePanel" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'top'">
+            <div id="headTitle"><h1 id="pgTitle">{{header}}</h1></div>
+            <div id="headlinks" class="toplinks"></div>
+        </div>
+        <div id="leftCol" class="edgePanel" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="region: 'left', splitter: false">
+            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Search'" id="SearchTab">
+                <div id="searchTabs" class="edgePanel" data-dojo-type="dijit.layout.AccordionContainer">
+
+                </div>
+            </div>
+            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title: 'Layers'" id="TOCTab">
+                <div id="tocDiv"></div>
+            </div>
+            <div data-dojo-type='dijit.layout.ContentPane' data-dojo-props="title: 'Info'" id="InfoTab">
+                <div id="InfoDiv"></div>
+            </div>
+        </div>
+        <div id="footer" class="edgePanel" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'bottom'">
+            <div id="notification"></div>
+            <div id="mousePosition"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function ajaxRequest() {
+            var activexmodes=["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"] //activeX versions to check for in IE
+            if (window.ActiveXObject) { //Test for support for ActiveXObject in IE first (as XMLHttpRequest in IE7 is broken)
+                for (var i=0; i<activexmodes.length; i++) {
+                    try{
+                        return new ActiveXObject(activexmodes[i]);
+                    } catch(e) {
+                        //suppress error
+                    }
+                }
+            } else if (window.XMLHttpRequest) { // if Mozilla, Safari etc
+                return new XMLHttpRequest();
+            } else {
+                return false;
+            }
+        }
+        var mygetrequest=new ajaxRequest();
+        mygetrequest.onreadystatechange=function(){
+            if (mygetrequest.readyState==4){
+                if (mygetrequest.status==200 || window.location.href.indexOf("http")==-1){
+                    var obj = JSON.parse(mygetrequest.responseText);
+                    var stl = document.createElement("link");
+                    stl.setAttribute("rel", "stylesheet");
+                    stl.setAttribute("type","text/css");
+                    stl.setAttribute("href","css/" + obj.mapConfig.Page.style + ".css");
+                    document.getElementsByTagName("head")[0].appendChild(stl);
+                    document.title = obj.mapConfig.Page.title;
+                } else {
+                }
+            } else {
+            }
+        }
+        mygetrequest.open("GET",'conf.json',true);
+        mygetrequest.send(null);
+            
+    </script>
+    <script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true, 
+            paths: {
+                agd: location.pathname.replace(/\/[^/]+$/, '') + 'agd'
+            }
+        };
+    </script>
+    {{#js}}
+    <script src="{{{.}}}"></script>
+    {{/js}}  
+    <script>
+        var GoToDeltaPPIN = function(ppin){           
+            var urlBase = "http://www.deltacomputersystems.com/cgi-apM5/APMCGI02?HTMCNTY={{{delta}}}&HTMBASE=C&HTMKEY=";
+            var str = ''+ppin;
+            var pad = "000000";
+            var padVal = pad.substring(0,pad.length - str.length) + str;
+            var url = urlBase + padVal;
+            
+            window.open(url);
+        };
+
+        dojo.ready(function(){
+            var overlay = document.getElementById("loadingOverlay");
+            overlay.parentNode.removeChild(overlay);
+        });
+    </script>    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{google}}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+    </body>
+</html>

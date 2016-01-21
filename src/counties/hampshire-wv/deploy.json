@@ -1,8 +1,0 @@
-{
-	"minify" : true,
-	"outdir": "../sandbox/hampshire",
-	"title": "Hampshire County, WV",
-	"header": "Hampshire County, WV",
-	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
-	"google": "UA-42186511-1"
-}

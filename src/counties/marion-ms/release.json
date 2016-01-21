@@ -1,0 +1,22 @@
+{
+	"name" : "Marion County, MS",
+	"minify" : true,
+	"srcdir" : "./src/counties/marion-ms",
+	"outdir": "../sandbox/marion",
+	"template": "template.tmpl",
+	"title": "Marion County, MS",
+	"header": "Marion County, MS",
+	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
+	"google": "UA-42339713-1",
+	"delta": "MS46",
+	"ftp" : {
+        "host":     "192.168.2.171",
+        "user":     "ftpuser",
+        "password": "goftp",
+        "port":     21,
+        "parallel": 5,
+        "reload":   true,
+        "debug":    true
+    },
+    "remotedir": "/marion"
+}

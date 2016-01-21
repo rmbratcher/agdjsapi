@@ -1,13 +1,14 @@
 {
-	"name" : "Hampshire, WV",
+	"name" : "Marion County, MS",
 	"minify" : false,
-	"srcdir" : "./src/counties/hampshire-wv",
-	"outdir": "../sandbox/hampshire",
+	"srcdir" : "./src/counties/marion-ms",
+	"outdir": "../sandbox/marion",
 	"template": "template.tmpl",
-	"title": "Hampshire County, WV",
-	"header": "Hampshire County, WV",
+	"title": "Marion County, MS",
+	"header": "Marion County, MS",
 	"js" : ["//js.arcgis.com/3.14","./js/agd.js"],
-	"google": "UA-42186511-1",
+	"google": "UA-42339713-1",
+	"delta": "MS46",
 	"ftp" : {
         "host":     "192.168.2.171",
         "user":     "ftpuser",
@@ -17,5 +18,5 @@
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/hampshire"
+    "remotedir": "/marion"
 }

@@ -1,27 +1,28 @@
 'use strict';
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var less = require('gulp-less');
-var path = require('path');
-var runSequence = require('run-sequence');
-var imagemin = require('gulp-imagemin');
-var prettify = require('gulp-jsbeautifier');
-var pngquant = require('imagemin-pngquant');
-var htmlmin = require('gulp-htmlmin');
-var cssnano = require('gulp-cssnano');
-var mustache = require("gulp-mustache");
-var uglify = require('gulp-uglify');
-var git = require('gulp-git');
-var bump = require('gulp-bump');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var strip = require('gulp-strip-comments');
-var data = require('gulp-data');
-var gulpif = require('gulp-if');
-var fs = require('fs');
-var request = require('request');
-var ftp = require( 'vinyl-ftp' );
+var gulp = require('gulp')
+,gutil = require('gulp-util')
+,less = require('gulp-less')
+,path = require('path')
+,runSequence = require('run-sequence')
+,imagemin = require('gulp-imagemin')
+,prettify = require('gulp-jsbeautifier')
+,pngquant = require('imagemin-pngquant')
+,htmlmin = require('gulp-htmlmin')
+,cssnano = require('gulp-cssnano')
+,mustache = require("gulp-mustache")
+,uglify = require('gulp-uglify')
+,git = require('gulp-git')
+,bump = require('gulp-bump')
+,concat = require('gulp-concat')
+,rename = require('gulp-rename')
+,strip = require('gulp-strip-comments')
+,data = require('gulp-data')
+,gulpif = require('gulp-if')
+,fs = require('fs')
+,request = require('request')
+,ftp = require( 'vinyl-ftp' )
+,argv = require('yargs').argv;
 /*
 *
 *  Local vars
@@ -30,7 +31,7 @@ var ftp = require( 'vinyl-ftp' );
 var conf = null;
 var outdir = null;
 var settings = null;
-var countydir = null;
+var srcdir = null;
 
 var ERROR_LEVELS = ['error', 'warning'];
 
@@ -183,12 +184,16 @@ gulp.task('commit-changes', function () {
 *   Load config file
 */
 gulp.task('load-config', function(){
-    return gulp.src(countydir + 'template.tmpl')
+    settings = path.join('src','counties', argv.county, argv.build + '.json');
+    console.log(settings);
+    return gulp.src(settings)
             .pipe(data(function(file){
-                conf = JSON.parse(fs.readFileSync(countydir + settings));
+                conf = JSON.parse(fs.readFileSync(settings));
                 outdir = conf.outdir;
+                srcdir = conf.srcdir;
             }));
 });
+
 /*************************************************************************************************************
  _______   _______  _______    ___      __    __   __      .___________.
 |       \ |   ____||   ____|  /   \    |  |  |  | |  |     |           |
@@ -200,7 +205,7 @@ gulp.task('load-config', function(){
 */
 
 
-gulp.task('default', function () {
+gulp.task('default', function (callback) {
     console.log("*************************************************************");
     console.log("*      Command List                                         *");
     console.log("*  [empty] = show this                                      *");
@@ -230,6 +235,18 @@ gulp.task('default', function () {
     console.log("*                                                           *");
     console.log("*************************************************************");
 
+
+    runSequence(
+        'load-config',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log(conf);
+          }
+          callback(error);
+    });
+        
 });
 
 /*
@@ -356,40 +373,14 @@ gulp.task('min-html',function(){
 |__|  |__| /__/     \__\ |__|  |__| | _|   |_______/    |__|  |__| |__| | _| `._____||_______|         \__/  \__/         \__/     
                                                                                                                                    
 */
-
-gulp.task('debug-hampshire-wv', function (callback) {
-    //outdir = '../sandbox/hampshire';
-    settings = 'debug.json';
-    countydir = './src/counties/hampshire-wv/'
+   
+gulp.task('build', function (callback) {
     runSequence(
         'load-config',
         'img-crush',
-        'hampshire-wv-config',
-        'hampshire-wv-render',
-        'hampshire-min-html',
-        'min-js',
-        'min-css',
-        function (error) {
-          if (error) {
-            console.log(error.message);
-          } else {
-            console.log('DEBUG FINISHED SUCCESSFULLY');
-          }
-          callback(error);
-    });
-
-});
-    
-gulp.task('build-hampshire-wv', function (callback) {
-    //outdir = '../sandbox/hampshire';
-    settings = 'deploy.json';
-    countydir = './src/counties/hampshire-wv/'
-    runSequence(
-        'load-config',
-        'img-crush',
-        'hampshire-wv-config',
-        'hampshire-wv-render',
-        'hampshire-min-html',
+        'config',
+        'render',
+        'min-html',
         'min-js',
         'min-css',
         function (error) {
@@ -403,13 +394,11 @@ gulp.task('build-hampshire-wv', function (callback) {
 
 });
 
-gulp.task('deploy-hampshire-wv', function (callback) {
-    //outdir = '../sandbox/hampshire';
-    settings = 'deploy.json';
-    countydir = './src/counties/hampshire-wv/'
+gulp.task('deploy', function (callback) {
+
     runSequence(
-        'build-hampshire-wv',
-        'hampshire-wv-ftp',
+        'build',
+        'ftp',
         'commit-changes',
         function (error) {
           if (error) {
@@ -418,7 +407,7 @@ gulp.task('deploy-hampshire-wv', function (callback) {
             console.log('** RELEASE DEPLOYED SUCCESSFULLY **');
 
             var requestData = {
-                text: "Hampshire, WV Arcgis Server Site Deployed to server."
+                text: conf.name + " Arcgis Server Site Deployed to server."
             };
 
             request('https://hooks.slack.com/services/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',
@@ -432,16 +421,16 @@ gulp.task('deploy-hampshire-wv', function (callback) {
 
 });
 
-gulp.task('hampshire-wv-config', function(){
-    return gulp.src(countydir + 'conf.json')
+gulp.task('config', function(){
+    return gulp.src(path.join(srcdir,'conf.json'))
             .pipe(strip())
             .pipe(gulp.dest(outdir));
 });
 
-gulp.task('hampshire-wv-render',function(){
-    return gulp.src(countydir + 'template.tmpl')
-            .pipe(data(function(file){
-                return JSON.parse(fs.readFileSync(countydir + settings));
+gulp.task('render',function(){
+    return gulp.src(path.join(srcdir, conf.template))
+            .pipe(data(function(file) {
+                return JSON.parse(fs.readFileSync(settings));
             }))
             .pipe(mustache())
             .pipe(rename(function (path) {
@@ -453,23 +442,17 @@ gulp.task('hampshire-wv-render',function(){
 
 });
 
-gulp.task('hampshire-min-html',function(){
-    return gulp.src(outdir + 'help.html')
+gulp.task('min-html',function(){
+    return gulp.src(path.join(srcdir,'help.html'))
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(outdir));
 });
 
-gulp.task('hampshire-wv-ftp', function(){
-    var conn = ftp.create( {
-        host:     '192.168.2.171',
-        user:     'ftpuser',
-        password: 'goftp',
-        port:     21,
-        parallel: 5,
-        log:      gutil.log,
-        reload:   true,
-        debug:    true
-    } );
+gulp.task('ftp', function(){
+    if (conf.deploy == false){
+        reuturn;
+    }
+    var conn = ftp.create(conf.ftp);
 
     var globs = [
         outdir + '/**'
@@ -481,8 +464,8 @@ gulp.task('hampshire-wv-ftp', function(){
     // turn off buffering in gulp.src for best performance
 
     gulp.src( globs, { base: outdir, buffer: false } )
-        .pipe( conn.newer( '/hampshire' ) ) // only upload newer files
-        .pipe( conn.dest( '/hampshire' ) );
+        .pipe( conn.newer( conf.remotedir ) ) // only upload newer files
+        .pipe( conn.dest( conf.remotedir ) );
 });
 
 /************************************************************************************************************
