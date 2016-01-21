@@ -12,6 +12,7 @@
     "gulp-data": "^1.2.1",
     "gulp-git": ">=1.6.0",
     "gulp-htmlmin": ">=1.2.0",
+    "gulp-if": "^2.0.0",
     "gulp-imagemin": ">=2.4.0",
     "gulp-jsbeautifier": ">=1.0.1",
     "gulp-less": ">=3.0.5",

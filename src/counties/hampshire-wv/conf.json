@@ -140,7 +140,7 @@
             "type": "QueryTask",
             "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/61",
             "operator": "LIKE",
-            "isNumber": true,
+            "isNumber": false,
             "searchBoxLable": "PARID",
             "searchFields": ["PARID"],
             "outFields": ["OWN1", "OWN2", "CAREOF", "PARID","ADDR1","ADDR2"],
@@ -150,7 +150,7 @@
             "type": "FindTask",
             "searchBoxLable": "Address",
             "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/",
-            "layerIds": [67, 70],
+            "layerIds": [61,70],
             "searchFields": ["ADDR1","ADDR2","FULL_ADDRESS"]
         }],
         "Symbols": [{

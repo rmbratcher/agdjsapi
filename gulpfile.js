@@ -17,6 +17,8 @@ var bump = require('gulp-bump');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var strip = require('gulp-strip-comments');
+var data = require('gulp-data');
+var gulpif = require('gulp-if');
 var fs = require('fs');
 var request = require('request');
 var ftp = require( 'vinyl-ftp' );
@@ -27,6 +29,8 @@ var ftp = require( 'vinyl-ftp' );
 */
 var conf = null;
 var outdir = null;
+var settings = null;
+var countydir = null;
 
 var ERROR_LEVELS = ['error', 'warning'];
 
@@ -174,7 +178,17 @@ gulp.task('commit-changes', function () {
     .pipe(git.commit('Auto-commit from build system.'));
 });
 
-
+/*
+*
+*   Load config file
+*/
+gulp.task('load-config', function(){
+    return gulp.src(countydir + 'template.tmpl')
+            .pipe(data(function(file){
+                conf = JSON.parse(fs.readFileSync(countydir + settings));
+                outdir = conf.outdir;
+            }));
+});
 /*************************************************************************************************************
  _______   _______  _______    ___      __    __   __      .___________.
 |       \ |   ____||   ____|  /   \    |  |  |  | |  |     |           |
@@ -342,12 +356,39 @@ gulp.task('min-html',function(){
 |__|  |__| /__/     \__\ |__|  |__| | _|   |_______/    |__|  |__| |__| | _| `._____||_______|         \__/  \__/         \__/     
                                                                                                                                    
 */
-    
-gulp.task('build-hampshire-wv', function (callback) {
-    outdir = '../sandbox/hampshire';
+
+gulp.task('debug-hampshire-wv', function (callback) {
+    //outdir = '../sandbox/hampshire';
+    settings = 'debug.json';
+    countydir = './src/counties/hampshire-wv/'
     runSequence(
+        'load-config',
         'img-crush',
         'hampshire-wv-config',
+        'hampshire-wv-render',
+        'hampshire-min-html',
+        'min-js',
+        'min-css',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('DEBUG FINISHED SUCCESSFULLY');
+          }
+          callback(error);
+    });
+
+});
+    
+gulp.task('build-hampshire-wv', function (callback) {
+    //outdir = '../sandbox/hampshire';
+    settings = 'deploy.json';
+    countydir = './src/counties/hampshire-wv/'
+    runSequence(
+        'load-config',
+        'img-crush',
+        'hampshire-wv-config',
+        'hampshire-wv-render',
         'hampshire-min-html',
         'min-js',
         'min-css',
@@ -356,16 +397,6 @@ gulp.task('build-hampshire-wv', function (callback) {
             console.log(error.message);
           } else {
             console.log('RELEASE FINISHED SUCCESSFULLY');
-
-            /*var requestData = {
-                text: "Build finished for Hampshire, WV Arcgis Server Site."
-            };
-
-            request('https://hooks.slack.com/services/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',
-                    { json: true, body: requestData },
-                    function(err, res, body) {
-              // `body` is a js object if request was successful
-            });*/
           }
           callback(error);
     });
@@ -373,7 +404,9 @@ gulp.task('build-hampshire-wv', function (callback) {
 });
 
 gulp.task('deploy-hampshire-wv', function (callback) {
-    outdir = '../sandbox/hampshire';
+    //outdir = '../sandbox/hampshire';
+    settings = 'deploy.json';
+    countydir = './src/counties/hampshire-wv/'
     runSequence(
         'build-hampshire-wv',
         'hampshire-wv-ftp',
@@ -400,13 +433,28 @@ gulp.task('deploy-hampshire-wv', function (callback) {
 });
 
 gulp.task('hampshire-wv-config', function(){
-    return gulp.src('./src/counties/hampshire-wv/*.json')
+    return gulp.src(countydir + 'conf.json')
             .pipe(strip())
             .pipe(gulp.dest(outdir));
 });
 
+gulp.task('hampshire-wv-render',function(){
+    return gulp.src(countydir + 'template.tmpl')
+            .pipe(data(function(file){
+                return JSON.parse(fs.readFileSync(countydir + settings));
+            }))
+            .pipe(mustache())
+            .pipe(rename(function (path) {
+                path.basename = "index";
+                path.extname = ".html"
+            }))
+            .pipe(gulpif(conf.minify,htmlmin({collapseWhitespace: true})))
+            .pipe(gulp.dest(outdir))
+
+});
+
 gulp.task('hampshire-min-html',function(){
-    return gulp.src('./src/counties/hampshire-wv/*.html')
+    return gulp.src(outdir + 'help.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(outdir));
 });

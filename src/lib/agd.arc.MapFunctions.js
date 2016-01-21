@@ -47,6 +47,7 @@ dojo.require("esri.dijit.Scalebar");
 dojo.require('esri.tasks.GeometryService');
 dojo.require('esri.config');
 dojo.require('esri.tasks.FindTask');
+dojo.require('esri.tasks.FindParameters');
 dojo.require("esri.tasks.locator");
 dojo.require("esri.tasks.identify");
 dojo.require("esri.tasks.geometry");
