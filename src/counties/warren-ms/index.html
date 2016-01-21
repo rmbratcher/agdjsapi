@@ -116,7 +116,7 @@
         };
         dojo.ready(function(){
             var overlay = document.getElementById("loadingOverlay");
-            overlay.remove();
+            overlay.parentNode.removeChild(overlay);
         });
     </script>
     <script>
