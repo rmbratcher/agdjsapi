@@ -130,7 +130,7 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://mariongis.com/arcgis/rest/services/Geometry/GeometryServer"
+                "geometryService": "http://mariongis.com/arcgis/rest/services/Utilities/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",

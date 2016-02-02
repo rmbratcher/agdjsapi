@@ -148,7 +148,7 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://mariongis.com/arcgis/rest/services/Geometry/GeometryServer"
+                "geometryService": "http://warren.msmaps.org/arcgis/rest/services/Utilities/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",
@@ -251,30 +251,18 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/160",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
                 "searchFields": [
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "ADDRESS3"
+                    "SITUS"
                 ],
                 "outFields": [
-                    "PPIN",
-                    "PARCEL_NUMBER",
-                    "APPRAISED_AC",
-                    "OWNERNAME",
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "CITY",
-                    "STATE",
-                    "ZIP",
-                    "RANGE",
-                    "SECTION",
-                    "TAX_DIST",
-                    "SUB_NAME",
-                    "LEGAL1"
+                    "ROAD_NAME",
+					"HSENUM",
+					"HSENUM_SUB",
+					"SITUS"
                 ],
                 "symbol": "DefaultPolygonSymbol"
             },
