@@ -259,10 +259,9 @@
                     "SITUS"
                 ],
                 "outFields": [
-                    "ROAD_NAME",
-					"HSENUM",
-					"HSENUM_SUB",
-					"SITUS"
+					"SITUS",
+                    "FEA_TYPE",
+                    "BLDG_CODE"
                 ],
                 "symbol": "DefaultPolygonSymbol"
             },

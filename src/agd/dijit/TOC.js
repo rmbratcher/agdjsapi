@@ -102,8 +102,8 @@ define("agd/dijit/TOC", ['dojo/_base/declare', "dojo/has", "dojo/aspect", "dojo/
       }
       var showChildren = this.data.visible;
 
-      //Always collapse "Anno" Layer
-      if (this.data.name == "Anno"){
+      //Always collapse "Anno" or "Annotation" Layer
+      if (this.data.name == "Anno" || this.data.name == "Annotation"){
         showChildren = false;
       }
 
