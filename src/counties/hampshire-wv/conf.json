@@ -92,10 +92,10 @@
             }
         }, {
             "type": "Measure",
-            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Geometry/GeometryServer"
+            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Utilities/Geometry/GeometryServer"
         }, {
             "type": "GoToXY",
-            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Geometry/GeometryServer"
+            "geometryService": "http://map.hampshirewv.com/arcgis/rest/services/Utilities/Geometry/GeometryServer"
         }, {
             "type": "MultiSelect",
             "label": "Select",
