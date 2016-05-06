@@ -1,0 +1,23 @@
+{
+	"name" : "Monongalia Parcel Viewer",
+	"minify" : false,
+	"srcdir" : "./src/counties/mon-wv",
+	"outdir": "../sandbox/mon-test",
+	"template": "template.tmpl",
+	"title": "Monongalia Parcel Viewer",
+	"header": "Monongalia Parcel Viewer",
+	"js" : ["//js.arcgis.com/3.14","./js/app.min.js"],
+	"copydirs": ["images"],
+	"google": "",
+	"delta": "",
+	"ftp" : {
+        "host":     "192.168.2.171",
+        "user":     "ftpuser",
+        "password": "goftp",
+        "port":     21,
+        "parallel": 5,
+        "reload":   true,
+        "debug":    true
+    },
+    "remotedir": "/mon"
+}

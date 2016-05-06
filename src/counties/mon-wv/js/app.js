@@ -1,5 +1,5 @@
 "use strict";
-var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, parcelLayer, fplate, districts, pInfoTemplate, navToolbar, activeTool, measureDialog, measurementWidget, printSettings, currentFeatures, lastMapCenter, STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH, mapSettings, defaultWKID, Queries, QueryTasks, featureCache, RemoveNamePrefix, ButtonClickDoQuery, ZoomToFeature, currentGraphic, SymbolDefs, symbols, ClearInputs;
+var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, parcelLayer, fplate, districts, pInfoTemplate, navToolbar, activeTool, measureDialog, measurementWidget, printSettings, currentFeatures, lastMapCenter, STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH, mapSettings, defaultWKID, Queries, QueryTasks, featureCache, RemoveNamePrefix, ButtonClickDoQuery, ZoomToFeature, currentGraphic, SymbolDefs, symbols, ClearInputs, queryPoint, iasURL;
 
 /*
      _______. _______ .___________.___________. __  .__   __.   _______      _______.
@@ -10,6 +10,8 @@ var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, 
 |_______/    |_______|    |__|        |__|     |__| |__| \__|  \______| |_______/   
 
 */
+
+iasURL = 'http://moniasbeta.agd.cx',
 
 mapSettings = {
 	center: [1868344, 396122],
@@ -34,14 +36,14 @@ printSettings = {
 };
 
 
-agsBase = "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/";
+agsBase = "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/";
 
-parcelLayerIDX = '153';
+parcelLayerIDX = '142';
 
 Queries = [{
 	"label": "Owner",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/153",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Owner Name",
@@ -54,11 +56,11 @@ Queries = [{
 	],
 	"symbol": "DefaultPolygonSymbol",
 	"title": "Parcel: ${dmp}",
-	"content": '<b>Details:</b><a href="http://mon.ias.agd.cx/detail/${dmp}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
+	"content": '<b>Details:</b><a href="'+ iasURL+ '/detail/${dmp}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
 }, {
 	"label": "ParId",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/153",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Parcel Id.",
@@ -75,7 +77,7 @@ Queries = [{
 }, {
 	"label": "Address",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/150",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/138",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Address",
@@ -391,7 +393,7 @@ monApp = require(["esri/map",
 	*/
 	pInfoTemplate = new InfoTemplate();
 	pInfoTemplate.setTitle("Parcel: ${dmp}");
-	var tmpl = '<b>Details:</b><a href="http://mon.ias.agd.cx/detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
+	var tmpl = '<b>Details:</b><a href="'+ iasURL + '/detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
 	tmpl += '<b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />';
 	pInfoTemplate.setContent(tmpl);
 	pInfoTemplate.spatialReference = new SpatialReference({
@@ -568,6 +570,7 @@ monApp = require(["esri/map",
 		}
 		var query = new Query();
 		query.geometry = e.mapPoint;
+		queryPoint = e.mapPoint;
 		var deferred = parcelLayer.selectFeatures(query, FeatureLayer.SELECTION_NEW, selectionHandler);
 
 	});
@@ -611,7 +614,8 @@ monApp = require(["esri/map",
 
 			var parcelPoly = featObj.geometry;
 			parcelPoly.spatialReference = map.spatialReference;
-			var center = parcelPoly.getCentroid();
+			var center = queryPoint == undefined ? parcelPoly.getCentroid() : queryPoint;
+			queryPoint = undefined;
 			map.infoWindow.setFeatures([featObj]);
 			map.infoWindow.show(center);
 			map.setExtent(parcelPoly.getExtent().expand(2.5), true);
@@ -946,9 +950,9 @@ monApp = require(["esri/map",
 	*/
 
 	function getDistricts() {
-		var distQueryTask = new QueryTask(agsBase + parcelLayerIDX);
+		var distQueryTask = new QueryTask('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/153');
 		var dquery = new Query();
-		dquery.outFields = ["dist"];
+		dquery.outFields = ["dist","Name"];
 		dquery.returnGeometry = false;
 		dquery.returnDistinctValues = true;
 		dquery.where = 'OBJECTID > -1';
@@ -956,10 +960,11 @@ monApp = require(["esri/map",
 			var results = results1.featureSet.features.sort(function(obj1, obj2) {
 				return obj1.attributes.dist - obj2.attributes.dist;
 			});
+			districts.push(['-','Select'])
 			arrayUtils.forEach(results, function(feat) {
 				if (feat.attributes.dist != null) {
 					//console.log(feat.attributes.dist);
-					districts.push(feat.attributes.dist);
+					districts.push([feat.attributes.dist,feat.attributes.Name]);
 				}
 			});
 			renderSearchPanel();
@@ -987,6 +992,10 @@ monApp = require(["esri/map",
 			var results = results1.featureSet.features.sort(natSortMap); //function(obj1,obj2){return obj1.attributes.map - obj2.attributes.map;});
 			dojo.byId("sel-map").innerHTML = "";
 			var selmap = document.getElementById("sel-map");
+
+			var opt = document.createElement("option");
+			opt.text = "Select";
+			selmap.add(opt);
 
 			arrayUtils.forEach(results, function(feat) {
 				if (feat.attributes.map != null) {
@@ -1020,6 +1029,11 @@ monApp = require(["esri/map",
 			});
 			dojo.byId("sel-parcel").innerHTML = "";
 			var selpar = document.getElementById("sel-parcel");
+
+			var opt = document.createElement("option");
+			opt.text = "Select";
+			selpar.add(opt);
+
 			arrayUtils.forEach(results, function(feat) {
 				if (feat.attributes.parcel != null) {
 					var option = document.createElement("option");
@@ -1040,14 +1054,14 @@ monApp = require(["esri/map",
 
 	*/
 	function renderSearchPanel() {
-		var rendered = '<span>Dist-Map-Parcel:<br /><span id="dmp-display" class="grey"></span></span><br /><span>District: <select id="sel-dist">';
+		var rendered = '<span>Dist-Map-Parcel:<br /><span id="dmp-display" class="grey"></span></span><br /><span>District: <br /><select id="sel-dist">';
 
 		arrayUtils.forEach(districts, function(dist) {
-			rendered += '<option value="' + dist + '">' + dist + '</option>';
+			rendered += '<option value="' + dist[0] + '">' + dist[1] + '</option>';
 		});
 		rendered += '</select></span><br />';
 
-		rendered += '<span>Map: <select id="sel-map"></select></span><br /><span>Parcel: <select id="sel-parcel"></select><span>';
+		rendered += '<span>Map: <br /><select id="sel-map"></select></span><br /><span>Parcel: <br /><select id="sel-parcel"></select><span>';
 
 		dojo.byId('search-panel').innerHTML = rendered;
 		//dojo.style(dojo.byId('search-panel'), "display", "block");
@@ -1065,7 +1079,7 @@ monApp = require(["esri/map",
 		});
 
 		dojo.connect(dojo.byId('sel-parcel'), 'change', function(evt) {
-			selectParcel(dojo.byId("sel-dist").value.replace(/^0/, '') + '-' + dojo.byId("sel-map").value + '-' + this.value);
+			selectParcel(dojo.byId("sel-dist").value + '-' + dojo.byId("sel-map").value + '-' + this.value);
 			dojo.byId('dmp-display').innerHTML = dojo.byId("sel-dist").value + '-' + dojo.byId("sel-map").value + '-' + this.value;
 		});
 	}

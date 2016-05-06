@@ -56,11 +56,11 @@
                 "layerIds": [61, 57, 67, 63, 67],
                 "layerOptions": "ALL",
                 "show": true,
-                "title": "${PARID}",
+                "title": "${parid}",
                 "width": 250,
                 "height": 360,
                 "templates": {
-                    "61": "<b>${OWN1}</b><hr /><b>ACCOUNT: </b>${ACCOUNT}<br /><b>Address1: </b>${ADDR1}<br/><b>City: </b>${CITYNAME}<br /><b>State: </b>${STATECODE}<br /><b>Map: </b>${MAPNAME}<br /><b>Parcel.: </b>${PARCEL}<br /><b>Suffix: </b>${SUFFIX}<br /><hr /><b>Property Record Card:</b><a href='http://hampshire.wvassessor.com/prc.aspx?PARID=${PARID}' target='_blank'>PRC</a><br /><b>Plat:</b><a href='http://docs.hampshirewv.com/plat/ref/${PLAT_REF}' target='_blank'>${PLAT_REF}</a><br /><b>Deed:</b><a href='http://docs.hampshirewv.com/deed/${BOOK}/${PAGE}' target='_blank'>${BOOK}-${PAGE}</a><br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                    "61": "<b>${own1}</b><hr /><b>OwnerAddress: </b>${owneraddr}<br/><b>City: </b>${cityname}<br /><b>State: </b>${statecode}<br /><b>ParcelAddress: </b>${situsaddr}<br /><b>Map: </b${dist}-${map}<br /><b>parcel.: </b>${parcel}<br /><hr /><b>Property Record Card:</b><a href='http://hampshire.wvassessor.com/prc.aspx?PARID=${parid}' target='_blank'>PRC</a><br /><b>Plat:</b><a href='http://docs.hampshirewv.com/plat/ref/${plat_ref}' target='_blank'>${plat_ref}</a><br /><b>Deed:</b><a href='http://docs.hampshirewv.com/deed/${book}/${page}' target='_blank'>${book}-${page}</a><br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
                     "57": "",
                     "67": "",
                     "63": "",
@@ -75,19 +75,17 @@
             "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
             "printDefs": {
                 "61": [
-                        "PARID",
-                        "DISTRICT",
-                        "MAP",
-                        "PARCEL",
-                        "SUBPARCEL",
-                        "OWN1",
-                        "OWN2",
-                        "ADDR1",
-                        "ADDR2",
-                        "CITYNAME",
-                        "STATECODE",
-                        "ZIP1",
-                        "TOTASM"
+                        "parid",
+                        "dist",
+                        "map",
+                        "parcel",
+                        "own1",
+                        "own2",
+                        "owneraddr",
+                        "situsaddr",
+                        "cityname",
+                        "statecode",
+                        "aprtot"
                     ]
             }
         }, {
@@ -120,7 +118,7 @@
                     "iconClass":"hyperlinkIcon",
                     "height": "450",
                     "width": "700",
-                    "template":"http://hampshire.wvassessor.com/prc.aspx?PARID={PARID}"
+                    "template":"http://hampshire.wvassessor.com/prc.aspx?PARID={parid}"
                 }
             ]
         }
@@ -132,8 +130,8 @@
             "operator": "LIKE",
             "isNumber": false,
             "searchBoxLable": "Owner Name",
-            "searchFields": ["OWN1", "OWN2"],
-            "outFields": ["OWN1", "OWN2", "CAREOF", "PARID","ADDR1","ADDR2"],
+            "searchFields": ["own1", "own2"],
+            "outFields": ["own1", "own2", "careof", "parid","owneraddr","situsaddr"],
             "symbol": "DefaultPolygonSymbol"
         }, {
             "label": "Search by PARID",
@@ -142,8 +140,8 @@
             "operator": "LIKE",
             "isNumber": false,
             "searchBoxLable": "PARID",
-            "searchFields": ["PARID"],
-            "outFields": ["OWN1", "OWN2", "CAREOF", "PARID","ADDR1","ADDR2"],
+            "searchFields": ["parid"],
+            "outFields": ["own1", "own2", "careof", "parid","owneraddr","situsaddr"],
             "symbol": "DefaultPolygonSymbol"
         }, {
             "label": "Find Address",
@@ -151,7 +149,7 @@
             "searchBoxLable": "Address",
             "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer/",
             "layerIds": [61,70],
-            "searchFields": ["ADDR1","ADDR2","FULL_ADDRESS"]
+            "searchFields": ["owneraddr","situsaddr","FULL_ADDRESS"]
         }],
         "Symbols": [{
             "name": "DefaultLineSymbol",

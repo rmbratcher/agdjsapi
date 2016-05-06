@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css" />
+	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css"/>
+	    <link rel="stylesheet" href="./css/style.css" />
+	    <link rel="stylesheet" href="./css/style-dijit.css" />
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" type="text/css" href="./agd/css/agd.css" />
+	    <link rel="stylesheet" type="text/css" href="./agd/infoWindow.css"/>
+
+ 	</head>
+	 <body class="claro">
+	 <div id="loadingOverlay" class="loadingOverlay pageOverlay" style="display: block;"><div class="loadingMessage"></div></div>
+	 <iframe name="printframe" src="" style="height:0px; width:0px;display:none;left:-2px;z-index:0;"></iframe>
+	 	<div class="nav">
+	 		<img src="images/logo_print.png" class="hor-navbar-logo-lg" alt="Monongalia" />
+	 		<h2>{{title}}</h2>
+	 		<div class="input-group">
+      					<input id="searchbar" type="text" class="form-control" placeholder="Search">
+      				</div>
+	 	</div>
+	 	<div id="tools-dongle" class="dongle">
+	 		<span>
+	 			<i class="fa fa-tasks fa-2x"></i> 
+	 			
+ 			</span>
+	 	</div>
+	 	<div class="notify">
+	 		<div id="notification"></div>
+	 		<div id="coords"></div>
+	 	</div>
+	 	<div id="measureDialog" style="display: none">
+	 		<div id="measure-panel"></div>
+	 	</div>
+	 	<main class="content">
+	 		<div id="map"></div>
+	 		<div id="display-panel" class="side-panel">
+	 			<div class="nav-small">
+	 				<div id="side-panel-closer">
+	 					<i class="fa fa-caret-right fa-3x"></i>
+	 				</div>
+	 			</div>
+	 			<div id="navToolbar" data-dojo-type="dijit.Toolbar" class="toolbar"></div>
+	 			<div class="inner-side-panel">
+	 				<div data-dojo-type="dijit/layout/TabContainer" style="width: 100%; height: 100%;">
+				        <div data-dojo-type="dijit/layout/ContentPane" title="Legend" data-dojo-props="selected:true">
+				            <div id="legend-panel" style="width: 100%; height: 100%;"></div>
+				        </div>
+				        <div data-dojo-type="dijit/layout/ContentPane" title="Parcel Search">
+				        	<div id="searchTabs" data-dojo-type="dijit/layout/TabContainer" data-dojo-props="tabPosition:'right'" style="width: 100%; height: 100%;">
+					        	<div data-dojo-type="dijit/layout/ContentPane" title="Dist-Map-Par" data-dojo-props="selected:true">
+					            	<div id="search-panel" class="search-panel"></div>
+					            </div>
+				            </div>
+				        </div>
+			    	</div>
+	 			</div>
+	 		</div>
+	 		<div class="clearer"></div>
+	 	</main>
+	 	<script>
+			var dojoConfig = {
+				parseOnLoad: false, 
+				paths: {
+				    agd: location.pathname.replace(/\/[^/]+$/, '') + '/agd'
+				}
+			};
+        </script>
+		    {{#js}}
+    	<script src="{{{.}}}"></script>
+	    {{/js}}  
+	    <script>
+	        dojo.ready(function(){
+	            var overlay = document.getElementById("loadingOverlay");
+	            overlay.parentNode.removeChild(overlay);
+	        });
+    	</script> 
+	 </body>
+ </html>

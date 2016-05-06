@@ -20,6 +20,22 @@ body {
   position: relative;
   cursor: auto;
 }
+.loadingOverlay {
+  background: #FFFFFF url('../img/loading_big2.gif') no-repeat fixed center;
+  position: absolute;
+  z-index: 1001;
+  display: none;
+}
+.pageOverlay {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.loadingMessage {
+  padding: 25px 40px;
+  color: #999;
+}
 article,
 aside,
 canvas,
@@ -170,9 +186,8 @@ summary {
   font-size: 1.2em;
 }
 .search-panel span select {
-  margin-left: 10px;
   margin-bottom: 10px;
-  font-size: 1.2em;
+  font-size: 0.8em;
 }
 .grey {
   color: #999;
