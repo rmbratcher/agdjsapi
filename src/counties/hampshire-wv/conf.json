@@ -27,13 +27,20 @@
             }
         },
         "layers": [{
+            "name": "Aerials 2015",
+            "type": "ArcGISImageServiceLayer",
+            "url": "http://ags2.atlasgeodata.com/arcgis/rest/services/hampshire2015/ImageServer",
+            "toggle": true,
+            "transbtn": true,
+            "visible": false
+        },{
             "name": "Aerials 2010",
             "type": "ArcGISDynamicMapServiceLayer",
             "url": "http://ags.hampshirewv.com/ArcGIS/rest/services/WVHAMP10_SID_1METER/MapServer",
             "toggle": true,
             "transbtn": true,
             "visible": false
-        }, {
+        },{
             "name": "Layers",
             "type": "ArcGISDynamicMapServiceLayer",
             "url": "http://map.hampshirewv.com/arcgis/rest/services/HampshireWV/MapServer",
