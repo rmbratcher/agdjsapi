@@ -1,6 +1,6 @@
 {
 	"name" : "Monongalia Parcel Viewer",
-	"minify" : false,
+	"minify" : true,
 	"srcdir" : "./src/counties/mon-wv",
 	"outdir": "../sandbox/mon-test",
 	"template": "template.tmpl",
