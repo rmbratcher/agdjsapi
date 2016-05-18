@@ -5,7 +5,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
 	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css" />
 	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css"/>
-	    <link rel="stylesheet" href="./css/style.css" />
+	    <link rel="stylesheet" href="./css/new-style.css" />
 	    <link rel="stylesheet" href="./css/style-dijit.css" />
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    <link rel="stylesheet" type="text/css" href="./agd/css/agd.css" />
@@ -14,6 +14,32 @@
  	</head>
 	 <body class="claro">
 	 <div id="loadingOverlay" class="loadingOverlay pageOverlay" style="display: block;"><div class="loadingMessage"></div></div>
+	 <div data-dojo-id ="disclaimerDialog" data-dojo-type = "dijit.Dialog" title = "Legal Notice" style="display: none">
+            <div class="dijitDialogPaneContentArea">
+            <p>
+	            {{county}} County online map access is provided as a public service, as is, as available and<br />
+	            without warranties, expressed or implied.  Content published on this website is for informational<br />
+	            purposes only, and is not intended to constitute a legal record nor should it be substituted<br />
+	            for the advice or services of a licensed professional.
+				<br />
+			</p>
+			<p style="margin=5px; padding=5px;">
+				Parcel map information is prepared for the inventory of real property<br />
+				found within County jurisdiction and is compiled from recorded deeds, plats,<br />
+				and other public documents. Users arehereby notified that the aforementioned public record sources<br /> 
+				should be consulted for verification of information. With limited exception, data available on this<br /> 
+				website originates from {{county}} County Land Records GIS and is maintained for the internal use of<br /> 
+				the County. The County of {{county}} and the Website Provider disclaim all responsibility and legal<br /> 
+				liability for the content published on this website. The user agrees that {{county}} County and its<br /> 
+				Assigns shall be held harmless from all actions, claims, damages or judgments arising out of the<br /> 
+				use of County data.
+			</p>
+			<br />
+            </div>
+            <div class ="dijitDialogPaneActionBar">
+	            <button data-dojo-type = "dijit.form.Button" type ="submit" tabindex = '10' id = "ok" onClick="disclamerOk();">OK</button>
+    		</div>
+     </div>
 	 <iframe name="printframe" src="" style="height:0px; width:0px;display:none;left:-2px;z-index:0;"></iframe>
 	 	<div class="nav">
 	 		<img src="images/logo_print.png" class="hor-navbar-logo-lg" alt="Monongalia" />
@@ -56,6 +82,17 @@
 					            </div>
 				            </div>
 				        </div>
+				        <div data-dojo-type="dijit/layout/ContentPane" title="Contact" data-dojo-props="tabPosition:'right'">
+				            <div id="contact-panel" style="width: 100%; height: 100%;">
+				            	<h2>Contact Title</h2>
+				            	<p>
+					            	<b>Some Name</b>
+					            	<ul>
+					            		<li>Phone: (555) 555-5555</li>
+					            	</ul>
+					            </p>
+				            </div>
+				        </div>
 			    	</div>
 	 			</div>
 	 		</div>
@@ -69,14 +106,21 @@
 				}
 			};
         </script>
-		    {{#js}}
+	    {{#js}}
     	<script src="{{{.}}}"></script>
-	    {{/js}}  
+	    {{/js}}
 	    <script>
 	        dojo.ready(function(){
-	            var overlay = document.getElementById("loadingOverlay");
-	            overlay.parentNode.removeChild(overlay);
+	            
+
+	            disclaimerDialog.show();
 	        });
-    	</script> 
+
+	        function disclamerOk(){
+	        	var overlay = document.getElementById("loadingOverlay");
+	            overlay.parentNode.removeChild(overlay);
+	            disclaimerDialog.hide();
+	        }
+    	</script>   
 	 </body>
  </html>
