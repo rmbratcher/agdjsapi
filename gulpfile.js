@@ -290,7 +290,10 @@ gulp.task('default', function (callback) {
     console.log("                       warren-ms                            ");
     console.log("                       marion-ms                            ");
     console.log("                                                            ");
-        
+    console.log("                                                            ");
+    console.log(" Examples:                                                  ");
+    console.log("           gulp build --county=mon-wv --build=debug         ");
+    console.log("           gulp deploy --county=hampshire-wv --build=release");
 });
 
 /*
