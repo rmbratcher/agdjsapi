@@ -11,7 +11,7 @@ var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, 
 
 */
 
-iasURL = 'http://moniasbeta.agd.cx',
+iasURL = 'http://ias.monwv.agdmaps.com',
 
 mapSettings = {
 	center: [1868344, 396122],
@@ -36,14 +36,14 @@ printSettings = {
 };
 
 
-agsBase = "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/";
+agsBase = "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/";
 
 parcelLayerIDX = '142';
 
 Queries = [{
 	"label": "Owner",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/142",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Owner Name",
@@ -60,7 +60,7 @@ Queries = [{
 }, {
 	"label": "ParId",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/142",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Parcel Id.",
@@ -77,7 +77,7 @@ Queries = [{
 }, {
 	"label": "Address",
 	"type": "QueryTask",
-	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/138",
+	"url": "http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/138",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Address",
@@ -950,7 +950,7 @@ monApp = require(["esri/map",
 	*/
 
 	function getDistricts() {
-		var distQueryTask = new QueryTask('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWVTest/MapServer/153');
+		var distQueryTask = new QueryTask('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/153');
 		var dquery = new Query();
 		dquery.outFields = ["dist","Name"];
 		dquery.returnGeometry = false;

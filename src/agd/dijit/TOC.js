@@ -103,7 +103,7 @@ define("agd/dijit/TOC", ['dojo/_base/declare', "dojo/has", "dojo/aspect", "dojo/
       var showChildren = this.data.visible;
 
       //Always collapse "Anno" or "Annotation" Layer
-      if (this.data.name == "Anno" || this.data.name == "Annotation"){
+      if (/(A|a)nno.*$/.test(this.data.name)) {
         showChildren = false;
       }
 
@@ -547,14 +547,28 @@ define("agd/dijit/TOC", ['dojo/_base/declare', "dojo/has", "dojo/aspect", "dojo/
         }, this);
       }
     },
+    // Check all parent layers to be sure that the current layer is visible.
+    _recursiveParentVisibleCheck: function(rootLayers,layerInfo) {
+      var xlayerInfo = layerInfo;
+      while(xlayerInfo.parentLayerId > -1) {
+        xlayerInfo = rootLayers[xlayerInfo.parentLayerId];
+        if (xlayerInfo.visible == false){
+          return false;
+        }
+      }
+      return xlayerInfo.visible;
+    },
     _getVisibleLayers: function(){
-      var vis = [];
+      var vis = [], rootLayers = this.rootLayer.layerInfos, self=this;
       array.forEach(this.rootLayer.layerInfos, function(layerInfo){
         if (layerInfo.subLayerIds) {
           // if a group layer is set to vis, all sub layer will be drawn regardless it's sublayer status
           return;
         } else if (layerInfo.visible) {
-          vis.push(layerInfo.id);
+          // if any of the layers parents are not visable don't draw it.
+          if(self._recursiveParentVisibleCheck(rootLayers,layerInfo)){
+                  vis.push(layerInfo.id);
+            }
         }
       });
       if (vis.length === 0) {
