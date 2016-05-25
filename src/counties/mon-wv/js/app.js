@@ -85,7 +85,7 @@ Queries = [{
 		"FULL_ADDRESS"
 	],
 	"outFields": [
-		"BLDG_CODE", "FULL_ADDRESS", "COMMUNITY", "ZIPCODE"
+		"BLDG_CODE", "FULL_ADDRESS", "COMMUNITY"
 	],
 	"symbol": "DefaultPointSymbol",
 	"title": "${FULL_ADDRESS}",
