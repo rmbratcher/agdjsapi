@@ -149,15 +149,15 @@ SymbolDefs = [{
 			247,
 			230,
 			97,
-			100
+			0
 		],
 		"outline": {
 			"type": "esriSLS",
 			"style": "esriSLSSolid",
 			"color": [
-				110,
-				110,
-				110,
+				255,
+				0,
+				0,
 				255
 			],
 			"width": 1
