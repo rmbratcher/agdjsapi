@@ -418,7 +418,7 @@ monApp = require(["esri/map",
 	imgLayer2010.visible = false;
 
 	parcelLayer = new FeatureLayer(agsBase + parcelLayerIDX, {
-		outFields: ['own1', 'own2', 'dmp', 'legal1','OBJECTID'],
+		outFields: ['*'],
 		infoTemplate: pInfoTemplate,
 		mode: FeatureLayer.MODE_ONDEMAND
 	});
