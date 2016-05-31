@@ -55,7 +55,7 @@ Queries = [{
 		"dmp", "dist", "map", "parcel", "parid", "nbhd", "own1", "own2", "careof", "owneraddr", "cityname", "statecode", "acres", "book", "page", "aprland", "aprbldg", "legal1", "legal2", "legal3"
 	],
 	"symbol": "DefaultPolygonSymbol",
-	"title": "Parcel: ${dmp}",
+	"title": "Parcel: ${parid}",
 	"content": '<b>Details:</b><a href="'+ iasURL+ '/detail/${parid}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
 }, {
 	"label": "ParId",
