@@ -204,7 +204,7 @@ gulp.task('min-js5',function(){
 
 
 /*
-*   Copy thirdparty js files to outdir
+*   Copy thirdparty js files to outdir 
 */
 gulp.task('js-copy',function(){
     return gulp.src('./src/extrajs/*.js')
@@ -215,7 +215,7 @@ gulp.task('copy-dirs',function() {
     var dirs = [];
     if(conf.copydirs) {
         for(var i = 0; i < conf.copydirs.length; i += 1) {
-            dirs.push(path.join(srcdir,conf.copydirs[0]) + "/**/*");
+            dirs.push(path.join(srcdir,conf.copydirs[i]) + "/**/*");
         }
         console.log(dirs);
         return gulp.src(dirs,  {base:srcdir})
@@ -374,6 +374,7 @@ gulp.task('build', function (callback) {
         'min-html',
         'min-js',
         'min-css',
+        'copy-dirs',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -425,8 +426,8 @@ gulp.task('render',function(){
             }))
             .pipe(mustache())
             .pipe(rename(function (path) {
-                path.basename = "index";
-                path.extname = ".html"
+                path.basename = conf.destfile[0];
+                path.extname = conf.destfile[1];
             }))
             .pipe(gulpif(conf.minify,htmlmin({collapseWhitespace: true})))
             .pipe(gulp.dest(outdir))

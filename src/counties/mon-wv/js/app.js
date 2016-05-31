@@ -14,10 +14,10 @@ var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, 
 iasURL = 'http://ias.monwv.agdmaps.com',
 
 mapSettings = {
-	center: [1868344, 396122],
+	center: [1840128, 402581],
 	zoom: 11,
 	autoResize: true
-		//,infoWindow: infoWindow
+
 };
 
 defaultWKID = 26853;
@@ -393,47 +393,51 @@ monApp = require(["esri/map",
 	*/
 	pInfoTemplate = new InfoTemplate();
 	pInfoTemplate.setTitle("Parcel: ${dmp}");
-	var tmpl = '<b>Details:</b><a href="'+ iasURL + '/detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
+	var tmpl = '<b>Details:</b><a href="'+ iasURL + '/detail/${parid}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
 	tmpl += '<b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />';
 	pInfoTemplate.setContent(tmpl);
-	pInfoTemplate.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});
+	/*pInfoTemplate.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
 
 
-	mainMapLayer = new ArcGISDynamicMapServiceLayer(agsBase);
-	mainMapLayer.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});
+	mainMapLayer = new ArcGISDynamicMapServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer');
+	/*mainMapLayer.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
 	imgLayer2015 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonongaliaWV2015/ImageServer');
-	imgLayer2015.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});
+	/*imgLayer2015.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
 	imgLayer2015.visible = false;
 
 	var imgLayer2010 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonogaliaWV2010/ImageServer');
-	imgLayer2010.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});
+	/*imgLayer2010.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
 	imgLayer2010.visible = false;
 
 	parcelLayer = new FeatureLayer(agsBase + parcelLayerIDX, {
-		outFields: ["*"],
+		outFields: ['own1', 'own2', 'dmp', 'legal1','OBJECTID'],
 		infoTemplate: pInfoTemplate,
-		mode: FeatureLayer.MODE_SELECTION
+		mode: FeatureLayer.MODE_ONDEMAND
 	});
 
-	parcelLayer.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});
+	/*parcelLayer.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
+
+	/*mapSettings.spatialReference = new SpatialReference({
+		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
+	});*/
 
 	// Create map
 	map = new Map("map", mapSettings);
 
 	//assign spatial reference
-	map.spatialReference = new SpatialReference({
+	/*map.spatialReference = new SpatialReference({
 		wkid: defaultWKID
-	});
+	});*/
 
 
 	/*
@@ -483,24 +487,23 @@ monApp = require(["esri/map",
 		var fplate = new InfoTemplate();
 		fplate.setTitle("Parcel");
 
-		var search = new Search({
+		/*var search = new Search({
 			sources: [{
-				featureLayer: new FeatureLayer(agsBase + parcelLayerIDX, {
-					outFields: ["*"],
-					infoTemplate: pInfoTemplate
-				}),
+				featureLayer: new FeatureLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/142'),
 				enableLabel: false,
 				enableHighlight: false,
-				outFields: ["own1", "dmp", "legal1"],
+				outFields: ['own1', 'own2', 'dmp', 'legal1','OBJECTID'],
 				displayField: "own1",
 				searchFields: ['own1', 'own2', 'dmp', 'legal1'],
 				suggestionTemplate: "${own1}: ${dmp}",
 				name: "Parcels",
 				placeholder: "Wade Richard",
-				enableSuggestions: true
+				enableSuggestions: true 
 			}],
 			map: map
 		}, "searchbar");
+
+		search.startup();*/
 
 
 		setupNavigation();
@@ -935,6 +938,9 @@ monApp = require(["esri/map",
 		if (parid) {
 			var query = new Query();
 			query.where = "dmp = '" + parid + "'";
+			query.outFields  = ['*'];
+			query.returnGeometry = true;
+
 			var deferred = parcelLayer.queryFeatures(query, selectionHandler);
 		}
 	}

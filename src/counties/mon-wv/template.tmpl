@@ -1,10 +1,13 @@
+<?php
+header("Expires: Sun, 26 Jul 2015 05:00:00 GMT");
+?>
 <!DOCTYPE html>
 <html>
  	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
-	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css" />
-	    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css"/>
+	    <link rel="stylesheet" href="http://js.arcgis.com/3.16/esri/css/esri.css" />
+	    <link rel="stylesheet" href="http://js.arcgis.com/3.16/dijit/themes/claro/claro.css"/>
 	    <link rel="stylesheet" href="./css/new-style.css" />
 	    <link rel="stylesheet" href="./css/style-dijit.css" />
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -45,7 +48,7 @@
 	 		<img src="images/logo_print.png" class="hor-navbar-logo-lg" alt="Monongalia" />
 	 		<h2>{{title}}</h2>
 	 		<div class="input-group">
-      					<input id="searchbar" type="text" class="form-control" placeholder="Search">
+      					<!--input id="searchbar" type="text" class="form-control" placeholder="Search"-->
       				</div>
 	 	</div>
 	 	<div id="tools-dongle" class="dongle">
@@ -122,6 +125,16 @@
 	            overlay.parentNode.removeChild(overlay);
 	            disclaimerDialog.hide();
 	        }
-    	</script>   
+    	</script>
+    	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', '{{google}}', 'auto');
+		  ga('send', 'pageview');
+
+		</script>   
 	 </body>
  </html>
