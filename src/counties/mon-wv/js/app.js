@@ -574,6 +574,7 @@ monApp = require(["esri/map",
 		var query = new Query();
 		query.geometry = e.mapPoint;
 		queryPoint = e.mapPoint;
+		query.outFields = ['*']
 		var deferred = parcelLayer.selectFeatures(query, FeatureLayer.SELECTION_NEW, selectionHandler);
 
 	});
