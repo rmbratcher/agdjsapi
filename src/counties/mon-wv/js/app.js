@@ -56,7 +56,7 @@ Queries = [{
 	],
 	"symbol": "DefaultPolygonSymbol",
 	"title": "Parcel: ${dmp}",
-	"content": '<b>Details:</b><a href="'+ iasURL+ '/detail/${dmp}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
+	"content": '<b>Details:</b><a href="'+ iasURL+ '/detail/${parid}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
 }, {
 	"label": "ParId",
 	"type": "QueryTask",

@@ -8,11 +8,11 @@
 	"title": "Monongalia Parcel Viewer",
 	"header": "Monongalia Parcel Viewer",
 	"county":"Monongalia",
-	"js" : ["//js.arcgis.com/3.16","./js/app.js?v=120","./js/CollapsibleLists.js"],
+	"js" : ["//js.arcgis.com/3.16","./js/app.js?v=121","./js/CollapsibleLists.js"],
 	"copydirs": ["images","js"],
 	"google": "UA-42186511-9",
 	"delta": "",
-	"version": "120",
+	"version": "121",
 	"ftp" : {
         "host":     "192.168.2.108",
         "user":     "www",
