@@ -5,6 +5,7 @@
 	"outdir": "../sandbox/warren",
 	"template": "template.tmpl",
 	"title": "Warren County, MS",
+	"destfile":["index",".html"],
 	"header": "Warren County, MS",
 	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
 	"google": "UA-42186511-7",

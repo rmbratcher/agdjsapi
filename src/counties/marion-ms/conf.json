@@ -248,36 +248,18 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/45",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/39",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
                 "searchFields": [
-                    "ADDRESS1",
-                    "ADDRESS2"
+                    "SITUS"
                 ],
                 "outFields": [
-                    "PPIN",
-                    "Parcel_Number",
-                    "NAME",
-                    "Appraised_AC",
-                    "TOTAL_ASSESED_VAL",
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "CITY",
-                    "STATE",
-                    "ZIPCODE",
-                    "TR_SECTION",
-                    "TOWNSHIP",
-                    "RANGE",
-                    "TAX_DIST",
-                    "PROP_ADD_NUM",
-                    "PROP_STREET",
-                    "DEED_BOOK",
-                    "DEED_PAGE",
-                    "LEGAL_DESC"
+                    "STRUCTURE",
+                    "SITUS"
                 ],
-                "symbol": "DefaultPolygonSymbol"
+                "symbol": "DefaultPointymbol"
             },
             {
                 "label": "Search by Subdivision",

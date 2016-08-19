@@ -279,7 +279,7 @@ gulp.task('default', function (callback) {
     console.log("                                                            ");
     console.log("  bump-version => increment the build number                ");
     console.log("                                                            ");
-    console.log("  build --county=[county] --build=[debug|release]            ");
+    console.log("  build --county=[county] --build=[debug|release]           ");
     console.log("                                                            ");
     console.log("  depoly --county=[county] --build=[debug|release]          ");
     console.log("                                                            ");
