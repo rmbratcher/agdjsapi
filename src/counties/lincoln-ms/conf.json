@@ -81,9 +81,9 @@
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
-                            135,//Parcels
-                            136,//Subdivision
-                            146//Roads
+                            103,//Parcels
+                            104,//Subdivision
+                            115//Roads
                         ],
                         "layerOptions": "ALL",
                         "show": true,
@@ -92,8 +92,8 @@
                         "height": 300,
                         "templates": {
                             "128": "",
-                            "135": "<b>${NAME}</b><hr /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
-                            "136": ""
+                            "103": "<b>${NAME}</b><hr /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "104": ""
                         }
                     }
                 ]
@@ -139,9 +139,9 @@
                 "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
                 "limit": 25,
                 "layerIds": [
-                    135,//Parcels
-                    136,//Subdivision
-                    146//Roads
+                    103,//Parcels
+                    104,//Subdivision
+                    115//Roads
                 ]
             }
         ],
@@ -149,7 +149,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "NEAR",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
@@ -176,7 +176,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -203,7 +203,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -231,36 +231,23 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/135",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/109",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
                 "searchFields": [
-                    "SITUS_ADDRESS"
+                    "SITUS"
                 ],
                 "outFields": [
-                	"SITUS_ADDRESS",
-                    "PPIN",
-                    "PARCEL",
-                    "APPRAISED_AC",
-                    "NAME",
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "CITY",
-                    "STATE",
-                    "ZIP",
-                    "TOTAL_ASSESSED_VALUE",
-                    "RANGE",
-                    "SECTION",
-                    "LEGAL_DESC_1",
-                    "LEGAL_DESC_2"
+                	"SITUS",
+                    "STRUCTURE"
                 ],
                 "symbol": "DefaultPolygonSymbol"
             },
             {
                 "label": "Search by Subdivision",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/136",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/104",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Subdivision",
@@ -280,7 +267,7 @@
             {
                 "label": "Search by Landmark",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/136",
+                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/111",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Name",
