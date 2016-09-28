@@ -81,31 +81,33 @@
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
-                            45,
-                            40,
-                            50
+                            48,
+                            41,
+                            42,
+                            54
                         ],
                         "layerOptions": "ALL",
                         "show": true,
                         "title": "${NAME}",
-                        "width": 350,
+                        "width": 354,
                         "height": 300,
                         "templates": {
-                            "40": "",
-                            "45": "<b>${NAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${Parcel_Number}<br /><b>Appraised Ac: </b>${Appraised_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><b>Assesed Value: </b>$${TOTAL_ASSESED_VAL}.00<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
-                            "50": ""
+                            "41": "",
+                            "48": "<b>${NAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN: </b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${Parcel_Number}<br /><b>Appraised Ac: </b>${Appraised_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><b>Assesed Value: </b>$${TOTAL_ASSESED_VAL}.00<br /><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "54": "",
+                            "42": ""
                         }
                     }
                 ]
             },
             {
                 "type": "Print",
-                "url": "http://print.agd.cc/services/print/Default.ashx",
+                "url": "http://localhost:56215/services/print/Default.ashx",
                 "title": "MARION COUNTY, MS        PROPERTY MAP",
                 "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
                 "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
                 "printDefs": {
-                    "44": [
+                    "48": [
                         "PPIN",
                         "Parcel_Number",
                         "NAME",
@@ -139,9 +141,10 @@
                 "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer",
                 "limit": 25,
                 "layerIds": [
-                    45,
-                    50,
-                    40
+                    48,
+                    41,
+                    42,
+                    54
                 ]
             }
         ],
@@ -149,7 +152,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/45",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/48",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -182,7 +185,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/45",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/48",
                 "operator": "equals",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
@@ -215,7 +218,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/45",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/48",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -248,7 +251,7 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/39",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/41",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
@@ -264,7 +267,7 @@
             {
                 "label": "Search by Subdivision",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/50",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/54",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Subdivision",
@@ -282,7 +285,7 @@
             {
                 "label": "Search by Landmark",
                 "type": "QueryTask",
-                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/38",
+                "url": "http://mariongis.com/arcgis/rest/services/MarionMS/MapServer/39",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Name",
