@@ -102,7 +102,7 @@
             },
             {
                 "type": "Print",
-                "url": "http://localhost:56215/services/print/Default.ashx",
+                "url": "http://print.agd.cc/services/print/Default.ashx",
                 "title": "MARION COUNTY, MS        PROPERTY MAP",
                 "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
                 "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
