@@ -142,9 +142,44 @@ agd.SortFeatures = function(field, reverse) {
 	};
 };
 
+/*
 if (agd.BrowserId[0] == 'MSIE' || agd.BrowserId[0] == 'Safari') {
-    agd.setupComplete = document.createEvent('HTMLEvents');
-    agd.setupComplete.initEvent('agdSetupComplete',true,true);
+    if(document.createEvent) {
+      agd.setupComplete = document.createEvent('HTMLEvents');
+      agd.setupComplete.initEvent('agdSetupComplete',true,true);
+    } else {
+      document.documentElement.attachEvent('onpropertychange', function (e) {
+            if(e.propertyName  == eventName) {
+                callback();
+            }            
+        });
+    }
 } else {
     agd.setupComplete = new Event('agdSetupComplete');
+}*/
+
+/*
+function Event () {
 }
+
+Event.listen = function (eventName, callback) {
+    if(document.addEventListener) {
+        document.addEventListener(eventName, callback, false);
+    } else {    
+        document.documentElement.attachEvent('onpropertychange', function (e) {
+            if(e.propertyName  == eventName) {
+                callback();
+            }            
+        });
+    }
+}
+
+Event.trigger = function (eventName) {
+    if(document.createEvent) {
+        var event = document.createEvent('agdSetupComplete');
+        event.initEvent(eventName, true, true);
+        document.dispatchEvent(event);
+    } else {
+        document.documentElement[eventName]++;
+    }
+} */

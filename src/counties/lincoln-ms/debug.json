@@ -6,6 +6,7 @@
 	"template": "template.tmpl",
 	"title": "Lincoln County, MS",
 	"header": "Lincoln County, MS",
+	"destfile":["index",".html"],
 	"js" : ["//js.arcgis.com/3.14","./js/agd.js"],
 	"google": "UA-43782007-26",
 	"delta": "MS43",

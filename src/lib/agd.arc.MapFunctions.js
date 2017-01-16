@@ -172,7 +172,7 @@ function BuildMap(json) {
 	
 	//do a fake pan to get the scale working #hack
 	//map.centerAt(map.getCenter());
-    document.dispatchEvent(agd.setupComplete);
+    //document.dispatchEvent(agd.setupComplete);
 }
 
 // Connect map events to functions

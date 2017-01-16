@@ -101,9 +101,9 @@
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
-                            168,
-                            162,
-                            160
+                            166,
+                            163,
+                            161
                         ],
                         "layerOptions": "ALL",
                         "show": true,
@@ -111,9 +111,9 @@
                         "width": 350,
                         "height": 300,
                         "templates": {
-                            "162": "",
-                            "168": "<b>${OWNERNAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN:</b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL_NUMBER}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
-                            "160": ""
+                            "163": "",
+                            "166": "<b>${OWNERNAME}</b><hr /><b>ObjectId: </b>${OBJECTID}<br /><b>PPIN:</b><a href='#' onclick='GoToDeltaPPIN(${PPIN})'>${PPIN}</a><br /><b>Parcel Number: </b>${PARCEL_NUMBER}<br /><b>Appraised Ac: </b>${APPRAISED_AC}<br /><b>Address1: </b>${ADDRESS1}<br/><b>Address2: </b>${ADDRESS2}<br/><hr /><b><a href=# onClick=agd.Utils.getAllAttributes(${OBJECTID},'#URL');>Show All Attributes</a></b>",
+                            "161": ""
                         }
                     }
                 ]
@@ -122,10 +122,10 @@
                 "type": "Print",
                 "url": "http://print.agd.cc/services/print/Default.ashx",
                 "title": "WARREN COUNTY, MS        PROPERTY MAP",
-                "subtitle": " TAX ASSESSOR/TAX COLLECTOR OFFICE ",
+                "subtitle": " TAX ASSESSOR",
                 "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
                 "printDefs": {
-                    "168": [
+                    "166": [
                         "PPIN",
                         "PARCEL_NUMBER",
                         "OWNERNAME",
@@ -148,7 +148,7 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://mariongis.com/arcgis/rest/services/Geometry/GeometryServer"
+                "geometryService": "http://warren.msmaps.org/arcgis/rest/services/Utilities/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",
@@ -157,9 +157,9 @@
                 "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
                 "limit": 25,
                 "layerIds": [
-                    168,
-                    160,
-                    162
+                    166,
+                    161,
+                    163
                 ]
             }
         ],
@@ -167,7 +167,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -195,7 +195,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "equals",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
@@ -223,7 +223,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -251,30 +251,17 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/168",
+                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/161",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
                 "searchFields": [
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "ADDRESS3"
+                    "SITUS"
                 ],
                 "outFields": [
-                    "PPIN",
-                    "PARCEL_NUMBER",
-                    "APPRAISED_AC",
-                    "OWNERNAME",
-                    "ADDRESS1",
-                    "ADDRESS2",
-                    "CITY",
-                    "STATE",
-                    "ZIP",
-                    "RANGE",
-                    "SECTION",
-                    "TAX_DIST",
-                    "SUB_NAME",
-                    "LEGAL1"
+					"SITUS",
+                    "FEA_TYPE",
+                    "BLDG_CODE"
                 ],
                 "symbol": "DefaultPolygonSymbol"
             },

@@ -63,6 +63,43 @@ gulp.task('img-crush',function(){
 });
 
 /*
+*   Compile Less into css
+*/
+gulp.task('make-css',function(callback){
+    runSequence(
+        'make-css1',
+        'move-css',
+        function (error) {
+          if (error) {
+            console.log(error.message);
+          } else {
+            console.log('Build JS successful');
+          }
+          callback(error);
+      });
+});
+gulp.task('make-css1',function(){
+    // .less => .css
+    //var lesspath = path.join(srcdir,'less/*.less');
+    return gulp.src(path.join(srcdir,'less/*.less'))
+        .pipe(less({
+          paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(gulp.dest(path.join(srcdir,'css')))
+        .on('error',gutil.log);
+});
+
+/*
+*   Copy compiled css to outdir
+*/
+gulp.task('move-css',function(){
+    var cssdir = path.join(srcdir,'css')
+    return gulp.src(cssdir + "/*.css")
+        .pipe(gulp.dest(path.join(outdir,'css')));
+});
+
+
+/*
 *   Minify *.css
 */
 gulp.task('min-css',['min-css1','min-css2','min-css3']);
@@ -100,6 +137,7 @@ gulp.task('min-js', function (callback) {
         'min-js3',
         'concat-js1',
         'min-js4',
+        'min-js5',
         'js-copy',
         function (error) {
           if (error) {
@@ -152,13 +190,42 @@ gulp.task('min-js4',function(){
         .pipe(gulp.dest(path.join(outdir,'js')));
 });
 
+gulp.task('min-js5',function(){
+    return gulp.src(path.join(srcdir,'js/app.js'))
+        .pipe(uglify())
+        .on("error", console.log)
+        .pipe(rename(function(path){
+            path.basename += '.min';
+            path.extname = '.js';
+            return path;
+        }))
+        .pipe(gulp.dest(path.join(outdir,'js')));
+});
+
 
 /*
-*   Copy thirdparty js files to outdir
+*   Copy thirdparty js files to outdir 
 */
 gulp.task('js-copy',function(){
     return gulp.src('./src/extrajs/*.js')
         .pipe(gulp.dest(path.join(outdir,'js')));
+});
+
+gulp.task('copy-dirs',function() {
+    var dirs = [];
+    if(conf.copydirs) {
+        for(var i = 0; i < conf.copydirs.length; i += 1) {
+            dirs.push(path.join(srcdir,conf.copydirs[i]) + "/**/*");
+        }
+        console.log(dirs);
+        return gulp.src(dirs,  {base:srcdir})
+        .pipe(gulp.dest(outdir));
+    }
+    else{
+        return null;
+    }
+        
+    
 });
 
 /*
@@ -212,7 +279,7 @@ gulp.task('default', function (callback) {
     console.log("                                                            ");
     console.log("  bump-version => increment the build number                ");
     console.log("                                                            ");
-    console.log("  make --county=[county] --build=[debug|release]            ");
+    console.log("  build --county=[county] --build=[debug|release]           ");
     console.log("                                                            ");
     console.log("  depoly --county=[county] --build=[debug|release]          ");
     console.log("                                                            ");
@@ -223,7 +290,10 @@ gulp.task('default', function (callback) {
     console.log("                       warren-ms                            ");
     console.log("                       marion-ms                            ");
     console.log("                                                            ");
-        
+    console.log("                                                            ");
+    console.log(" Examples:                                                  ");
+    console.log("           gulp build --county=mon-wv --build=debug         ");
+    console.log("           gulp deploy --county=hampshire-wv --build=release");
 });
 
 /*
@@ -265,76 +335,24 @@ gulp.task('build-lib', function (callback) {
 *                                                                    
 */
 
-gulp.task('build-mon-wv', function (callback) {
-    outdir = './dist/mon';
+gulp.task('build-test', function (callback) {
     runSequence(
-        'make-css',
+        'load-config',
         'img-crush',
-        'min-css',
-        'mon-wv',
+        'render',
         'min-html',
+        'min-js',
+        'make-css',
+        'copy-dirs',
         function (error) {
           if (error) {
             console.log(error.message);
           } else {
             console.log('RELEASE FINISHED SUCCESSFULLY');
-
-            var requestData = {
-                text: "Build finished for Mon, WV Arcgis Server Site."
-            };
-
-            request('https://hooks.slack.com/services/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',
-                    { json: true, body: requestData },
-                    function(err, res, body) {
-              // `body` is a js object if request was successful
-            });
           }
           callback(error);
     });
-});
 
-
-gulp.task('mon-wv',['mon-wv-copy','min-js','mon-wv-make-css']);
-
-gulp.task('mon-wv-copy',function(){
-    return gulp.src('./counties/mon-wv/app.js')
-        .pipe(prettify({config: '.jsbeautifyrc', mode: 'VERIFY_AND_WRITE'}))
-        .pipe(gulp.dest(path.join(outdir,'js')));
-});
-
-/*
-*   Compile .less into .css
-*/
-
-gulp.task('mon-wv-make-css',['mon-wv-make-css1','mon-wv-make-css2']);
-
-gulp.task('mon-wv-make-css1',function(){
-    // .less => .css
-    return gulp.src('./src/counties/mon-wv/css/**/*.less')
-        .pipe(less({
-          paths: [ path.join(__dirname, 'less', 'includes') ]
-        }))
-        .pipe(gulp.dest(path.join(outdir,'mon-wv/css')))
-        .on('error',gutil.log);
-});
-
-gulp.task('mon-wv-make-css2',function(){
-    // .less => .css
-    return gulp.src('./src/agd/**/*.less')
-        .pipe(less({
-          paths: [ path.join(__dirname, 'less', 'includes') ]
-        }))
-        .pipe(gulp.dest(path.join(outdir,'agd')));
-});
-
-/*
-*   Minify html
-*/
-
-gulp.task('min-html',function(){
-    return gulp.src('./*.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest(outdir));
 });
 
 /***********************************************************************************************************************************
@@ -356,6 +374,7 @@ gulp.task('build', function (callback) {
         'min-html',
         'min-js',
         'min-css',
+        'copy-dirs',
         function (error) {
           if (error) {
             console.log(error.message);
@@ -407,8 +426,8 @@ gulp.task('render',function(){
             }))
             .pipe(mustache())
             .pipe(rename(function (path) {
-                path.basename = "index";
-                path.extname = ".html"
+                path.basename = conf.destfile[0];
+                path.extname = conf.destfile[1];
             }))
             .pipe(gulpif(conf.minify,htmlmin({collapseWhitespace: true})))
             .pipe(gulp.dest(outdir))
