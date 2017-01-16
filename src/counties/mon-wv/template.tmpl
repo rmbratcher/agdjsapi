@@ -78,7 +78,7 @@ header("Expires: Sun, 26 Jul 2015 05:00:00 GMT");
 				        <div data-dojo-type="dijit/layout/ContentPane" title="Legend" data-dojo-props="selected:true">
 				            <div id="legend-panel" style="width: 100%; height: 100%;"></div>
 				        </div>
-				        <div data-dojo-type="dijit/layout/ContentPane" title="Parcel Search">
+				        <div data-dojo-type="dijit/layout/ContentPane" title="Search">
 				        	<div id="searchTabs" data-dojo-type="dijit/layout/TabContainer" data-dojo-props="tabPosition:'right'" style="width: 100%; height: 100%;">
 					        	<div data-dojo-type="dijit/layout/ContentPane" title="Dist-Map-Par" data-dojo-props="selected:true">
 					            	<div id="search-panel" class="search-panel"></div>
@@ -97,16 +97,27 @@ header("Expires: Sun, 26 Jul 2015 05:00:00 GMT");
 					            </p>
 				            </div>
 				        </div>
+						<div data-dojo-type="dijit/layout/ContentPane" title="Map Card Search" data-dojo-props="tabPosition:'right'">
+							<div id="card-link-panel" style="width: 100%; height: 100%">
+								<p>
+									<a href="http://www.assessor.org/parcelweb/" target="_blank">Map Card Search</a>
+								</p>
+							</div>
+						</div>
 			    	</div>
 	 			</div>
 	 		</div>
 	 		<div class="clearer"></div>
 	 	</main>
 	 	<script>
+			var npath = '/agd';
+		 	if(location.pathname != '/') {
+				 npath = location.pathname.replace(/\/[^/]+$/, '') + '/agd';
+			 }
 			var dojoConfig = {
 				parseOnLoad: false, 
 				paths: {
-				    agd: location.pathname.replace(/\/[^/]+$/, '') + '/agd'
+				    agd: npath
 				}
 			};
         </script>

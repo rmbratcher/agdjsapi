@@ -61,10 +61,14 @@
 	 		<div class="clearer"></div>
 	 	</main>
 	 	<script>
+		    var npath = '/agd';
+		 	if(location.pathname != '/') {
+				 npath = location.pathname.replace(/\/[^/]+$/, '') + '/agd';
+			 }
 			var dojoConfig = {
 				parseOnLoad: false, 
 				paths: {
-				    agd: location.pathname.replace(/\/[^/]+$/, '') + '/agd'
+				    agd: npath
 				}
 			};
         </script>
