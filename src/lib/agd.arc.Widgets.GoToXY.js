@@ -25,7 +25,7 @@ agd.Widgets.GoToXY = agd.Class({
 		
 		this.pointSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CROSS, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1), new dojo.Color([255,255,0,0.5]));
 	},
-	/**
+	/** 
 	 *
 	 * Method: ShowDialog
 	 * 

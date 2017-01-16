@@ -5,7 +5,7 @@
             "title": "Marion County, MS",
             "links": [],
             "helpTab": "help.html",
-            "scalebar": true,
+            "scalebar": true, 
             "scaleview": true
         },
         "Extent": {
