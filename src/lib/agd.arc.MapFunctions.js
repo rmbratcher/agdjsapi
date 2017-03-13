@@ -12,6 +12,7 @@ dojo.require("dijit.form.HorizontalRule");
 dojo.require("dijit.form.HorizontalSlider");
 dojo.require("dijit.ToolbarSeparator");
 dojo.require('dijit.form.ValidationTextBox');
+dojo.require('dijit.form.NumberTextBox');
 dojo.require('dijit.form.ComboBox');
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit.layout.TabContainer");

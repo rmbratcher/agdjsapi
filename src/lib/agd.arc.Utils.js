@@ -864,6 +864,21 @@ agd.Utilities = agd.Class({
 					}
 				}));
 			}
+
+			if(tool.type == "TaxCalc") {
+				this.widgets.TaxEstCalc = new agd.Widgets.TaxEstCalc(tool.TaxInfo);
+
+				this.tools.push(new dijit.form.Button({
+					label: 'Tax Calculator',
+					showLabel: false,
+					id: 'taxcalc-dailog-button',
+					iconClass: 'taxcalcIcon',
+					persist: false,
+					onClick: function() {
+						agd.Utils.changeTool(this.id);
+					}
+				}))
+			}
         }
 
         for (var j = 0; j < this.tools.length; j += 1) {
@@ -1591,6 +1606,10 @@ agd.Utilities = agd.Class({
 			case 'gotoxy-dailog-button':
 				self.Notify('notify','Current tool GoToXY');
 				self.widgets.GoToXY.ShowDialog();
+				break;
+			case 'taxcalc-dailog-button':
+				self.Notify('notify','Current tool Tax Calculator');
+				self.widgets.TaxEstCalc.ShowDialog();
 				break;
         }
 

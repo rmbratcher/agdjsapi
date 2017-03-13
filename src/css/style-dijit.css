@@ -21,6 +21,7 @@ outline: none !important;
 .measureIcon {background-image:url(../img/rulers.png);width:16px; height: 16px;}
 .gotoxyIcon {background-image:url(../img/esriGoToLocation.png);width:16px; height: 16px;}
 .photoIcon {background-image:url(../img/photo_icon.jpg);width:16px; height:16px;}
+.taxcalcIcon {background-image:url(../img/dollar-symbol-icon.png);width:16px; height:16px;}
 
 body {
     margin: 0;
