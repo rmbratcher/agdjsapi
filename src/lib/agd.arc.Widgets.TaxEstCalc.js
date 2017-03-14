@@ -135,8 +135,8 @@ agd.Widgets.TaxEstCalc = agd.Class({
             }
 
             //var oth = pround(taxSubTotal,2);
-            //if (cname == "Lafayette" && curDist == "County"){
-            var oth = self.pround((fmv * (10/100)) * millage,2);
+            //if (cname == "Lafayette" && curDist == "County"){s
+            var oth = self.pround((fmv * self.SHCalc) * millage,2);
            // }
 
             if (oth < 0) {

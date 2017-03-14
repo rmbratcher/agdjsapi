@@ -165,8 +165,8 @@
                 "type": "TaxCalc",
                 "label": "Tax Calculator",
                 "TaxInfo": {
-                    "baseRate": 10,
-                    "specialRate":15,
+                    "baseRate": 0.10,
+                    "specialRate":0.15,
                     "districts" : {
                         "City": 135.83,
                         "County": 104.20
