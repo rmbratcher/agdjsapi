@@ -146,6 +146,18 @@
                     42,
                     54
                 ]
+            },{
+                "type": "TaxCalc",
+                "label": "Tax Calculator",
+                "TaxInfo": {
+                    "baseRate": 0.10,
+                    "specialRate":0.15,
+                    "districts" : {
+                        "City": 156.88,
+                        "City School Outside": 140.43,
+                        "County": 128.47
+                    }
+                }
             }
         ],
         "Queries": [
