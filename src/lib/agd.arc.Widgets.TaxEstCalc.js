@@ -43,7 +43,7 @@ agd.Widgets.TaxEstCalc = agd.Class({
             contentHtml += '<option value="' + self.distvals[dist] + '">' + dist + '</option>';
         }
         contentHtml += '</select> <br /><label>Market Value:</label><br />\
-                <input id="valInput" data-dojo-type="dijit.form.ValidationTextBox" class="numeric" type="text"/> \
+                <input id="valInput" data-dojo-type="dijit.form.TextBox", type="text"/> \
                 <button data-dojo-type="dijit.form.Button" id="calculateBtn" value="Calculate">Calculate</button> \
             </div> \
             <div id="results" class="calcresult" style="width=100%;"> \
@@ -69,6 +69,7 @@ agd.Widgets.TaxEstCalc = agd.Class({
 			style: styletext
 		},dojo.byId('pTaxCalc'));
 
+
         var valInputWidget = dijit.byId('valInput');
         
         //var calcButtonWidget = dijit.byId('calculateBtn');
@@ -80,7 +81,7 @@ agd.Widgets.TaxEstCalc = agd.Class({
 
         dojo.connect(dijit.byId('seldistrict'),'onChange',function(evt){
             var self = agd.Utils.widgets.TaxEstCalc;
-            var realval=parseInt(dijit.byId('valInput').value);
+            var realval=parseInt(dijit.byId('valInput').value.replace("$","").replace(",",""));
             if(isNaN(realval)){
                 return;
             } else {
@@ -89,14 +90,15 @@ agd.Widgets.TaxEstCalc = agd.Class({
         });
 
         dojo.connect(dijit.byId('valInput'),'onKeyUp',function(evt){
-            var self = agd.Utils.widgets.TaxEstCalc;
-            var realval=parseInt(dijit.byId('valInput').value);
-            if(isNaN(realval)){
-                return;
-            } else {
-                self.calculate();
+            if(evt.keyCode != 8) {
+                self.textChangeHandler();
             }
-            
+        });
+
+        dojo.connect(dijit.byId('valInput'),'onBlur',function(evt){
+            var realval=parseInt(dijit.byId('valInput').value.replace("$","").replace(",",""));
+            var fmtNumb='$' + dojo.currency.format(realval,'USD');
+            dojo.setAttr(dojo.byId("valInput"),"value",fmtNumb);
         });
 
         self.CalcDialog.startup();
@@ -110,9 +112,19 @@ agd.Widgets.TaxEstCalc = agd.Class({
             return Math.round(num*Math.pow(10,decimals))/Math.pow(10,decimals);
         },
 
+    textChangeHandler: function() {
+            var self = agd.Utils.widgets.TaxEstCalc;
+            var realval=parseInt(dijit.byId('valInput').value.replace("$","").replace(",",""));
+            if(isNaN(realval)){
+                return;
+            } else {
+                self.calculate();
+            }
+    },
+
     calculate: function() {
             var self = agd.Utils.widgets.TaxEstCalc;
-            var fmv = parseInt(dijit.byId('valInput').value);
+            var fmv = parseInt(dijit.byId('valInput').value.replace("$","").replace(",",""));
 
             var credRate = (Math.ceil((fmv * self.baseCalc ) / 150) * 6);
             if (credRate > 300) {
@@ -147,11 +159,11 @@ agd.Widgets.TaxEstCalc = agd.Class({
     },
 
     showResults: function(amtHS,shs,oth,fmv) {
-            document.getElementById("rhs").innerHTML='$' + amtHS.toFixed(2);
-            document.getElementById("distval").innerHTML= dijit.byId("seldistrict").item.name;
-            document.getElementById("shs").innerHTML='$' + shs.toFixed(2);
-            document.getElementById("fmv").innerHTML='$' +  fmv.toFixed(2);
-            document.getElementById("nhs").innerHTML='$' +  oth.toFixed(2);
+            document.getElementById("rhs").innerHTML='$' + dojo.currency.format(amtHS,'USD');
+            document.getElementById("distval").innerHTML=dijit.byId("seldistrict").item.name;
+            document.getElementById("shs").innerHTML='$' + dojo.currency.format(shs,'USD');
+            document.getElementById("fmv").innerHTML='$' + dojo.currency.format(fmv,'USD');
+            document.getElementById("nhs").innerHTML='$' + dojo.currency.format(oth,'USD');
     }
 
 });

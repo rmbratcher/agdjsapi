@@ -26,6 +26,7 @@ dojo.require("dojo.io.iframe");
 dojo.require('dojo.parser');
 dojo.require("dojo.store.Memory");
 dojo.require("dojo.data.ItemFileWriteStore");
+dojo.require("dojo.currency");
 //dojox
 dojo.require("dojox.layout.FloatingPane");
 dojo.require("dojox.layout.ContentPane");
