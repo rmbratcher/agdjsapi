@@ -61,7 +61,7 @@
             {
                 "name": "Lincoln Parcels",
                 "type": "ArcGISDynamicMapServiceLayer",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer",
                 "toggle": false,
                 "transbtn": false,
                 "visible": true
@@ -77,7 +77,7 @@
                 "task": [
                     {
                         "name": "MapIdentify",
-                        "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                        "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer",
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
@@ -176,7 +176,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -203,7 +203,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -231,7 +231,7 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/109",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/109",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
@@ -247,7 +247,7 @@
             {
                 "label": "Search by Subdivision",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/104",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/104",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Subdivision",
@@ -267,7 +267,7 @@
             {
                 "label": "Search by Landmark",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/111",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/111",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Name",

@@ -11,13 +11,13 @@
 	"google": "UA-43782007-26",
 	"delta": "MS43",
 	"ftp" : {
-        "host":     "192.168.2.171",
-        "user":     "ftpuser",
-        "password": "goftp",
+        "host":     "ags.agdmaps.com",
+        "user":     "publisher",
+        "password": "Bogue!23",
         "port":     21,
         "parallel": 5,
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/lincoln"
+    "remotedir": "/ms/lincoln"
 }
