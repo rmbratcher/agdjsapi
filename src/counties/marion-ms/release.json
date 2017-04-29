@@ -2,7 +2,7 @@
 	"name" : "Marion County, MS",
 	"minify" : true,
 	"srcdir" : "./src/counties/marion-ms",
-	"outdir": "/Users/mbratcher/www/sites/agdjsapi/dist/marion",
+	"outdir": "/Users/mbratcher/www/sites/marionms/dist",
 	"template": "template.tmpl",
 	"title": "Marion County, MS",
 	"header": "Marion County, MS",
@@ -11,13 +11,13 @@
 	"google": "UA-42339713-1",
 	"delta": "MS46",
 	"ftp" : {
-        "host":     "192.168.2.171",
-        "user":     "ftpuser",
-        "password": "goftp",
+        "host":     "ags.agdmaps.com",
+        "user":     "publisher",
+        "password": "Bogue!23",
         "port":     21,
         "parallel": 5,
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/marion"
+    "remotedir": "/ms/marion"
 }
