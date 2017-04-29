@@ -2,7 +2,7 @@
 	"name" : "Lincoln County, MS",
 	"minify" : true,
 	"srcdir" : "./src/counties/lincoln-ms",
-	"outdir": "../sandbox/lincoln",
+	"outdir": "/Users/mbratcher/www/sites/lincolnms/dist",
 	"template": "template.tmpl",
 	"title": "Lincoln County, MS",
 	"header": "Lincoln County, MS",
