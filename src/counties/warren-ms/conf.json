@@ -81,7 +81,7 @@
             {
                 "name": "Warren Parcels",
                 "type": "ArcGISDynamicMapServiceLayer",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer",
                 "toggle": false,
                 "transbtn": false,
                 "visible": true
@@ -97,7 +97,7 @@
                 "task": [
                     {
                         "name": "MapIdentify",
-                        "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                        "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer",
                         "tolerance": 3,
                         "returnGeometry": true,
                         "layerIds": [
@@ -148,13 +148,13 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://warren.msmaps.org/arcgis/rest/services/Utilities/Geometry/GeometryServer"
+                "geometryService": "https://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",
                 "label": "Select",
                 "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer",
                 "limit": 25,
                 "layerIds": [
                     166,
@@ -178,7 +178,7 @@
             {
                 "label": "Search by Owner Name",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Owner Name",
@@ -206,7 +206,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "equals",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
@@ -234,7 +234,7 @@
             {
                 "label": "Search by Parcel Number",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/166",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/166",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Parcel No.",
@@ -262,7 +262,7 @@
             {
                 "label": "Search by Address",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/161",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/161",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Address",
@@ -279,7 +279,7 @@
             {
                 "label": "Search by Subdivision",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/169",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/169",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Subdivision",
@@ -296,7 +296,7 @@
             {
                 "label": "Search by Landmark",
                 "type": "QueryTask",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS/MapServer/172",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/WarrenMS/MapServer/172",
                 "operator": "LIKE",
                 "isNumber": false,
                 "searchBoxLable": "Name",

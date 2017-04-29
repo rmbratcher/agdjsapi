@@ -19,5 +19,5 @@
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/warren"
+    "remotedir": "/ms/warren"
 }

@@ -2,20 +2,20 @@
 	"name" : "Hampshire, WV",
 	"minify" : true,
 	"srcdir" : "./src/counties/hampshire-wv",
-	"outdir": "../sandbox/hampshire",
+	"outdir": "./Users/mbratcher/www/sites/lincolnms/dist",
 	"template": "template.tmpl",
 	"title": "Hampshire County, WV",
 	"header": "Hampshire County, WV",
 	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
 	"google": "UA-42186511-1",
 	"ftp" : {
-        "host":     "192.168.2.171",
-        "user":     "ftpuser",
-        "password": "goftp",
+        "host":     "ags.agdmaps.com",
+        "user":     "publisher",
+        "password": "Bogue!23",
         "port":     21,
         "parallel": 5,
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/hampshire"
+    "remotedir": "/wv/hampshire"
 }
