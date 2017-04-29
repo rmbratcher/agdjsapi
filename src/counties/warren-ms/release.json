@@ -12,8 +12,8 @@
 	"delta": "MS75",
 	"ftp" : {
         "host":     "ags.agdmaps.com",
-        "user":     "ftpuser",
-        "password": "goftp",
+        "user":     "publisher",
+        "password": "Bogue!23",
         "port":     21,
         "parallel": 5,
         "reload":   true,
