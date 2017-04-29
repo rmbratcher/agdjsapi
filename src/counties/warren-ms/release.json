@@ -11,7 +11,7 @@
 	"google": "UA-42186511-7",
 	"delta": "MS75",
 	"ftp" : {
-        "host":     "192.168.2.171",
+        "host":     "ags.agdmaps.com",
         "user":     "ftpuser",
         "password": "goftp",
         "port":     21,
