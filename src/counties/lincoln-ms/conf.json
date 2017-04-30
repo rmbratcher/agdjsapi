@@ -21,7 +21,7 @@
             {
                 "name": "Aerial County Wide",
                 "type": "ArcGISImageServiceLayer",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS400/ImageServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/Imagery/LincolnMS1ft/ImageServer",
                 "extent": {
                     "xmin" : 2160055.1299, 
             		"ymin" : 641403.8156,
@@ -41,7 +41,7 @@
             {
                 "name": "Aerial City",
                 "type": "ArcGISImageServiceLayer",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS100/ImageServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/Imagery/LincolnMS6in/ImageServer",
                 "extent": {
                     "xmin" : 2160055.1299, 
             		"ymin" : 641403.8156,
