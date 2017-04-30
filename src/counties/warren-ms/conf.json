@@ -21,7 +21,7 @@
             {
                 "name": "Aerial County Wide",
                 "type": "ArcGISImageServiceLayer",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS400/ImageServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/Imagery/WarrenMS400/ImageServer",
                 "extent": {
                     "xmin" : 2031532.57262978, 
                     "ymin" : 932857.81542307, 
@@ -41,7 +41,7 @@
             {
                 "name": "Aerial City",
                 "type": "ArcGISImageServiceLayer",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS100/ImageServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/Imagery/WarrenMS100/ImageServer",
                 "extent": {
                     "xmin": 2068827.75,
                     "ymin": 963904.25,
@@ -61,7 +61,7 @@
             {
                 "name": "Aerial Downtown",
                 "type": "ArcGISImageServiceLayer",
-                "url": "http://warren.msmaps.org/arcgis/rest/services/WarrenMS50/ImageServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/Imagery/WarrenMS100/ImageServer",
                 "extent": {
                     "xmin": 2121099.26921888,
                     "ymin": 1028065.83391261,
