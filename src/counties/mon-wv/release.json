@@ -14,13 +14,13 @@
 	"delta": "",
 	"version": "124",
 	"ftp" : {
-        "host":     "192.168.2.108",
-        "user":     "www",
-        "password": "goftp",
+        "host":     "ags.agdmaps.com",
+        "user":     "publisher",
+        "password": "Bogue!23",
         "port":     21,
         "parallel": 5,
         "reload":   true,
         "debug":    true
     },
-    "remotedir": "/mon"
+    "remotedir": "/wv/mon"
 }
