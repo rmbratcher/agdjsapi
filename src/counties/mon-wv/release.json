@@ -2,7 +2,7 @@
 	"name" : "Monongalia Parcel Viewer",
 	"minify" : true,
 	"srcdir" : "./src/counties/mon-wv",
-	"outdir": "../sandbox/mon-test",
+	"outdir": "/Users/mbratcher/www/sites/mon/dist",
 	"template": "template.tmpl",
 	"destfile":["index",".php"],
 	"title": "Monongalia Parcel Viewer",
