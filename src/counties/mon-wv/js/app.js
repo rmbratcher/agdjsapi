@@ -500,7 +500,7 @@ monApp = require(["esri/map",
 
 		/*var search = new Search({
 			sources: [{
-				featureLayer: new FeatureLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/142'),
+				featureLayer: new FeatureLayer('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/142'),
 				enableLabel: false,
 				enableHighlight: false,
 				outFields: ['own1', 'own2', 'dmp', 'legal1','OBJECTID'],
@@ -968,7 +968,7 @@ monApp = require(["esri/map",
 	*/
 
 	function getDistricts() {
-		var distQueryTask = new QueryTask('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer/153');
+		var distQueryTask = new QueryTask('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/153');
 		var dquery = new Query();
 		dquery.outFields = ["dist","Name"];
 		dquery.returnGeometry = false;
