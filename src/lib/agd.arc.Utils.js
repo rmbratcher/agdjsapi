@@ -126,7 +126,7 @@ agd.Utilities = agd.Class({
     CreateMap: function(obj) {
         var etnt, popup, popupOptions, mapOptions;
 
-        //config.defaults.geometryService = new GeometryService("http://ags2.atlasgeodata.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+        //config.defaults.geometryService = new GeometryService("http://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
 
         etnt = new esri.geometry.Extent(obj.mapConfig.Extent);
 

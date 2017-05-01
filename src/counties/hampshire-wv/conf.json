@@ -28,7 +28,7 @@
         },
         "layers": [{
             "name": "Aerials 2015",
-            "type": "ArcGISImageServiceLayer",
+            "type": "WMS",
             "url": "http://ags2.atlasgeodata.com/arcgis/rest/services/hampshire2015/ImageServer",
             "toggle": true,
             "transbtn": true,
