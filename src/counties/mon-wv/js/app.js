@@ -383,7 +383,7 @@ monApp = require(["esri/map",
 	parser.parse();
 
 
-	config.defaults.geometryService = new GeometryService("http://ags2.atlasgeodata.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+	config.defaults.geometryService = new GeometryService("https://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
 
 	esriConfig.defaults.io.proxyUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + 'proxy.php';
 
@@ -401,21 +401,30 @@ monApp = require(["esri/map",
 	});*/
 
 
-	mainMapLayer = new ArcGISDynamicMapServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/MonongaliaWV/MapServer');
+	mainMapLayer = new ArcGISDynamicMapServiceLayer('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer');
 	/*mainMapLayer.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
-	imgLayer2015 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonongaliaWV2015/ImageServer');
+
+	//TMP
+	//imgLayer2015 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonongaliaWV2015/ImageServer');
+	
 	/*imgLayer2015.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
-	imgLayer2015.visible = false;
+	
+	//TMP
+	//imgLayer2015.visible = false;
 
-	var imgLayer2010 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonogaliaWV2010/ImageServer');
+	//TMP
+	//var imgLayer2010 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonogaliaWV2010/ImageServer');
+
 	/*imgLayer2010.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
-	imgLayer2010.visible = false;
+
+	//TMP
+	//imgLayer2010.visible = false;
 
 	parcelLayer = new FeatureLayer(agsBase + parcelLayerIDX, {
 		outFields: ['*'],
@@ -453,7 +462,9 @@ monApp = require(["esri/map",
 	map.on("layers-add-result", function(results) {
 		toc = new TOC({
 			map: map,
-			layerInfos: [{
+			layerInfos: [
+			//TMP
+			/*{
 				layer: imgLayer2015,
 				title: "Aerials 2015",
 				slider: true,
@@ -467,7 +478,7 @@ monApp = require(["esri/map",
 				noLayers: true
 					//collapsed: false, // whether this root layer should be collapsed initially, default false.
 					//slider: false // whether to display a transparency slider.
-			}, {
+			},*/ {
 				layer: mainMapLayer,
 				title: "Layers",
 				autoToggle: false
@@ -478,8 +489,8 @@ monApp = require(["esri/map",
 
 	});
 
-
-	map.addLayers([imgLayer2015, imgLayer2010, mainMapLayer]);
+	//TMP
+	map.addLayers([mainMapLayer]);//[imgLayer2015, imgLayer2010, mainMapLayer]);
 
 
 	map.on("load", function() {
