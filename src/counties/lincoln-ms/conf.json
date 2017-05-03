@@ -130,13 +130,13 @@
             },
             {
                 "type": "Measure",
-                "geometryService": "http://lincoln.msmaps.org/arcgis/rest/services/Utilities/Geometry/GeometryServer"
+                "geometryService": "https://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer"
             },
             {
                 "type": "MultiSelect",
                 "label": "Select",
                 "serviceUrl": "http://ext.agd.cc/agsext/services/csv/",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer",
                 "limit": 25,
                 "layerIds": [
                     103,//Parcels
@@ -149,7 +149,7 @@
             {
                 "label": "Search by PPIN",
                 "type": "QueryTask",
-                "url": "http://lincoln.msmaps.org/arcgis/rest/services/LincolnMS/MapServer/103",
+                "url": "https://ags.agdmaps.com/arcgis/rest/services/LincolnMS/MapServer/103",
                 "operator": "NEAR",
                 "isNumber": true,
                 "searchBoxLable": "PPIN",
