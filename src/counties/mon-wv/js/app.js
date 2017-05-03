@@ -38,12 +38,12 @@ printSettings = {
 
 agsBase = "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer";
 
-parcelLayerIDX = '142';
+parcelLayerIDX = '138';
 
 Queries = [{
 	"label": "Owner",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/142",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/138",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Owner Name",
@@ -60,7 +60,7 @@ Queries = [{
 }, {
 	"label": "ParId",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/142",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/138",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Parcel Id.",
@@ -77,7 +77,7 @@ Queries = [{
 }, {
 	"label": "Address",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/138",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/135",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Address",
