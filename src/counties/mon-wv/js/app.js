@@ -56,7 +56,7 @@ Queries = [{
 	],
 	"symbol": "DefaultPolygonSymbol",
 	"title": "Parcel: ${parid}",
-	"content": '<b>Details:</b><a href="'+ iasURL+ '/detail/${parid}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
+	"content": '<b>Details:</b><a href="'+ iasURL+ 'detail/${parid}">View</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br /><b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />'
 }, {
 	"label": "ParId",
 	"type": "QueryTask",
@@ -395,7 +395,7 @@ monApp = require(["esri/map",
 	*/
 	pInfoTemplate = new InfoTemplate();
 	pInfoTemplate.setTitle("Parcel: ${dmp}");
-	var tmpl = '<b>Details:</b><a href="'+ iasURL + '/detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
+	var tmpl = '<b>Details:</b><a href="'+ iasURL + 'detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
 	tmpl += '<b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />';
 	pInfoTemplate.setContent(tmpl);
 	/*pInfoTemplate.spatialReference = new SpatialReference({
