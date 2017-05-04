@@ -36,14 +36,14 @@ printSettings = {
 };
 
 
-agsBase = "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer";
+agsBase = "https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/";
 
-parcelLayerIDX = '138';
+parcelLayerIDX = '142';
 
 Queries = [{
 	"label": "Owner",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/138",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Owner Name",
@@ -60,7 +60,7 @@ Queries = [{
 }, {
 	"label": "ParId",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/138",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/142",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Parcel Id.",
@@ -77,7 +77,7 @@ Queries = [{
 }, {
 	"label": "Address",
 	"type": "QueryTask",
-	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/135",
+	"url": "https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/138",
 	"operator": "LIKE",
 	"isNumber": false,
 	"searchBoxLable": "Address",
@@ -199,6 +199,8 @@ RemoveNamePrefix = true;
 monApp = require(["esri/map",
 	"esri/layers/ArcGISDynamicMapServiceLayer",
 	"esri/layers/ArcGISImageServiceLayer",
+	"esri/layers/WMSLayer",
+	"esri/layers/WMSLayerInfo",
 	"esri/layers/FeatureLayer",
 	"esri/tasks/FeatureSet",
 	"esri/tasks/query",
@@ -251,7 +253,7 @@ monApp = require(["esri/map",
 	"dijit/layout/TabContainer",
 	"dijit/Dialog",
 	"dojo/domReady!"
-], function(Map, ArcGISDynamicMapServiceLayer, ArcGISImageServiceLayer, FeatureLayer, FeatureSet, Query, QueryTask,
+], function(Map, ArcGISDynamicMapServiceLayer, ArcGISImageServiceLayer, WMSLayer, WMSLayerInfo, FeatureLayer, FeatureSet, Query, QueryTask,
 	graphicsUtils, PopupTemplate, Legend, SpatialReference, Units, SimpleLineSymbol, Graphic, PictureMarkerSymbol,
 	config, Color, on, fx, conn, dom, esriUnits, Grid, number, arrayUtils, esriLang, domConstruct, parser, urlUtils,
 	SimpleRenderer, SimpleFillSymbol, SimpleMarkerSymbol, InfoTemplate, Button, Search, domquery, Measurement, SnappingManager, GeometryService,
@@ -401,14 +403,20 @@ monApp = require(["esri/map",
 	});*/
 
 
-	mainMapLayer = new ArcGISDynamicMapServiceLayer('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer');
+	mainMapLayer = new ArcGISDynamicMapServiceLayer('https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer');
 	/*mainMapLayer.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
 
 	//TMP
 	//imgLayer2015 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonongaliaWV2015/ImageServer');
-	
+	/*imgLayer2015 = new WMSLayer('https://wms.agdmaps.com/geoserver/MonWV/wms',{
+		format: "png",
+		version: "1.1.1",
+      	visibleLayers: [
+        	"MonWV:Imagery2015"
+      	]
+	});*/
 	/*imgLayer2015.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
@@ -436,9 +444,9 @@ monApp = require(["esri/map",
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});*/
 
-	/*mapSettings.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
+	mapSettings.spatialReference = new SpatialReference({
+		wkid: 102750
+	});
 
 	// Create map
 	map = new Map("map", mapSettings);
@@ -478,7 +486,8 @@ monApp = require(["esri/map",
 				noLayers: true
 					//collapsed: false, // whether this root layer should be collapsed initially, default false.
 					//slider: false // whether to display a transparency slider.
-			},*/ {
+			},*/
+			{
 				layer: mainMapLayer,
 				title: "Layers",
 				autoToggle: false
@@ -500,7 +509,7 @@ monApp = require(["esri/map",
 
 		/*var search = new Search({
 			sources: [{
-				featureLayer: new FeatureLayer('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/142'),
+				featureLayer: new FeatureLayer('https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/142'),
 				enableLabel: false,
 				enableHighlight: false,
 				outFields: ['own1', 'own2', 'dmp', 'legal1','OBJECTID'],
@@ -948,11 +957,11 @@ monApp = require(["esri/map",
 	*/
 	function selectParcel(parid) {
 		if (parid) {
-			var query = new Query();
-			query.where = "dmp = '" + parid + "'";
+			var query = new Query('https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/' + parcelLayerIDX);
+			query.where = "dmp = '" + parid.replace(/^0/,'') + "'";
 			query.outFields  = ['*'];
 			query.returnGeometry = true;
-
+			query.outSpatialReference = map.spatialReference;
 			var deferred = parcelLayer.queryFeatures(query, selectionHandler);
 		}
 	}
@@ -968,12 +977,13 @@ monApp = require(["esri/map",
 	*/
 
 	function getDistricts() {
-		var distQueryTask = new QueryTask('https://ags.agdmaps.com/arcgis/rest/services/MonWV/MonongaliaWV/MapServer/153');
+		var distQueryTask = new QueryTask('https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer/153');
 		var dquery = new Query();
 		dquery.outFields = ["dist","Name"];
 		dquery.returnGeometry = false;
 		dquery.returnDistinctValues = true;
 		dquery.where = 'OBJECTID > -1';
+		dquery.outSpatialReference = map.spatialReference;
 		distQueryTask.on("complete", function(results1) {
 			var results = results1.featureSet.features.sort(function(obj1, obj2) {
 				return obj1.attributes.dist - obj2.attributes.dist;
@@ -1006,6 +1016,7 @@ monApp = require(["esri/map",
 		mquery.returnGeometry = false;
 		mquery.where = "dist = '" + dist + "'";
 		mquery.returnDistinctValues = true;
+		mquery.outSpatialReference = map.spatialReference;
 		mapQueryTask.on("complete", function(results1) {
 			var results = results1.featureSet.features.sort(natSortMap); //function(obj1,obj2){return obj1.attributes.map - obj2.attributes.map;});
 			dojo.byId("sel-map").innerHTML = "";
@@ -1041,6 +1052,7 @@ monApp = require(["esri/map",
 		pquery.outFields = ["parcel"];
 		pquery.returnGeometry = false;
 		pquery.where = "dist = '" + dist + "' and map = '" + map + "'";
+		pquery.outSpatialReference = map.spatialReference;
 		parQueryTask.on("complete", function(results1) {
 			var results = results1.featureSet.features.sort(function(obj1, obj2) {
 				return obj1.attributes.parcel - obj2.attributes.parcel;
@@ -1500,6 +1512,7 @@ monApp = require(["esri/map",
 
 			if (queryDef.type == "QueryTask") {
 				queryTask = new esri.tasks.QueryTask(queryDef.url);
+				queryTask.outSpatialReference = map.spatialReference;
 				if (queryDef.inputId != "") {
 					if (queryDef.buttonId != "") {
 						// get a reference to the button defined in conf.json as belonging to current query
