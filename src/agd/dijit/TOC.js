@@ -629,7 +629,7 @@ define("agd/dijit/TOC", ['dojo/_base/declare', "dojo/has", "dojo/aspect", "dojo/
       if (this.rootLayer.version >= 10.01) {
         url = this.rootLayer.url + '/legend';
       } else {
-        url = 'http://www.arcgis.com/sharing/tools/legend';
+        url = 'https://arcgis.com/sharing/tools/legend';
         var i = this.rootLayer.url.toLowerCase().indexOf('/rest/');
         var soap = this.rootLayer.url.substring(0, i) + this.rootLayer.url.substring(i + 5);
         url = url + '?soapUrl=' + escape(soap);
