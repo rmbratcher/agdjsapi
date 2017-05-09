@@ -14,13 +14,13 @@ var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, 
 iasURL = 'https://ias.agdmaps.com/mon/',
 
 mapSettings = {
-	center: [1840128, 402581],
+	center: [-8907145.71 , 4808373.03],
 	zoom: 11,
 	autoResize: true
 
 };
 
-defaultWKID = 26853;
+defaultWKID = 3857;
 
 
 printSettings = {
@@ -409,7 +409,7 @@ monApp = require(["esri/map",
 	});*/
 
 	//TMP
-	//imgLayer2015 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonongaliaWV2015/ImageServer');
+	imgLayer2015 = new ArcGISDynamicMapServiceLayer('https://services.wvgis.wvu.edu/arcgis/rest/services/ImageryBaseMaps/wv_aerial_photos_mixed_resolutions_wm/MapServer');
 	/*imgLayer2015 = new WMSLayer('https://wms.agdmaps.com/geoserver/MonWV/wms',{
 		format: "png",
 		version: "1.1.1",
@@ -417,12 +417,12 @@ monApp = require(["esri/map",
         	"MonWV:Imagery2015"
       	]
 	});*/
-	/*imgLayer2015.spatialReference = new SpatialReference({
+	imgLayer2015.spatialReference = new SpatialReference({
 		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
+	});
 	
 	//TMP
-	//imgLayer2015.visible = false;
+	imgLayer2015.visible = false;
 
 	//TMP
 	//var imgLayer2010 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonogaliaWV2010/ImageServer');
@@ -445,7 +445,7 @@ monApp = require(["esri/map",
 	});*/
 
 	mapSettings.spatialReference = new SpatialReference({
-		wkid: 102750
+		wkid: 102100
 	});
 
 	// Create map
@@ -455,6 +455,8 @@ monApp = require(["esri/map",
 	/*map.spatialReference = new SpatialReference({
 		wkid: defaultWKID
 	});*/
+
+	map.spatialReference = new SpatialReference({ wkid: 102100 });
 
 
 	/*
@@ -472,14 +474,14 @@ monApp = require(["esri/map",
 			map: map,
 			layerInfos: [
 			//TMP
-			/*{
+			{
 				layer: imgLayer2015,
-				title: "Aerials 2015",
+				title: "Aerials 2017",
 				slider: true,
 				noLayers: true
 					//collapsed: false, // whether this root layer should be collapsed initially, default false.
 					//slider: false // whether to display a transparency slider.
-			}, {
+			}, /*{
 				layer: imgLayer2010,
 				title: "Aerials 2010",
 				slider: true,
@@ -499,8 +501,7 @@ monApp = require(["esri/map",
 	});
 
 	//TMP
-	map.addLayers([mainMapLayer]);//[imgLayer2015, imgLayer2010, mainMapLayer]);
-
+	map.addLayers([imgLayer2015,mainMapLayer]);//[imgLayer2015, imgLayer2010, mainMapLayer]);
 
 	map.on("load", function() {
 
@@ -524,7 +525,6 @@ monApp = require(["esri/map",
 		}, "searchbar");
 
 		search.startup();*/
-
 
 		setupNavigation();
 		toggleSidePannel();
@@ -1477,7 +1477,7 @@ monApp = require(["esri/map",
 	 * @param {Object} obj  json object
 	 */
 	function CreateQueries() {
-		//define queries as array
+		//fine queries as array
 		var queries = [];
 
 		for (var i = 0; i < Queries.length; i += 1) {

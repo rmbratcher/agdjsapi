@@ -12,7 +12,7 @@
 	"copydirs": ["images","js"],
 	"google": "UA-42186511-9",
 	"delta": "",
-	"version": "124",
+	"version": "131",
 	"ftp" : {
         "host":     "192.168.2.108",
         "user":     "www",

@@ -12,7 +12,7 @@
 	"copydirs": ["images"],
 	"google": "UA-42186511-9",
 	"delta": "",
-	"version": "128",
+	"version": "129",
 	"ftp" : {
         "host":     "ags.agdmaps.com",
         "user":     "publisher",
