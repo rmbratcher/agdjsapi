@@ -13,14 +13,9 @@ var monApp, map, toc, agsBase, parcelLayerIDX, map, mainMapLayer, imgLayer2015, 
 
 iasURL = 'https://ias.agdmaps.com/mon/',
 
-mapSettings = {
-	center: [-8907145.71 , 4808373.03],
-	zoom: 11,
-	autoResize: true
 
-};
 
-defaultWKID = 3857;
+defaultWKID = 26853;
 
 
 printSettings = {
@@ -387,8 +382,8 @@ monApp = require(["esri/map",
 
 	config.defaults.geometryService = new GeometryService("https://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
 
-	//esriConfig.defaults.io.proxyUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + 'proxy.php';
-
+	esriConfig.defaults.io.proxyUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '/proxy/index.php';
+	//esriConfig.defaults.io.corsEnabledServers.push("wms.agdmaps.com");
 	/*var infoWindow = new  InfoWindow({
           domNode: domConstruct.create("div", null, dom.byId("map"))
        });
@@ -398,38 +393,27 @@ monApp = require(["esri/map",
 	var tmpl = '<b>Details:</b><a href="'+ iasURL + 'detail/${dmp}" target="_blank"> View IAS</a><br /><b>Parid:</b> ${parid}<br /><b>Owner:</b><br />${own1}<br /><b>Owner2:</b> ${own2}<br /><b>Nghbrhd:</b> ${nbhd}<br /><b>Legal1:</b><br />${legal1}<br />';
 	tmpl += '<b>Book-Page:</b> ${book}-${page}<br /><b>Land Value:</b> $${aprland}<br /><b>Bldg Value:</b> $${aprbldg}<br />';
 	pInfoTemplate.setContent(tmpl);
-	/*pInfoTemplate.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
 
 
 	mainMapLayer = new ArcGISDynamicMapServiceLayer('https://ags.agdmaps.com/arcgis/rest/services/MonongaliaWV/MapServer');
-	/*mainMapLayer.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
 
 	//TMP
-	imgLayer2015 = new ArcGISDynamicMapServiceLayer('https://services.wvgis.wvu.edu/arcgis/rest/services/ImageryBaseMaps/wv_aerial_photos_mixed_resolutions_wm/MapServer');
-	/*imgLayer2015 = new WMSLayer('https://wms.agdmaps.com/geoserver/MonWV/wms',{
+	//imgLayer2015 = new ArcGISDynamicMapServiceLayer('https://services.wvgis.wvu.edu/arcgis/rest/services/ImageryBaseMaps/wv_aerial_photos_mixed_resolutions_wm/MapServer');
+	imgLayer2015 = new WMSLayer('https://wms.agdmaps.com/geoserver/MonWV/wms?',{
 		format: "png",
-		version: "1.1.1",
       	visibleLayers: [
         	"MonWV:Imagery2015"
       	]
-	});*/
-	imgLayer2015.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
 	});
+	//imgLayer2015.spatialReference = new SpatialReference({
+	//	wkid: 26853
+	//});
 	
 	//TMP
 	imgLayer2015.visible = false;
 
 	//TMP
 	//var imgLayer2010 = new ArcGISImageServiceLayer('http://ags2.atlasgeodata.com/arcgis/rest/services/Imagery/MonogaliaWV2010/ImageServer');
-
-	/*imgLayer2010.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
 
 	//TMP
 	//imgLayer2010.visible = false;
@@ -440,24 +424,16 @@ monApp = require(["esri/map",
 		mode: FeatureLayer.MODE_ONDEMAND
 	});
 
-	/*parcelLayer.spatialReference = new SpatialReference({
-		wkid: 'PROJCS["NAD_1983_West_Virginia_North_ftUS",GEOGCS["GCS_North_American_1983",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["false_easting",1968500.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",-79.5],PARAMETER["standard_parallel_1",40.25],PARAMETER["standard_parallel_2",39.0],PARAMETER["latitude_of_origin",38.5],UNIT["Foot_US",0.3048006096012192]])'
-	});*/
-
-	mapSettings.spatialReference = new SpatialReference({
-		wkid: 102100
-	});
+	mapSettings = {
+		extent: new esri.geometry.Extent(1709084.042606663, 341851.9964481592, 1897028.9570704103, 447010.65292832255,
+			new SpatialReference({wkid: 26853})),
+		autoResize: true,
+		spatialReference : new SpatialReference({ wkid: 26853 })
+	};
 
 	// Create map
 	map = new Map("map", mapSettings);
-
-	//assign spatial reference
-	/*map.spatialReference = new SpatialReference({
-		wkid: defaultWKID
-	});*/
-
-	map.spatialReference = new SpatialReference({ wkid: 102100 });
-
+	map.spatialReference = new SpatialReference({ wkid: 26853 });
 
 	/*
 	.___  ___.      ___      .______          ______   .__   __. 
@@ -476,7 +452,7 @@ monApp = require(["esri/map",
 			//TMP
 			{
 				layer: imgLayer2015,
-				title: "Aerials 2017",
+				title: "Aerials 2015",
 				slider: true,
 				noLayers: true
 					//collapsed: false, // whether this root layer should be collapsed initially, default false.
@@ -531,6 +507,8 @@ monApp = require(["esri/map",
 		setToolTips();
 		getDistricts();
 		CreateQueries();
+
+		map.spatialReference = new SpatialReference({ wkid: 26853 })
 
 
 		measureDialog = new dijit.Dialog({
