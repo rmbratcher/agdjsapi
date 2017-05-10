@@ -382,8 +382,8 @@ monApp = require(["esri/map",
 
 	config.defaults.geometryService = new GeometryService("https://ags.agdmaps.com/arcgis/rest/services/Utilities/Geometry/GeometryServer");
 
-	esriConfig.defaults.io.proxyUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '/proxy/index.php';
-	//esriConfig.defaults.io.corsEnabledServers.push("wms.agdmaps.com");
+	esriConfig.defaults.io.proxyUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + 'proxy/index.php';
+	esriConfig.defaults.io.corsEnabledServers.push("wms.agdmaps.com");
 	/*var infoWindow = new  InfoWindow({
           domNode: domConstruct.create("div", null, dom.byId("map"))
        });
