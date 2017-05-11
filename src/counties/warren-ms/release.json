@@ -7,7 +7,7 @@
 	"title": "Warren County, MS",
 	"destfile":["index",".html"],
 	"header": "Warren County, MS",
-	"js" : ["//js.arcgis.com/3.20","./js/agd.min.js"],
+	"js" : ["//js.arcgis.com/3.14","./js/agd.min.js"],
 	"google": "UA-42186511-7",
 	"delta": "MS75",
 	"ftp" : {

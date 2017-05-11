@@ -7,7 +7,7 @@
 	"title": "Marion County, MS",
 	"destfile":["index",".html"],
 	"header": "Marion County, MS",
-	"js" : ["//js.arcgis.com/3.20","./js/agd.js"],
+	"js" : ["//js.arcgis.com/3.14","./js/agd.js"],
 	"google": "UA-42339713-1",
 	"delta": "MS46",
 	"ftp" : {
