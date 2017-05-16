@@ -2,7 +2,7 @@
 	"name" : "Marion County, MS",
 	"minify" : false,
 	"srcdir" : "./src/counties/marion-ms",
-	"outdir": "/Users/mbratcher/www/sites/agdjsapi/dist/marion",
+	"outdir": "/Users/mbratcher/www/sites/marionms/dist/",
 	"template": "template.tmpl",
 	"title": "Marion County, MS",
 	"destfile":["index",".html"],

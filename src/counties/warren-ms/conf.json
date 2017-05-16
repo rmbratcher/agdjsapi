@@ -120,7 +120,7 @@
             },
             {
                 "type": "Print",
-                "url": "http://print.agd.cc/services/print/Default.ashx",
+                "url": "http://print.agd.cc/AGSprint/PrintMapMS",
                 "title": "WARREN COUNTY, MS        PROPERTY MAP",
                 "subtitle": " TAX ASSESSOR",
                 "disclamer": "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",

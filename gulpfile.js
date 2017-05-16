@@ -391,7 +391,7 @@ gulp.task('deploy', function (callback) {
     runSequence(
         'build',
         'ftp',
-        'commit-changes',
+        //'commit-changes',
         function (error) {
           if (error) {
             console.log(error.message);

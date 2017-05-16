@@ -19,7 +19,7 @@ defaultWKID = 26853;
 
 
 printSettings = {
-	url: "http://print.agd.cc/services/print/mon-wv.ashx",
+	url: "http://print.agd.cc/AGSprint/PrintMapMon",
 	title: "Monongalia, WV",
 	subtitle: " TAX ASSESSORS OFFICE ",
 	disclamer: "THIS MAP IS DESIGNED FOR ASSESSMENT PURPOSES ONLY AND IS NOT INTENDED AS A SUBSTITUE FOR A TRUE TITLE SEARCH, PROPERTY APPRAISAL OR A SURVEY BY A LICENSED SURVEYOR.",
@@ -1313,6 +1313,7 @@ monApp = require(["esri/map",
 		printInfo.title = printSettings.title;
 		printInfo.subtitle = printSettings.subtitle;
 		printInfo.disclamer = printSettings.disclamer;
+		printInfo.srs = map.spatialReference.wkid;
 
 		// Check the layer id from the last identify to see if it is in the printDefs Object
 		// if it's there use the field names and order from it.  else use them all
@@ -1326,35 +1327,31 @@ monApp = require(["esri/map",
 
 			if (layerId != undefined || layerId != 'undefined') {
 				if (printSettings.printDefs.hasOwnProperty(layerId)) {
-					printInfo.attribues = {};
+					printInfo.attributes = {};
 					for (var x = 0; x < printSettings.printDefs[layerId].length; x += 1) {
 						var name = printSettings.printDefs[layerId][x];
 						var split = name.split('.');
 						if (split.length > 1) {
 							name = split[1];
 						}
-						printInfo.attribues[name] = currentFeatures[0].attributes[name];
+						printInfo.attributes[name] = currentFeatures[0].attributes[name];
 					}
 				} else {
-					printInfo.attribues = currentFeatures[0].attributes;
+					printInfo.attributes = currentFeatures[0].attributes;
 				}
 			} else {
-				printInfo.attribues = currentFeatures[0].attributes;
+				printInfo.attributes = currentFeatures[0].attributes;
 			}
 		} else {
-			printInfo.attribues = {};
+			printInfo.attributes = {};
 		}
 
 		printInfo.path = [];
 
 
-		if (map.graphics._div.children.length > 0) {
-			if (map.graphics._div.children.length > 0) {
-				for (var k = 0; k < map.graphics._div.children.length; k += 1) {
-					if (map.graphics._div.children[k].shape.path != null || map.graphics._div.children[k].shape.path != undefined) {
-						printInfo.path.push(map.graphics._div.children[k].shape.path);
-					}
-				}
+		if (map.graphics.graphics.length > 0) {
+			for(var i =0; i < map.graphics.graphics.length; i += 1) {
+				printInfo.path.push(map.graphics.graphics[i]._shape.shape.path)
 			}
 		}
 
@@ -1437,7 +1434,7 @@ monApp = require(["esri/map",
 		form.setAttribute("target", "formresult");
 
 		var hiddenField = document.createElement("input");
-		hiddenField.setAttribute("name", "prntinfo");
+		hiddenField.setAttribute("name", "printinfo");
 		hiddenField.setAttribute("value", JSON.stringify(printInfo));
 		form.appendChild(hiddenField);
 		document.body.appendChild(form);

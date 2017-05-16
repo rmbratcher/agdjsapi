@@ -2,7 +2,7 @@
 	"name" : "Warren County, MS",
 	"minify" : false,
 	"srcdir" : "./src/counties/warren-ms",
-	"outdir": "/Users/mbratcher/www/sites/agdjsapi/dist",
+	"outdir": "/Users/mbratcher/www/sites/warrenms/dist",
 	"template": "template.tmpl",
 	"title": "Warren County, MS",
 	"destfile":["index",".html"],

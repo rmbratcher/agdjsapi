@@ -43,6 +43,7 @@ agd.Widgets.Print = agd.Class({ /** @this {agd.Widgets.Print} */
         printInfo.title = this.title;
         printInfo.subtitle = this.subtitle;
         printInfo.disclamer = this.disclamer;
+        printInfo.srs = map.spatialReference.wkid;
 
         // Check the layer id from the last identify to see if it is in the printDefs Object
         // if it's there use the field names and order from it.  else use them all
@@ -56,23 +57,23 @@ agd.Widgets.Print = agd.Class({ /** @this {agd.Widgets.Print} */
 
             if (layerId != undefined || layerId != 'undefined') {
                 if (this.printDefs.hasOwnProperty(layerId)) {
-                    printInfo.attribues = {};
+                    printInfo.attributes = {};
                     for (var x = 0; x < this.printDefs[layerId].length; x += 1) {
                         var name = this.printDefs[layerId][x];
                         var split = name.split('.');
                         if (split.length > 1) {
                             name = split[1];
                         }
-                        printInfo.attribues[name] = agd.Utils.currentFeatures[0].feature.attributes[name];
+                        printInfo.attributes[name] = agd.Utils.currentFeatures[0].feature.attributes[name];
                     }
                 } else {
-                    printInfo.attribues = agd.Utils.currentFeatures[0].feature.attributes;
+                    printInfo.attributes = agd.Utils.currentFeatures[0].feature.attributes;
                 }
             } else {
-                printInfo.attribues = agd.Utils.currentFeatures[0].feature.attributes;
+                printInfo.attributes = agd.Utils.currentFeatures[0].feature.attributes;
             }
         } else {
-            printInfo.attribues = {};
+            printInfo.attributes = {};
         }
 
         printInfo.path = []; //agd.Utils.currentIdentifyGeom;
@@ -164,7 +165,7 @@ agd.Widgets.Print = agd.Class({ /** @this {agd.Widgets.Print} */
         form.setAttribute("target", "formresult");
 
         var hiddenField = document.createElement("input");
-        hiddenField.setAttribute("name", "prntinfo");
+        hiddenField.setAttribute("name", "printinfo");
         hiddenField.setAttribute("value", JSON.stringify(printInfo));
         form.appendChild(hiddenField);
         document.body.appendChild(form);
